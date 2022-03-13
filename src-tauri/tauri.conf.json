@@ -1,0 +1,59 @@
+{
+  "package": {
+    "productName": "LeafView",
+    "version": "0.1.0"
+  },
+  "build": {
+    "distDir": "../dist",
+    "devPath": "http://localhost:8080",
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build"
+  },
+  "tauri": {
+    "allowlist": {
+      "all": false,
+      "dialog": {
+        "all": false,
+        "open": true
+      },
+      "path": { "all": true },
+      "protocol": {
+        "all": false,
+        "asset": true,
+        "assetScope": ["*"]
+      },
+      "window": {
+        "all": false,
+        "setTitle": true
+      }
+    },
+    "bundle": {
+      "active": true,
+      "targets": ["dmg"],
+      "identifier": "jp.sprout2000.LeafView",
+      "icon": ["icons/icon.icns", "icons/icon.ico"],
+      "copyright": "© 2022 sprout2000 and other contributors",
+      "category": "Photography",
+      "shortDescription": "A minimalist image viewer",
+      "longDescription": "A minimalist image viewer based on Leaflet.js and Tauri."
+    },
+    "security": {
+      "csp": "default-src 'self'; img-src 'self' asset: https://asset.localhost"
+    },
+    "updater": {
+      "active": false
+    },
+    "windows": [
+      {
+        "label": "main",
+        "title": "LeafView",
+        "width": 640,
+        "height": 400,
+        "minWidth": 640,
+        "minHeight": 400,
+        "visible": false,
+        "resizable": true
+      }
+    ]
+  }
+}

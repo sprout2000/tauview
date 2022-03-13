@@ -1,0 +1,6 @@
+dist
+node_modules
+src-tauri/src
+src-tauri/target
+src-tauri/Cargo.lock
+src-tauri/*.toml

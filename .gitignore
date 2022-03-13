@@ -1,0 +1,10 @@
+build
+public
+release
+node_modules
+
+npm-*.log
+yarn-*.log
+
+.env
+.DS_Store

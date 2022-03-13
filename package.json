@@ -1,0 +1,54 @@
+{
+  "name": "leafview",
+  "description": "A minimalist image viewer based on Leaflet.js and Tauri.",
+  "productName": "LeafView",
+  "version": "0.1.0",
+  "license": "MIT",
+  "keywords": [
+    "image-viewer",
+    "macos",
+    "tauri"
+  ],
+  "scripts": {
+    "tauri": "tauri",
+    "dev": "run-p dev:*",
+    "dev:react": "react-devtools",
+    "dev:webpack": "webpack serve --mode development",
+    "build": "webpack --mode production --progress",
+    "prepare": "git config --local core.hooksPath hooks"
+  },
+  "dependencies": {
+    "@tauri-apps/api": "^1.0.0-rc.2",
+    "i18next": "^21.6.14",
+    "leaflet": "^1.7.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "@tauri-apps/cli": "^1.0.0-rc.7",
+    "@types/leaflet": "^1.7.9",
+    "@types/node": "^17.0.21",
+    "@types/react": "^17.0.40",
+    "@types/react-dom": "^17.0.13",
+    "@typescript-eslint/eslint-plugin": "^5.14.0",
+    "@typescript-eslint/parser": "^5.14.0",
+    "css-loader": "^6.7.1",
+    "eslint": "^8.11.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-react": "^7.29.3",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "eslint-plugin-regexp": "^1.5.1",
+    "html-webpack-plugin": "^5.5.0",
+    "mini-css-extract-plugin": "^2.6.0",
+    "npm-run-all": "^4.1.5",
+    "prettier": "^2.5.1",
+    "sass": "^1.49.9",
+    "sass-loader": "^12.6.0",
+    "ts-loader": "^9.2.8",
+    "ts-node": "^10.7.0",
+    "typescript": "^4.6.2",
+    "webpack": "^5.70.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.7.4"
+  }
+}
