@@ -1,6 +1,9 @@
 # <img width="48" alt="leaves" src="https://user-images.githubusercontent.com/52094761/156916014-b9472d73-3270-455a-be95-25e527efeaff.svg" /> LeafView2
 
 [![GitHub CI](https://github.com/sprout2000/leafview/actions/workflows/release.yml/badge.svg)](https://github.com/sprout2000/leafview/actions/workflows/release.yml)
+![GitHub all releases](https://img.shields.io/github/downloads/sprout2000/leafview2/total)
+[![GitHub stars](https://img.shields.io/github/stars/sprout2000/leafview2)](https://github.com/sprout2000/leafview2/stargazers)
+![GitHub package.json dynamic](https://img.shields.io/github/package-json/keywords/sprout2000/leafview2)
 [![GitHub license](https://img.shields.io/github/license/sprout2000/leafview)](https://github.com/sprout2000/leafview/blob/main/LICENSE.md)
 
 A minimalist image viewer based on [Leaflet.js](https://leafletjs.com/) and [Tauri](https://tauri.studio/).
