@@ -35,7 +35,7 @@
     "css-loader": "^6.7.1",
     "eslint": "^8.11.0",
     "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-react": "^7.29.3",
+    "eslint-plugin-react": "^7.29.4",
     "eslint-plugin-react-hooks": "^4.3.0",
     "eslint-plugin-regexp": "^1.5.1",
     "html-webpack-plugin": "^5.5.0",
