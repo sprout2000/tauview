@@ -85,6 +85,7 @@ pub fn default() -> Menu {
             ),
     );
 
+    #[cfg(not(target_os = "linux"))]
     let window_menu = Submenu::new(
         i18n(&ctx, &locale, "Window"),
         Menu::new()
@@ -99,8 +100,11 @@ pub fn default() -> Menu {
         .add_submenu(window_menu)
         .add_submenu(shortcuts_menu);
 
-    #[cfg(not(target_os = "macos"))]
+    #[cfg(target_os = "windows")]
     let menu = Menu::new().add_submenu(file_menu).add_submenu(window_menu);
+
+    #[cfg(target_os = "linux")]
+    let menu = Menu::new().add_submenu(file_menu);
 
     menu
 }
