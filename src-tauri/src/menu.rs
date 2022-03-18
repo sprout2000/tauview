@@ -44,6 +44,7 @@ pub fn default() -> Menu {
         Menu::new()
             .add_native_item(MenuItem::About(app_ctx.package_info().name.clone()))
             .add_native_item(MenuItem::Separator)
+            .add_native_item(MenuItem::Services)
             .add_native_item(MenuItem::Hide)
             .add_native_item(MenuItem::HideOthers)
             .add_native_item(MenuItem::ShowAll)
@@ -66,42 +67,34 @@ pub fn default() -> Menu {
     );
 
     #[cfg(target_os = "macos")]
-    let shortcuts_menu = Submenu::new(
-        i18n(&ctx, &locale, "Shortcuts"),
-        Menu::new()
-            .add_item(
-                CustomMenuItem::new("next", i18n(&ctx, &locale, "Next Image")).accelerator("J"),
-            )
-            .add_item(
-                CustomMenuItem::new("prev", i18n(&ctx, &locale, "Prev Image")).accelerator("K"),
-            )
-            .add_item(
-                CustomMenuItem::new("reset", i18n(&ctx, &locale, "Reset Zoom")).accelerator("0"),
-            )
-            .add_native_item(MenuItem::Separator)
-            .add_item(
-                CustomMenuItem::new("trash", i18n(&ctx, &locale, "Move to Trash"))
-                    .accelerator("Delete"),
-            ),
-    );
-
-    #[cfg(target_os = "macos")]
     let window_menu = Submenu::new(
         i18n(&ctx, &locale, "Window"),
         Menu::new()
             .add_native_item(MenuItem::Minimize)
-            .add_native_item(MenuItem::Zoom),
+            .add_native_item(MenuItem::Zoom)
+            .add_native_item(MenuItem::Separator)
+            .add_native_item(MenuItem::ShowAll)
+            .add_native_item(MenuItem::Separator)
+            .add_native_item(MenuItem::EnterFullScreen),
+    );
+
+    #[cfg(not(target_os = "macos"))]
+    let window_menu = Submenu::new(
+        i18n(&ctx, &locale, "Window"),
+        Menu::new()
+            .add_native_item(MenuItem::Minimize)
+            .add_native_item(MenuItem::Separator)
+            .add_native_item(MenuItem::EnterFullScreen),
     );
 
     #[cfg(target_os = "macos")]
     let menu = Menu::new()
         .add_submenu(app_menu)
         .add_submenu(file_menu)
-        .add_submenu(window_menu)
-        .add_submenu(shortcuts_menu);
+        .add_submenu(window_menu);
 
     #[cfg(not(target_os = "macos"))]
-    let menu = Menu::new().add_submenu(file_menu);
+    let menu = Menu::new().add_submenu(file_menu).add_submenu(window_menu);
 
     menu
 }
