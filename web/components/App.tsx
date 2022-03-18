@@ -191,17 +191,21 @@ export const App = () => {
 
     switch (e.key) {
       case '0':
+        e.preventDefault();
         mapObj.current && mapObj.current.setZoom(0);
         break;
       case e.metaKey && 'ArrowRight':
       case 'j':
+        e.preventDefault();
         onNext();
         break;
       case e.metaKey && 'ArrowLeft':
       case 'k':
+        e.preventDefault();
         onPrev();
         break;
       case 'Delete':
+        e.preventDefault();
         onRemove();
         break;
       default:
