@@ -44,7 +44,6 @@ pub fn default() -> Menu {
         Menu::new()
             .add_native_item(MenuItem::About(app_ctx.package_info().name.clone()))
             .add_native_item(MenuItem::Separator)
-            .add_native_item(MenuItem::Services)
             .add_native_item(MenuItem::Hide)
             .add_native_item(MenuItem::HideOthers)
             .add_native_item(MenuItem::ShowAll)
