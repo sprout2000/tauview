@@ -15,7 +15,10 @@ pub fn default() -> Menu {
 
     let ctx = static_json_gettext_build!(
         "en-US";
-        "ar" => "locales/ar.json",
+        "ar-DZ" => "locales/ar.json",
+        "ar-EG" => "locales/ar.json",
+        "ar-IQ" => "locales/ar.json",
+        "ar-MA" => "locales/ar.json",
         "cs-CZ" => "locales/cs.json",
         "de-AT" => "locales/de.json",
         "de-CH" => "locales/de.json",
@@ -23,8 +26,10 @@ pub fn default() -> Menu {
         "en-GB" => "locales/en.json",
         "en-US" => "locales/en.json",
         "es-AR" => "locales/es.json",
+        "es-CO" => "locales/es.json",
         "es-ES" => "locales/es.json",
         "es-MX" => "locales/es.json",
+        "es-PE" => "locales/es.json",
         "es-US" => "locales/es.json",
         "ja-JP" => "locales/ja.json",
         "pl-PL" => "locales/pl.json",
