@@ -3,9 +3,10 @@ import { Configuration } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-const isDev = process.argv[4] === 'development';
+const isDev = process.env.NODE_ENV === 'development';
 
 const config: Configuration = {
+  mode: isDev ? 'development' : 'production',
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.json'],
   },
@@ -31,7 +32,7 @@ const config: Configuration = {
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       inject: 'body',
-      template: isDev ? 'web/index.dev.html' : 'web/index.html',
+      template: isDev ? './web/index.dev.html' : './web/index.html',
     }),
   ],
   devServer: {
