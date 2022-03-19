@@ -101,6 +101,43 @@ fn main() {
                     )
                     .expect("Error while emitting open event"),
                 "close" => std::process::exit(0),
+                "minimize" => {
+                    if let Err(why) = window_.minimize() {
+                        println!("Error: {:?}", why)
+                    }
+                }
+                "zoom" => match window_.is_maximized() {
+                    Ok(result) => {
+                        if result {
+                            match window_.unmaximize() {
+                                Ok(_) => (),
+                                Err(why) => println!("Error: {:?}", why),
+                            }
+                        } else {
+                            match window_.maximize() {
+                                Ok(_) => (),
+                                Err(why) => println!("Error: {:?}", why),
+                            }
+                        }
+                    }
+                    Err(why) => println!("Error {:?}", why),
+                },
+                "fullscreen" => match window_.is_fullscreen() {
+                    Ok(result) => {
+                        if result {
+                            match window_.set_fullscreen(false) {
+                                Ok(_) => (),
+                                Err(why) => println!("Error: {:?}", why),
+                            }
+                        } else {
+                            match window_.set_fullscreen(true) {
+                                Ok(_) => (),
+                                Err(why) => println!("Error: {:?}", why),
+                            }
+                        }
+                    }
+                    Err(why) => println!("Error: {:?}", why),
+                },
                 _ => {}
             });
             Ok(())

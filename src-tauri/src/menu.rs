@@ -70,12 +70,16 @@ pub fn default() -> Menu {
     let window_menu = Submenu::new(
         i18n(&ctx, &locale, "Window"),
         Menu::new()
-            .add_native_item(MenuItem::Minimize)
-            .add_native_item(MenuItem::Zoom)
+            .add_item(
+                CustomMenuItem::new("minimize", i18n(&ctx, &locale, "Minimize"))
+                    .accelerator("CmdOrCtrl+M"),
+            )
+            .add_item(CustomMenuItem::new("zoom", i18n(&ctx, &locale, "Zoom")))
             .add_native_item(MenuItem::Separator)
-            .add_native_item(MenuItem::ShowAll)
-            .add_native_item(MenuItem::Separator)
-            .add_native_item(MenuItem::EnterFullScreen),
+            .add_item(
+                CustomMenuItem::new("fullscreen", i18n(&ctx, &locale, "Enter Full Screen"))
+                    .accelerator("Cmd+Ctrl+F"),
+            ),
     );
 
     #[cfg(not(target_os = "macos"))]
