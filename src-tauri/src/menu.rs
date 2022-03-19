@@ -72,7 +72,7 @@ pub fn default() -> Menu {
         Menu::new()
             .add_item(
                 CustomMenuItem::new("minimize", i18n(&ctx, &locale, "Minimize"))
-                    .accelerator("CmdOrCtrl+M"),
+                    .accelerator("Cmd+M"),
             )
             .add_item(CustomMenuItem::new("zoom", i18n(&ctx, &locale, "Zoom")))
             .add_native_item(MenuItem::Separator)
@@ -88,7 +88,7 @@ pub fn default() -> Menu {
         Menu::new()
             .add_item(
                 CustomMenuItem::new("minimize", i18n(&ctx, &locale, "Minimize"))
-                    .accelerator("CmdOrCtrl+M"),
+                    .accelerator("Ctrl+M"),
             )
             .add_item(CustomMenuItem::new("zoom", i18n(&ctx, &locale, "Zoom")))
             .add_native_item(MenuItem::Separator)
