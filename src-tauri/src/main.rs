@@ -102,42 +102,26 @@ fn main() {
                     .expect("Error while emitting open event"),
                 "close" => std::process::exit(0),
                 "minimize" => {
-                    if let Err(why) = window_.minimize() {
-                        println!("Error: {:?}", why)
+                    window_.minimize().unwrap();
+                }
+                "zoom" => {
+                    if let Ok(result) = window_.is_maximized() {
+                        if result {
+                            window_.unmaximize().unwrap();
+                        } else {
+                            window_.maximize().unwrap();
+                        }
                     }
                 }
-                "zoom" => match window_.is_maximized() {
-                    Ok(result) => {
+                "fullscreen" => {
+                    if let Ok(result) = window_.is_fullscreen() {
                         if result {
-                            match window_.unmaximize() {
-                                Ok(_) => (),
-                                Err(why) => println!("Error: {:?}", why),
-                            }
+                            window_.set_fullscreen(false).unwrap();
                         } else {
-                            match window_.maximize() {
-                                Ok(_) => (),
-                                Err(why) => println!("Error: {:?}", why),
-                            }
+                            window_.set_fullscreen(true).unwrap();
                         }
                     }
-                    Err(why) => println!("Error {:?}", why),
-                },
-                "fullscreen" => match window_.is_fullscreen() {
-                    Ok(result) => {
-                        if result {
-                            match window_.set_fullscreen(false) {
-                                Ok(_) => (),
-                                Err(why) => println!("Error: {:?}", why),
-                            }
-                        } else {
-                            match window_.set_fullscreen(true) {
-                                Ok(_) => (),
-                                Err(why) => println!("Error: {:?}", why),
-                            }
-                        }
-                    }
-                    Err(why) => println!("Error: {:?}", why),
-                },
+                }
                 _ => {}
             });
             Ok(())
