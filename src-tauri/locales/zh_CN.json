@@ -1,4 +1,13 @@
 {
+  "About": "关于",
+  "Hide": "隐藏",
+  "HideOthers": "隐藏其他",
+  "Show All": "全部显示",
+  "Quit": "退出",
+  "Minimize": "最小化",
+  "Maximize": "最大化",
+  "Zoom": "缩放",
+  "Enter Full Screen": "开启全屏",
   "File": "文件",
   "Open...": "打开...",
   "Close": "关闭",

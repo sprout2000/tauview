@@ -1,4 +1,13 @@
 {
+  "About": "Sobre",
+  "Hide": "Esconder",
+  "HideOthers": "Esconder Outros",
+  "Show All": "Exibir Tudo",
+  "Quit": "Sair",
+  "Minimize": "Minimizar",
+  "Maximize": "Maximizar",
+  "Zoom": "Zoom",
+  "Enter Full Screen": "Ativar Tela Cheia",
   "File": "Arquivo",
   "Open...": "Abrir...",
   "Close": "Fechar",

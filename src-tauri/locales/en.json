@@ -1,4 +1,13 @@
 {
+  "About": "About",
+  "Hide": "Hide",
+  "HideOthers": "Hide Others",
+  "Show All": "Show All",
+  "Quit": "Quit",
+  "Minimize": "Minimize",
+  "Maximize": "Maximize",
+  "Zoom": "Zoom",
+  "Enter Full Screen": "Enter Full Screen",
   "File": "File",
   "Open...": "Open...",
   "Close": "Close",

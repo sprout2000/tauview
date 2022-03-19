@@ -1,4 +1,13 @@
 {
+  "About": "アバウト",
+  "Hide": "隠す",
+  "HideOthers": "その他を非表示にする",
+  "Show All": "すべて表示",
+  "Quit": "終了",
+  "Minimize": "最小化",
+  "Maximize": "最大化",
+  "Zoom": "ズーム",
+  "Enter Full Screen": "フルスクリーン表示",
   "File": "ファイル",
   "Open...": "開く...",
   "Close": "閉じる",

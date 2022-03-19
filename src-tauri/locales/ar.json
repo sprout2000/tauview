@@ -1,4 +1,13 @@
 {
+  "About": "حول",
+  "Hide": "إخفاء",
+  "HideOthers": "إخفاء أخرى",
+  "Show All": "إظهار الكل",
+  "Quit": "خروج",
+  "Minimize": "تصغير",
+  "Maximize": "تكبير",
+  "Zoom": "تكبير",
+  "Enter Full Screen": "تفعيل وضع ملء الشاشة",
   "File": "ملف",
   "Open...": "فتح...",
   "Close": "إغلاق",
