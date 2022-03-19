@@ -15,6 +15,7 @@ pub fn default() -> Menu {
 
     let ctx = static_json_gettext_build!(
         "en-US";
+        "ar" => "locales/ar.json",
         "cs-CZ" => "locales/cs.json",
         "de-AT" => "locales/de.json",
         "de-CH" => "locales/de.json",
