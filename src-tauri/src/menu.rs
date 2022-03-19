@@ -82,7 +82,7 @@ pub fn default() -> Menu {
             .add_item(CustomMenuItem::new("zoom", i18n(&ctx, &locale, "Zoom")))
             .add_native_item(MenuItem::Separator)
             .add_item(
-                CustomMenuItem::new("fullscreen", i18n(&ctx, &locale, "Enter Full Screen"))
+                CustomMenuItem::new("fullscreen", i18n(&ctx, &locale, "Toggle Full Screen"))
                     .accelerator("Cmd+Ctrl+F"),
             ),
     );
@@ -98,7 +98,7 @@ pub fn default() -> Menu {
             .add_item(CustomMenuItem::new("zoom", i18n(&ctx, &locale, "Zoom")))
             .add_native_item(MenuItem::Separator)
             .add_item(
-                CustomMenuItem::new("fullscreen", i18n(&ctx, &locale, "Enter Full Screen"))
+                CustomMenuItem::new("fullscreen", i18n(&ctx, &locale, "Toggle Full Screen"))
                     .accelerator("F11"),
             ),
     );
