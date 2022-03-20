@@ -21,7 +21,7 @@ jobs:
           toolchain: stable
 
       - name: Install app dependencies
-        run: npm install
+        run: yarn install
 
       - name: Publish with tauri-action
         uses: tauri-apps/tauri-action@v0.3
