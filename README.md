@@ -63,13 +63,13 @@ You can download the latest version of LeafView2 from the releases page here:
 ```sh
 % git clone https://github.com/sprout2000/leafview2.git
 % cd leafview2
-% yarn install
+% npm install
 
 # for development
-% yarn tauri dev
+% npx tauri dev
 
 # for release
-% yarn tauri build
+% npx tauri build
 ```
 
 _NOTE: You will need to meet [Tauri prerequisites](https://tauri.studio/docs/getting-started/prerequisites)._
