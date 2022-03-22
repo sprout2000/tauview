@@ -1,2 +1,2 @@
 #!/bin/sh
-yarn eslint --fix . && yarn prettier --write .
+npx eslint --fix . && npx prettier --write .
