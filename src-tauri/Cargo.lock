@@ -1102,9 +1102,9 @@ checksum = "a357d28ed41a50f9c765dbfe56cbc04a64e53e5fc58ba79fbc34c10ef3df831f"
 
 [[package]]
 name = "enumflags2"
-version = "0.7.3"
+version = "0.7.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a25c90b056b3f84111cf183cbeddef0d3a0bbe9a674f057e1a1533c315f24def"
+checksum = "1b3ab37dc79652c9d85f1f7b6070d77d321d2467f5fe7b00d6b7a86c57b092ae"
 dependencies = [
  "enumflags2_derive",
  "serde",
@@ -1112,9 +1112,9 @@ dependencies = [
 
 [[package]]
 name = "enumflags2_derive"
-version = "0.7.3"
+version = "0.7.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "144ec79496cbab6f84fa125dc67be9264aef22eb8a28da8454d9c33f15108da4"
+checksum = "f58dc3c5e468259f19f2d46304a6b28f1c3d034442e14b322d2b850e36f6d5ae"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -1803,9 +1803,9 @@ dependencies = [
 
 [[package]]
 name = "html5ever"
-version = "0.25.1"
+version = "0.25.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "aafcf38a1a36118242d29b92e1b08ef84e67e4a5ed06e0a80be20e6a32bfed6b"
+checksum = "e5c13fb08e5d4dfc151ee5e88bae63f7773d61852f3bdc73c9f4b9e1bde03148"
 dependencies = [
  "log",
  "mac",
@@ -4146,7 +4146,7 @@ dependencies = [
 [[package]]
 name = "tauri-bundler"
 version = "1.0.0-rc.3"
-source = "git+https://github.com/tauri-apps/tauri#55c8680590c1085913f78e24ccb6885fae632f10"
+source = "git+https://github.com/tauri-apps/tauri#56ed4862954df10346c1f1c52c8ec6205765182d"
 dependencies = [
  "anyhow",
  "ar",
@@ -4183,7 +4183,7 @@ dependencies = [
 [[package]]
 name = "tauri-cli"
 version = "1.0.0-rc.7"
-source = "git+https://github.com/tauri-apps/tauri#55c8680590c1085913f78e24ccb6885fae632f10"
+source = "git+https://github.com/tauri-apps/tauri#56ed4862954df10346c1f1c52c8ec6205765182d"
 dependencies = [
  "anyhow",
  "base64",
@@ -4334,7 +4334,7 @@ dependencies = [
 [[package]]
 name = "tauri-utils"
 version = "1.0.0-rc.3"
-source = "git+https://github.com/tauri-apps/tauri#55c8680590c1085913f78e24ccb6885fae632f10"
+source = "git+https://github.com/tauri-apps/tauri#56ed4862954df10346c1f1c52c8ec6205765182d"
 dependencies = [
  "aes-gcm",
  "ctor",
