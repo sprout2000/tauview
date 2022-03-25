@@ -3313,9 +3313,9 @@ dependencies = [
 
 [[package]]
 name = "redox_syscall"
-version = "0.2.11"
+version = "0.2.12"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "8380fe0152551244f0747b1bf41737e0f8a74f97a14ccefd1148187271634f3c"
+checksum = "8ae183fc1b06c149f0c1793e1eb447c8b04bfe46d48e9e48bfb8d2d7ed64ecf0"
 dependencies = [
  "bitflags",
 ]
@@ -4146,7 +4146,7 @@ dependencies = [
 [[package]]
 name = "tauri-bundler"
 version = "1.0.0-rc.3"
-source = "git+https://github.com/tauri-apps/tauri#56ed4862954df10346c1f1c52c8ec6205765182d"
+source = "git+https://github.com/tauri-apps/tauri#def8a62bd3e6a87956a5b59bac8a20a1e959cdf9"
 dependencies = [
  "anyhow",
  "ar",
@@ -4183,7 +4183,7 @@ dependencies = [
 [[package]]
 name = "tauri-cli"
 version = "1.0.0-rc.7"
-source = "git+https://github.com/tauri-apps/tauri#56ed4862954df10346c1f1c52c8ec6205765182d"
+source = "git+https://github.com/tauri-apps/tauri#def8a62bd3e6a87956a5b59bac8a20a1e959cdf9"
 dependencies = [
  "anyhow",
  "base64",
@@ -4334,7 +4334,7 @@ dependencies = [
 [[package]]
 name = "tauri-utils"
 version = "1.0.0-rc.3"
-source = "git+https://github.com/tauri-apps/tauri#56ed4862954df10346c1f1c52c8ec6205765182d"
+source = "git+https://github.com/tauri-apps/tauri#def8a62bd3e6a87956a5b59bac8a20a1e959cdf9"
 dependencies = [
  "aes-gcm",
  "ctor",
