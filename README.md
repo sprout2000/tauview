@@ -65,10 +65,10 @@ You can download the latest version of LeafView2 from the releases page here:
 % cd leafview2
 % npm install
 
-# for development
+# on development
 % npx tauri dev
 
-# for release
+# on production
 % npx tauri build
 ```
 
