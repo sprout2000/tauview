@@ -4,6 +4,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
 const isDev = process.argv[4] === 'development';
+const isLinux = process.platform === 'linux';
 
 const config: Configuration = {
   mode: isDev ? 'development' : 'production',
@@ -47,7 +48,7 @@ const config: Configuration = {
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       inject: 'body',
-      template: isDev ? './web/index.dev.html' : './web/index.html',
+      template: isDev && !isLinux ? './web/index.dev.html' : './web/index.html',
     }),
   ],
   devServer: {
