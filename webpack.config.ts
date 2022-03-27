@@ -7,7 +7,6 @@ const isDev = process.argv[4] === 'development';
 const isLinux = process.platform === 'linux';
 
 const config: Configuration = {
-  mode: isDev ? 'development' : 'production',
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.json'],
   },
@@ -39,7 +38,7 @@ const config: Configuration = {
         ],
       },
       {
-        test: /\.png$/,
+        test: /\.(ico|jpe?g|png|svg)$/,
         type: 'asset/inline',
       },
     ],
