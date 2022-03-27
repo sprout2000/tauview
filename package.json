@@ -11,8 +11,8 @@
   ],
   "scripts": {
     "tauri": "tauri",
-    "dev": "NODE_ENV=\"development\" webpack serve",
-    "build": "NODE_ENV=\"production\" webpack --progress"
+    "dev": "webpack serve --mode development",
+    "build": "webpack build --mode production"
   },
   "dependencies": {
     "@tauri-apps/api": "^1.0.0-rc.2",
