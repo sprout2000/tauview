@@ -32,11 +32,11 @@
       "targets": "all",
       "identifier": "jp.sprout2000.LeafView",
       "icon": [
+        "icons/icon.ico",
+        "icons/icon.icns",
         "icons/32x32.png",
         "icons/128x128.png",
-        "icons/128x128@2x.png",
-        "icons/icon.icns",
-        "icons/icon.ico"
+        "icons/128x128@2x.png"
       ],
       "copyright": "© 2022 sprout2000 and other contributors",
       "category": "Photography",
