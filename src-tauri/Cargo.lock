@@ -4169,7 +4169,7 @@ dependencies = [
 [[package]]
 name = "tauri-bundler"
 version = "1.0.0-rc.3"
-source = "git+https://github.com/tauri-apps/tauri#9489963e004bfbc83874bb43fa9ddf2777520c50"
+source = "git+https://github.com/tauri-apps/tauri#3c4ee7c997fa3ff696bcfd5b8c82fecaca16bf49"
 dependencies = [
  "anyhow",
  "ar",
@@ -4206,7 +4206,7 @@ dependencies = [
 [[package]]
 name = "tauri-cli"
 version = "1.0.0-rc.7"
-source = "git+https://github.com/tauri-apps/tauri#9489963e004bfbc83874bb43fa9ddf2777520c50"
+source = "git+https://github.com/tauri-apps/tauri#3c4ee7c997fa3ff696bcfd5b8c82fecaca16bf49"
 dependencies = [
  "anyhow",
  "base64",
@@ -4357,7 +4357,7 @@ dependencies = [
 [[package]]
 name = "tauri-utils"
 version = "1.0.0-rc.3"
-source = "git+https://github.com/tauri-apps/tauri#9489963e004bfbc83874bb43fa9ddf2777520c50"
+source = "git+https://github.com/tauri-apps/tauri#3c4ee7c997fa3ff696bcfd5b8c82fecaca16bf49"
 dependencies = [
  "aes-gcm",
  "ctor",
