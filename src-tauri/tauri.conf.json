@@ -40,7 +40,7 @@
       ],
       "copyright": "© 2022 sprout2000 and other contributors",
       "category": "Photography",
-      "shortDescription": "A minimalist image viewer",
+      "shortDescription": "Image Viewer",
       "longDescription": "A minimalist image viewer based on Leaflet.js and Tauri."
     },
     "security": {
