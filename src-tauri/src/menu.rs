@@ -11,7 +11,9 @@ fn i18n(ctx: &JSONGetText, locale: &str, fallback: &str) -> String {
 }
 
 pub fn default() -> Menu {
-    let locale = get_locale().unwrap_or_else(|| String::from("en-US"));
+    let locale = get_locale()
+        .unwrap_or_else(|| String::from("en-US"))
+        .replace('_', "-");
 
     let ctx = static_json_gettext_build!(
         "en-US";
