@@ -72,7 +72,7 @@ You can download the latest version of LeafView2 from the releases page here:
 % npx tauri build
 ```
 
-_NOTE: You will need to meet [Tauri prerequisites](https://tauri.studio/docs/getting-started/prerequisites)._
+_NOTE: You will need to meet [Tauri prerequisites](https://tauri.studio/docs/getting-started/prerequisites)_.
 
 ## :copyright: License
 
