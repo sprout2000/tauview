@@ -87,7 +87,7 @@ fn main() {
         .menu(menu::default())
         .setup(|app| {
             let window = app.get_window("main").unwrap();
-            #[cfg(all(debug_assertions, target_os = "macos"))]
+            #[cfg(all(debug_assertions, not(target_os = "windows")))]
             window.open_devtools();
 
             let window_ = window.clone();
