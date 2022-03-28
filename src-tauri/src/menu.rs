@@ -42,7 +42,10 @@ pub fn default() -> Menu {
     let app_menu = Submenu::new(
         &app_ctx.package_info().name,
         Menu::new()
-            .add_native_item(MenuItem::About(app_ctx.package_info().name.clone()))
+            .add_native_item(MenuItem::About(
+                app_ctx.package_info().name.clone(),
+                tauri::AboutMetadata::new(),
+            ))
             .add_native_item(MenuItem::Separator)
             .add_native_item(MenuItem::Hide)
             .add_native_item(MenuItem::HideOthers)
