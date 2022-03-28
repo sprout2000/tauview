@@ -15,7 +15,7 @@
     "build": "webpack build --mode production"
   },
   "dependencies": {
-    "@tauri-apps/api": "^1.0.0-rc.2",
+    "@tauri-apps/api": "^1.0.0-rc.3",
     "i18next": "^21.6.14",
     "leaflet": "^1.7.1",
     "react": "^17.0.2",
