@@ -1,14 +1,6 @@
-use json_gettext::{get_text, static_json_gettext_build, JSONGetText};
+use json_gettext::{get_text, static_json_gettext_build};
 use sys_locale::get_locale;
 use tauri::{CustomMenuItem, Menu, MenuItem, Submenu};
-
-fn i18n(ctx: &JSONGetText, locale: &str, fallback: &str) -> String {
-    let title = match get_text!(ctx, locale, fallback) {
-        Some(result) => result.to_string(),
-        None => fallback.to_string(),
-    };
-    title
-}
 
 pub fn default() -> Menu {
     let locale = get_locale()
@@ -60,48 +52,76 @@ pub fn default() -> Menu {
     );
 
     let file_menu = Submenu::new(
-        i18n(&ctx, &locale, "File"),
+        get_text!(ctx, &locale, "File").unwrap().to_string(),
         Menu::new()
             .add_item(
-                CustomMenuItem::new("open", i18n(&ctx, &locale, "Open..."))
-                    .accelerator("CmdOrCtrl+O"),
+                CustomMenuItem::new(
+                    "open",
+                    get_text!(ctx, &locale, "Open...").unwrap().to_string(),
+                )
+                .accelerator("CmdOrCtrl+O"),
             )
             .add_native_item(MenuItem::Separator)
             .add_item(
-                CustomMenuItem::new("close", i18n(&ctx, &locale, "Close"))
-                    .accelerator("CmdOrCtrl+W"),
+                CustomMenuItem::new(
+                    "close",
+                    get_text!(ctx, &locale, "Close").unwrap().to_string(),
+                )
+                .accelerator("CmdOrCtrl+W"),
             ),
     );
 
     #[cfg(target_os = "macos")]
     let window_menu = Submenu::new(
-        i18n(&ctx, &locale, "Window"),
+        get_text!(ctx, &locale, "Window").unwrap().to_string(),
         Menu::new()
             .add_item(
-                CustomMenuItem::new("minimize", i18n(&ctx, &locale, "Minimize"))
-                    .accelerator("Cmd+M"),
+                CustomMenuItem::new(
+                    "minimize",
+                    get_text!(ctx, &locale, "Minimize").unwrap().to_string(),
+                )
+                .accelerator("Cmd+M"),
             )
-            .add_item(CustomMenuItem::new("zoom", i18n(&ctx, &locale, "Zoom")))
+            .add_item(CustomMenuItem::new(
+                "zoom",
+                get_text!(ctx, &locale, "Zoom").unwrap().to_string(),
+            ))
             .add_native_item(MenuItem::Separator)
             .add_item(
-                CustomMenuItem::new("fullscreen", i18n(&ctx, &locale, "Toggle Full Screen"))
-                    .accelerator("Cmd+Ctrl+F"),
+                CustomMenuItem::new(
+                    "fullscreen",
+                    get_text!(ctx, &locale, "Toggle Full Screen")
+                        .unwrap()
+                        .to_string(),
+                )
+                .accelerator("Cmd+Ctrl+F"),
             ),
     );
 
     #[cfg(not(target_os = "macos"))]
     let window_menu = Submenu::new(
-        i18n(&ctx, &locale, "Window"),
+        get_text!(ctx, &locale, "Window").unwrap().to_string(),
         Menu::new()
             .add_item(
-                CustomMenuItem::new("minimize", i18n(&ctx, &locale, "Minimize"))
-                    .accelerator("Ctrl+M"),
+                CustomMenuItem::new(
+                    "minimize",
+                    get_text!(ctx, &locale, "Minimize").unwrap().to_string(),
+                )
+                .accelerator("Ctrl+M"),
             )
-            .add_item(CustomMenuItem::new("zoom", i18n(&ctx, &locale, "Zoom")))
+            .add_item(CustomMenuItem::new(
+                "zoom",
+                get_text!(ctx, &locale, "Zoom").unwrap().to_string(),
+            ))
             .add_native_item(MenuItem::Separator)
             .add_item(
-                CustomMenuItem::new("fullscreen", i18n(&ctx, &locale, "Toggle Full Screen"))
-                    .accelerator("F11"),
+                CustomMenuItem::new(
+                    "fullscreen",
+                    get_text!(ctx, &locale, "Toggle Full Screen")
+                        .unwrap()
+                        .to_string(),
+                )
+                .accelerator("F11"),
             ),
     );
 
