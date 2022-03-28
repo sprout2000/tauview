@@ -21,6 +21,9 @@ sys-locale = "0.2.0"
 tauri = { version = "1.0.0-rc.5", features = ["dialog-open", "path-all", "protocol-asset", "window-set-title"] }
 trash = "2.0.4"
 
+# [dependencies.tauri-plugin-window-state]
+# git = "https://github.com/tauri-apps/tauri-plugin-window-state"
+
 [features]
 default = [ "custom-protocol" ]
 custom-protocol = [ "tauri/custom-protocol" ]
