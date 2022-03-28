@@ -869,6 +869,16 @@ dependencies = [
 ]
 
 [[package]]
+name = "ctrlc"
+version = "3.2.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "a19c6cedffdc8c03a3346d723eb20bd85a13362bb96dc2ac000842c6381ec7bf"
+dependencies = [
+ "nix",
+ "winapi 0.3.9",
+]
+
+[[package]]
 name = "cty"
 version = "0.2.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -3461,7 +3471,7 @@ version = "0.4.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "bfa0f585226d2e68097d4f95d113b15b83a82e819ab25717ec0590d9584ef366"
 dependencies = [
- "semver 1.0.6",
+ "semver 1.0.7",
 ]
 
 [[package]]
@@ -3635,9 +3645,9 @@ dependencies = [
 
 [[package]]
 name = "semver"
-version = "1.0.6"
+version = "1.0.7"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a4a3381e03edd24287172047536f20cabde766e2cd3e65e6b00fb3af51c4f38d"
+checksum = "d65bd28f48be7196d222d95b9243287f48d27aca604e08497513019ff0502cc4"
 
 [[package]]
 name = "semver-parser"
@@ -4134,7 +4144,7 @@ dependencies = [
  "rand 0.8.5",
  "raw-window-handle",
  "rfd",
- "semver 1.0.6",
+ "semver 1.0.7",
  "serde",
  "serde_json",
  "serde_repr",
@@ -4169,7 +4179,7 @@ dependencies = [
 [[package]]
 name = "tauri-bundler"
 version = "1.0.0-rc.3"
-source = "git+https://github.com/tauri-apps/tauri#3c4ee7c997fa3ff696bcfd5b8c82fecaca16bf49"
+source = "git+https://github.com/tauri-apps/tauri#8b807e09d6868f6bff8357f16d27b15bd1fccadd"
 dependencies = [
  "anyhow",
  "ar",
@@ -4206,12 +4216,13 @@ dependencies = [
 [[package]]
 name = "tauri-cli"
 version = "1.0.0-rc.7"
-source = "git+https://github.com/tauri-apps/tauri#3c4ee7c997fa3ff696bcfd5b8c82fecaca16bf49"
+source = "git+https://github.com/tauri-apps/tauri#8b807e09d6868f6bff8357f16d27b15bd1fccadd"
 dependencies = [
  "anyhow",
  "base64",
  "clap",
  "colored",
+ "ctrlc",
  "dialoguer",
  "encode_unicode",
  "glob",
@@ -4230,7 +4241,7 @@ dependencies = [
  "os_pipe",
  "regex",
  "schemars",
- "semver 1.0.6",
+ "semver 1.0.7",
  "serde",
  "serde_json",
  "serde_with",
@@ -4357,19 +4368,18 @@ dependencies = [
 [[package]]
 name = "tauri-utils"
 version = "1.0.0-rc.3"
-source = "git+https://github.com/tauri-apps/tauri#3c4ee7c997fa3ff696bcfd5b8c82fecaca16bf49"
+source = "git+https://github.com/tauri-apps/tauri#8b807e09d6868f6bff8357f16d27b15bd1fccadd"
 dependencies = [
  "aes-gcm",
  "ctor",
+ "getrandom 0.2.5",
  "glob",
  "heck 0.4.0",
  "html5ever",
  "json-patch",
  "json5",
  "kuchiki",
- "once_cell",
  "phf 0.10.1",
- "ring",
  "schemars",
  "serde",
  "serde_json",
@@ -4396,9 +4406,9 @@ dependencies = [
 
 [[package]]
 name = "tendril"
-version = "0.4.2"
+version = "0.4.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a9ef557cb397a4f0a5a3a628f06515f78563f2209e64d47055d9dc6052bf5e33"
+checksum = "d24a120c5fc464a3458240ee02c299ebcb9d67b5249c8848b09d639dca8d7bb0"
 dependencies = [
  "futf",
  "mac",
