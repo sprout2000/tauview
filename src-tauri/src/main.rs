@@ -16,13 +16,13 @@ struct Payload {
 
 fn mime_from<P: AsRef<Path>>(filepath: P) -> bool {
     match infer::get_from_path(filepath) {
-        Ok(kind) => match kind {
-            Some(mime) => {
-                mime.mime_type() == "image/jpeg"
-                    || mime.mime_type() == "image/png"
-                    || mime.mime_type() == "image/gif"
-                    || mime.mime_type() == "image/webp"
-                    || mime.mime_type() == "image/vnd.microsoft.icon"
+        Ok(opt) => match opt {
+            Some(filetype) => {
+                filetype.mime_type() == "image/jpeg"
+                    || filetype.mime_type() == "image/png"
+                    || filetype.mime_type() == "image/gif"
+                    || filetype.mime_type() == "image/webp"
+                    || filetype.mime_type() == "image/vnd.microsoft.icon"
             }
             None => false,
         },
