@@ -53,6 +53,8 @@ const config: Configuration = {
   devServer: {
     static: ['dist'],
   },
+  stats: 'minimal',
+  performance: { hints: false },
 };
 
 export default config;
