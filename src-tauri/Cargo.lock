@@ -2631,9 +2631,9 @@ dependencies = [
 
 [[package]]
 name = "tauri"
-version = "1.0.0-rc.5"
+version = "1.0.0-rc.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a737a30437bdadac222ad9cbd997fccb81dec4af958b74edaa6ff396747be1f2"
+checksum = "f6d514a34b3f9a07e2002d95e1371b42a446636e3d571a59e974b21d6acf3007"
 dependencies = [
  "anyhow",
  "bincode",
@@ -2742,9 +2742,9 @@ dependencies = [
 
 [[package]]
 name = "tauri-runtime-wry"
-version = "0.3.4"
+version = "0.3.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "b849531bbee35fcdf8fc96044a670991b8151442520141d6f0e20010ffccf709"
+checksum = "6a8bf16e0476a8249aa2c75e7b49ec4c059be5fb27d9f6514e30ed327e8e9fa2"
 dependencies = [
  "gtk",
  "rand 0.8.5",
