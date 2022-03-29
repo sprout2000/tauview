@@ -57,6 +57,7 @@
         "height": 400,
         "minWidth": 640,
         "minHeight": 400,
+        "visible": false,
         "resizable": true
       }
     ]

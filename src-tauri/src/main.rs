@@ -131,7 +131,7 @@ fn main() {
             mime_check,
             get_entries
         ])
-        // .plugin(tauri_plugin_window_state::WindowState::default())
+        .plugin(tauri_plugin_window_state::WindowState::default())
         .run(tauri::generate_context!())
         .expect("Error while running tauri application");
 }
