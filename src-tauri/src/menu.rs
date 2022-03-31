@@ -75,33 +75,23 @@ pub fn default() -> Menu {
     );
 
     #[cfg(target_os = "macos")]
-    let window_menu = Submenu::new(
-        get_text!(ctx, &locale, "Window").unwrap().to_string(),
-        Menu::new()
-            .add_item(
-                CustomMenuItem::new(
-                    "minimize",
-                    get_text!(ctx, &locale, "Minimize").unwrap().to_string(),
-                )
-                .accelerator("Cmd+M"),
-            )
-            .add_item(CustomMenuItem::new(
-                "zoom",
-                get_text!(ctx, &locale, "Zoom").unwrap().to_string(),
-            ))
-            .add_native_item(MenuItem::Separator)
-            .add_item(
-                CustomMenuItem::new(
-                    "fullscreen",
-                    get_text!(ctx, &locale, "Toggle Full Screen")
-                        .unwrap()
-                        .to_string(),
-                )
-                .accelerator("Cmd+Ctrl+F"),
-            ),
-    );
+    let fullscreen_menu = CustomMenuItem::new(
+        "fullscreen",
+        get_text!(ctx, &locale, "Toggle Full Screen")
+            .unwrap()
+            .to_string(),
+    )
+    .accelerator("Cmd+Option+F");
 
     #[cfg(not(target_os = "macos"))]
+    let fullscreen_menu = CustomMenuItem::new(
+        "fullscreen",
+        get_text!(ctx, &locale, "Toggle Full Screen")
+            .unwrap()
+            .to_string(),
+    )
+    .accelerator("F11");
+
     let window_menu = Submenu::new(
         get_text!(ctx, &locale, "Window").unwrap().to_string(),
         Menu::new()
@@ -110,22 +100,14 @@ pub fn default() -> Menu {
                     "minimize",
                     get_text!(ctx, &locale, "Minimize").unwrap().to_string(),
                 )
-                .accelerator("Ctrl+M"),
+                .accelerator("CmdOrCtrl+M"),
             )
             .add_item(CustomMenuItem::new(
                 "zoom",
                 get_text!(ctx, &locale, "Zoom").unwrap().to_string(),
             ))
             .add_native_item(MenuItem::Separator)
-            .add_item(
-                CustomMenuItem::new(
-                    "fullscreen",
-                    get_text!(ctx, &locale, "Toggle Full Screen")
-                        .unwrap()
-                        .to_string(),
-                )
-                .accelerator("F11"),
-            ),
+            .add_item(fullscreen_menu),
     );
 
     #[cfg(target_os = "macos")]
