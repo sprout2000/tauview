@@ -32,6 +32,7 @@
       "targets": "all",
       "identifier": "jp.sprout2000.LeafView",
       "icon": [
+        "icons/icon.png",
         "icons/icon.ico",
         "icons/icon.icns",
         "icons/32x32.png",
