@@ -58,6 +58,76 @@ You can download the latest version of LeafView2 from the releases page here:
 | 简体中文 :cn:                          | `zh_CN` |
 | 繁体中文 :taiwan:                      | `zh_TW` |
 
+## :scroll: Contributing
+
+You can easily contribute to this repository by providing translation files.
+
+1. Create `{your_LANG}.json` in `src-tauri/locales`.
+
+```diff
+src-tauri
+  ├── .gitignore
+  ├── Cargo.lock
+  ├── Cargo.toml
+  ├── build.rs
+  ├── icons
+  ├── locales
+  │   ├── ar.json
+  │   ├── cs.json
+  │   ├── de.json
+  │   ├── en.json
+  │   ├── es.json
++ │   ├── ja.json
+  │   ├── pl.json
+  │   ├── pt.json
+  │   ├── ru.json
+  │   ├── zh_CN.json
+  │   └── zh_TW.json
+  ├── src
+  └── tauri.conf.json
+```
+
+`src-tauri/ja.json`:
+
+```json
+{
+  "About": "アバウト",
+  "Hide": "隠す",
+  "HideOthers": "その他を非表示にする",
+  "Show All": "すべて表示",
+  "Quit": "終了",
+  "Minimize": "最小化",
+  "Maximize": "最大化",
+  "Zoom": "ズーム",
+  "Toggle Full Screen": "フルスクリーンのトグル",
+  "File": "ファイル",
+  "Open...": "開く...",
+  "Close": "閉じる",
+  "Shortcuts": "ショートカット",
+  "Next Image": "次の画像",
+  "Prev Image": "前の画像",
+  "Reset Zoom": "ズームをリセット",
+  "Move to Trash": "ゴミ箱へ移動",
+  "Window": "ウィンドウ"
+}
+```
+
+2. And then please send a [pull request](https://github.com/sprout2000/leafview2/pulls) to this repository.
+
+## :tada: Contributors
+
+**Special Thanks to:**
+
+- [@SuhaibAtef](https://github.com/SuhaibAtef) [#274](https://github.com/sprout2000/leafview/pull/274)
+- [@mwoz123](https://github.com/mwoz123) [#260](https://github.com/sprout2000/leafview/pull/260), [#261](https://github.com/sprout2000/leafview/pull/261)
+- [@ArcherGu](https://github.com/ArcherGu) [#235](https://github.com/sprout2000/leafview/pull/235)
+- [@guaycuru](https://github.com/guaycuru) [#228](https://github.com/sprout2000/leafview/pull/228), [#232](https://github.com/sprout2000/leafview/pull/232)
+- [@kitt3911](https://github.com/kitt3911) [#215](https://github.com/sprout2000/leafview/pull/215)
+- [@nukeop](https://github.com/nukeop) [#214](https://github.com/sprout2000/leafview/pull/214)
+- [@singuerinc](https://github.com/singuerinc) [#178](https://github.com/sprout2000/leafview/pull/178)
+- [@DrDeee](https://github.com/DrDeee) [#166](https://github.com/sprout2000/leafview/pull/166)
+- [@PetrTodorov](https://github.com/PetrTodorov) [#68](https://github.com/sprout2000/leafview/pull/68)
+
 ## :hammer_and_wrench: Development
 
 ```sh
