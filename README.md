@@ -72,17 +72,8 @@ src-tauri
   ├── build.rs
   ├── icons
   ├── locales
-  │   ├── ar.json
-  │   ├── cs.json
-  │   ├── de.json
   │   ├── en.json
-  │   ├── es.json
-+ │   ├── ja.json
-  │   ├── pl.json
-  │   ├── pt.json
-  │   ├── ru.json
-  │   ├── zh_CN.json
-  │   └── zh_TW.json
++ │   └── ja.json
   ├── src
   └── tauri.conf.json
 ```
@@ -112,7 +103,18 @@ src-tauri
 }
 ```
 
-2. And then please send a [pull request](https://github.com/sprout2000/leafview2/pulls) to this repository.
+2. Import the locale into [src-tauri/src/menu.rs](https://github.com/sprout2000/leafview2/blob/main/src-tauri/src/menu.rs) as follows:
+
+```diff
+      let ctx = static_json_gettext_build!(
+          "en-US";
+          "en-US" => "locales/en.json",
++         "ja-JP" => "locales/ja.json"
+      )
+      .unwrap();
+```
+
+3. And then please send a [pull request](https://github.com/sprout2000/leafview2/pulls) to this repository.
 
 ## :tada: Contributors
 
