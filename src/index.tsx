@@ -15,8 +15,4 @@ setLocales(locale);
 const container = document.getElementById('root');
 const root = container && createRoot(container);
 
-root?.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
+root?.render(<App />);
