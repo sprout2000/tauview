@@ -2726,7 +2726,7 @@ dependencies = [
 [[package]]
 name = "tauri-plugin-window-state"
 version = "0.1.0"
-source = "git+https://github.com/tauri-apps/tauri-plugin-window-state#9e57d4bda1559afcbdce1e9834a8ecfc010a49f8"
+source = "git+https://github.com/tauri-apps/tauri-plugin-window-state#660a8e2399c7b5c740660c038ce4e7acf382ce0f"
 dependencies = [
  "bincode",
  "serde",
