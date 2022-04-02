@@ -4,11 +4,6 @@
   "productName": "LeafView",
   "version": "0.2.0",
   "license": "MIT",
-  "keywords": [
-    "image-viewer",
-    "macos",
-    "tauri"
-  ],
   "scripts": {
     "tauri": "tauri",
     "dev": "webpack serve --mode development",
