@@ -2,7 +2,6 @@
 
 [![GitHub CI](https://github.com/sprout2000/leafview/actions/workflows/release.yml/badge.svg)](https://github.com/sprout2000/leafview/actions/workflows/release.yml)
 [![GitHub stars](https://img.shields.io/github/stars/sprout2000/leafview2)](https://github.com/sprout2000/leafview2/stargazers)
-![GitHub package.json dynamic](https://img.shields.io/github/package-json/keywords/sprout2000/leafview2)
 [![GitHub license](https://img.shields.io/github/license/sprout2000/leafview)](https://github.com/sprout2000/leafview/blob/main/LICENSE.md)
 
 A minimalist image viewer for macOS based on [Leaflet.js](https://leafletjs.com/) and [Tauri](https://tauri.studio/).
