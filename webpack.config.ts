@@ -3,14 +3,10 @@ import { Configuration } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
-const isDev = process.argv[4] === 'development';
-const isLinux = process.platform === 'linux';
-
 const config: Configuration = {
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.json'],
   },
-  entry: './web/index.tsx',
   module: {
     rules: [
       {
@@ -20,22 +16,7 @@ const config: Configuration = {
       },
       {
         test: /\.s?css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: isDev,
-              importLoaders: 1,
-            },
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              sourceMap: isDev,
-            },
-          },
-        ],
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
         test: /\.(ico|jpe?g|png|svg)$/,
@@ -46,15 +27,15 @@ const config: Configuration = {
   plugins: [
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
-      inject: 'body',
-      template: isDev && !isLinux ? './web/index.dev.html' : './web/index.html',
+      template:
+        process.argv[process.argv.length - 1] === 'development'
+          ? './src/index.dev.html'
+          : './src/index.html',
     }),
   ],
-  devServer: {
-    static: ['dist'],
-  },
   stats: 'minimal',
   performance: { hints: false },
+  devServer: { static: ['./dist'] },
 };
 
 export default config;
