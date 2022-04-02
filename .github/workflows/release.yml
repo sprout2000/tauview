@@ -19,6 +19,11 @@ jobs:
         uses: actions-rs/toolchain@v1
         with:
           toolchain: stable
+          default: true
+
+      - uses: Swatinem/rust-cache@v1
+        with:
+          working-directory: src-tauri/
 
       - name: Install app dependencies
         run: npm install
