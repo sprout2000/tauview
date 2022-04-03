@@ -1,9 +1,8 @@
-import React from 'react';
 import { createRoot } from 'react-dom/client';
 
+import { App } from './components/App';
 import { setLocales } from './setLocales';
 
-import { App } from './components/App';
 import './index.scss';
 
 const locale =
