@@ -214,28 +214,28 @@ export const App = () => {
   };
 
   useEffect(() => {
-    const unlistenFn = async () => {
-      return await event.listen(
-        'tauri://file-drop',
-        async (e: event.Event<string[]>) => {
-          const filepath = e.payload[0];
-          const mimeSafe: boolean = await invoke('mime_check', { filepath });
-          if (!mimeSafe) return;
+    const unlistenFn = event.listen(
+      'tauri://file-drop',
+      async (e: event.Event<string[]>) => {
+        const filepath = e.payload[0];
+        const mimeSafe: boolean = await invoke('mime_check', { filepath });
+        if (!mimeSafe) return;
 
-          setUrl(e.payload[0]);
-        }
-      );
+        setUrl(e.payload[0]);
+      }
+    );
+
+    return () => {
+      unlistenFn.then((f) => f());
     };
-    unlistenFn();
   }, []);
 
   useEffect(() => {
-    const unlistenFn = async () => {
-      return await event.listen('open', async () => {
-        onOpen();
-      });
+    const unlistenFn = event.listen('open', () => onOpen());
+
+    return () => {
+      unlistenFn.then((f) => f());
     };
-    unlistenFn();
   }, []);
 
   useEffect(() => {
