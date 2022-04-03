@@ -101,9 +101,7 @@ fn main() {
                     )
                     .expect("Error while emitting open event"),
                 "close" => std::process::exit(0),
-                "minimize" => {
-                    window_.minimize().unwrap();
-                }
+                "minimize" => window_.minimize().unwrap(),
                 "zoom" => {
                     if let Ok(result) = window_.is_maximized() {
                         if result {
@@ -127,9 +125,9 @@ fn main() {
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
-            move_to_trash,
             mime_check,
-            get_entries
+            get_entries,
+            move_to_trash,
         ])
         .plugin(tauri_plugin_window_state::WindowState::default())
         .run(tauri::generate_context!())
