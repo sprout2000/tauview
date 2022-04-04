@@ -136,14 +136,28 @@ pub fn default() -> Menu {
             .add_item(fullscreen_menu),
     );
 
+    let help_menu = Submenu::new(
+        get_text!(ctx, &locale, "Help").unwrap().to_string(),
+        Menu::new().add_item(CustomMenuItem::new(
+            "support",
+            get_text!(ctx, &locale, "Support URL...")
+                .unwrap()
+                .to_string(),
+        )),
+    );
+
     #[cfg(target_os = "macos")]
     let menu = Menu::new()
         .add_submenu(app_menu)
         .add_submenu(file_menu)
-        .add_submenu(window_menu);
+        .add_submenu(window_menu)
+        .add_submenu(help_menu);
 
     #[cfg(not(target_os = "macos"))]
-    let menu = Menu::new().add_submenu(file_menu).add_submenu(window_menu);
+    let menu = Menu::new()
+        .add_submenu(file_menu)
+        .add_submenu(window_menu)
+        .add_submenu(help_menu);
 
     menu
 }

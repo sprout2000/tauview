@@ -5,6 +5,7 @@
 
 use std::path::{Path, PathBuf};
 use tauri::api::dir::{read_dir, DiskEntry};
+use tauri::api::shell;
 use tauri::Manager;
 
 mod menu;
@@ -85,6 +86,16 @@ fn get_entries(dir: String) -> Vec<PathBuf> {
 fn main() {
     tauri::Builder::default()
         .menu(menu::default())
+        .on_menu_event(|event| {
+            if event.menu_item_id() == "support" {
+                shell::open(
+                    &event.window().shell_scope(),
+                    "https://github.com/sprout2000/leafview2#readme",
+                    None,
+                )
+                .unwrap();
+            }
+        })
         .setup(|app| {
             let window = app.get_window("main").unwrap();
             #[cfg(all(debug_assertions, not(target_os = "windows")))]

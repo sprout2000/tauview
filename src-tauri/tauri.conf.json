@@ -22,6 +22,10 @@
         "asset": true,
         "assetScope": ["*"]
       },
+      "shell": {
+        "all": false,
+        "open": true
+      },
       "window": {
         "all": false,
         "setTitle": true
