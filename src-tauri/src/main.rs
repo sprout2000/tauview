@@ -98,7 +98,7 @@ fn main() {
         })
         .setup(|app| {
             let window = app.get_window("main").unwrap();
-            #[cfg(all(debug_assertions, not(target_os = "windows")))]
+            #[cfg(debug_assertions)]
             window.open_devtools();
 
             let window_ = window.clone();
