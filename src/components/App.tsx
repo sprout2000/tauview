@@ -214,7 +214,7 @@ export const App = () => {
   };
 
   useEffect(() => {
-    const unlistenFn = event.listen(
+    const unlisten = event.listen(
       'tauri://file-drop',
       async (e: event.Event<string[]>) => {
         const filepath = e.payload[0];
@@ -226,15 +226,15 @@ export const App = () => {
     );
 
     return () => {
-      unlistenFn.then((f) => f());
+      unlisten.then((f) => f());
     };
   }, []);
 
   useEffect(() => {
-    const unlistenFn = event.listen('open', () => onOpen());
+    const unlisten = event.listen('open', () => onOpen());
 
     return () => {
-      unlistenFn.then((f) => f());
+      unlisten.then((f) => f());
     };
   }, []);
 
