@@ -103,7 +103,7 @@ pub fn default() -> Menu {
     #[cfg(target_os = "macos")]
     let fullscreen_menu = CustomMenuItem::new(
         "fullscreen",
-        get_text!(ctx, &locale, "Toggle Full Screen")
+        get_text!(ctx, &locale, "Toggle Fullscreen")
             .unwrap()
             .to_string(),
     )
@@ -112,7 +112,7 @@ pub fn default() -> Menu {
     #[cfg(not(target_os = "macos"))]
     let fullscreen_menu = CustomMenuItem::new(
         "fullscreen",
-        get_text!(ctx, &locale, "Toggle Full Screen")
+        get_text!(ctx, &locale, "Toggle Fullscreen")
             .unwrap()
             .to_string(),
     )
