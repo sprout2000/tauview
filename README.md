@@ -26,8 +26,8 @@ You can download the latest version of LeafView2 from the releases page here:
 
 |                                     Key                                     | Function       |
 | :-------------------------------------------------------------------------: | :------------- |
-|           <kbd>J</kbd> or <kbd>CmdOrCtrl</kbd>+<kbd>&#8594;</kbd>           | Next Image     |
-|           <kbd>K</kbd> or <kbd>CmdOrCtrl</kbd>+<kbd>&#8592;</kbd>           | Previous Image |
+|               <kbd>J</kbd> or <kbd>⌘</kbd>+<kbd>&#8594;</kbd>               | Next Image     |
+|               <kbd>K</kbd> or <kbd>⌘</kbd>+<kbd>&#8592;</kbd>               | Previous Image |
 |                                <kbd>+</kbd>                                 | Zoom In        |
 |                                <kbd>-</kbd>                                 | Zoom Out       |
 |                                <kbd>0</kbd>                                 | Reset Zoom     |
