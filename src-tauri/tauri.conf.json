@@ -54,10 +54,10 @@
       {
         "label": "main",
         "title": "LeafView",
-        "width": 640,
-        "height": 400,
-        "minWidth": 640,
-        "minHeight": 400,
+        "width": 800,
+        "height": 500,
+        "minWidth": 800,
+        "minHeight": 500,
         "visible": false,
         "resizable": true
       }
