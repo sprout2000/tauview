@@ -71,46 +71,67 @@ src-tauri
   ├── build.rs
   ├── icons
   ├── locales
++ │   ├── cs.json
   │   ├── en.json
-+ │   └── ja.json
+  │   └── ja.json
   ├── src
   └── tauri.conf.json
 ```
 
-`src-tauri/ja.json`:
+`src-tauri/locales/cs.json`:
 
 ```json
 {
-  "About": "アバウト",
-  "Hide": "隠す",
-  "HideOthers": "その他を非表示にする",
-  "Show All": "すべて表示",
-  "Quit": "終了",
-  "Minimize": "最小化",
-  "Maximize": "最大化",
-  "Zoom": "ズーム",
-  "Toggle Full Screen": "フルスクリーンのトグル",
-  "File": "ファイル",
-  "Open...": "開く...",
-  "Close": "閉じる",
-  "Shortcuts": "ショートカット",
-  "Next Image": "次の画像",
-  "Prev Image": "前の画像",
-  "Reset Zoom": "ズームをリセット",
-  "Move to Trash": "ゴミ箱へ移動",
-  "Window": "ウィンドウ"
+  "File": "Soubor",
+  "Open...": "Otevřít...",
+  "Select an image": "Vybrat obrázek",
+  "Image files": "Soubory obrázku",
+  "Move to Trash": "Přesunout do koše",
+  "View": "Zobrazit",
+  "Next Image": "Následující obrázek",
+  "Prev Image": "Předchozí obrázek",
+  "Toggle Fullscreen": "Celá obrazovka",
+  "Toggle Developer Tools": "Zobrazit nástroje pro vývojáře",
+  "Toggle Menubar": "Přepnout lištu nabídek",
+  "Toggle Dark Mode": "Přepínání tmavého režimu",
+  "Window": "Okno",
+  "Minimize": "Minimalizovat",
+  "Maximize": "Maximalizovat",
+  "Zoom": "Přiblížit",
+  "Bring All to Front": "Přenést vše do popředí",
+  "Close": "Storno",
+  "Help": "Nápověda",
+  "About": "O aplikaci LeafView",
+  "About LeafView": "O aplikaci LeafView",
+  "Support URL...": "URL podpory...",
+  "Hide LeafView": "Skrýt LeafView",
+  "Hide Others": "Skrýt ostatní",
+  "Show All": "Zobrazit vše",
+  "Quit": "Ukončit LeafView",
+  "Quit LeafView": "Ukončit LeafView"
 }
 ```
 
-2. Import the locale into [src-tauri/src/menu.rs](https://github.com/sprout2000/leafview2/blob/main/src-tauri/src/menu.rs) as follows:
+2. Import the locale into [src-tauri/src/menu.rs](https://github.com/sprout2000/leafview2/blob/main/src-tauri/src/menu.rs) and [src/setLocales.ts](https://github.com/sprout2000/leafview2/blob/main/src/setLocales.ts) as follows:
+
+`src-tauri/src/menu.rs`:
 
 ```diff
       let ctx = static_json_gettext_build!(
           "en-US";
           "en-US" => "locales/en.json",
-+         "ja-JP" => "locales/ja.json"
+          "ja-JP" => "locales/ja.json",
++         "cs-CZ" => "locales/cs.json"
       )
       .unwrap();
+```
+
+`src/setLocales.ts`:
+
+```diff
+  import en from '../src-tauri/locales/en.json';
+  import ja from '../src-tauri/locales/ja.json';
++ import cs from '../src-tauri/locales/cs.json';
 ```
 
 3. And then please send a [pull request](https://github.com/sprout2000/leafview2/pulls) to this repository.
