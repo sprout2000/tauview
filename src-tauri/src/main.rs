@@ -35,12 +35,12 @@ fn mime_from<P: AsRef<Path>>(filepath: P) -> bool {
 }
 
 #[tauri::command]
-fn mime_check(filepath: String) -> bool {
+async fn mime_check(filepath: String) -> bool {
     mime_from(filepath)
 }
 
 #[tauri::command]
-fn move_to_trash(url: String) -> Result<(), String> {
+async fn move_to_trash(url: String) -> Result<(), String> {
     match trash::delete(url) {
         Ok(_) => Ok(()),
         Err(error) => Err(error.to_string()),
@@ -63,7 +63,7 @@ fn is_img(entry: &DiskEntry) -> bool {
 }
 
 #[tauri::command]
-fn get_entries(dir: String) -> Vec<PathBuf> {
+async fn get_entries(dir: String) -> Vec<PathBuf> {
     let entries = match read_dir(dir, false) {
         Err(why) => {
             println!("Error in read_dir(): {:?}", why);
