@@ -30,15 +30,10 @@ export const App = () => {
     return list;
   };
 
-  const getZoom = (
-    imageWidth: number,
-    width: number,
-    imageHeight: number,
-    height: number
-  ) => {
-    if (imageWidth > width || imageHeight > height) {
-      const zoomX = width / imageWidth;
-      const zoomY = height / imageHeight;
+  const getZoom = (iw: number, width: number, ih: number, height: number) => {
+    if (iw > width || ih > height) {
+      const zoomX = width / iw;
+      const zoomY = height / ih;
 
       return zoomX >= zoomY ? zoomY : zoomX;
     } else {
