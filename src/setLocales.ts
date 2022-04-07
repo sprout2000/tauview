@@ -27,6 +27,9 @@ import zh_CN from '../src-tauri/locales/zh_CN.json';
 /** Merge the pull request sent by SuhaibAtef */
 /** https://github.com/sprout2000/leafview/pull/274 */
 import ar from '../src-tauri/locales/ar.json';
+/** Merge the pull request sent by Levminer */
+/** https://github.com/sprout2000/leafview/pull/305 */
+import hu from '../src-tauri/locales/hu.json';
 
 export const setLocales = (locale: string) => {
   i18next.init({
@@ -51,6 +54,7 @@ export const setLocales = (locale: string) => {
       'zh-CN': { translation: zh_CN },
       'zh-TW': { translation: zh_TW },
       ar: { translation: ar },
+      hu: { translation: hu },
     },
   });
 };
