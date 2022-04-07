@@ -50,6 +50,7 @@ You can download the latest version of LeafView2 from the releases page here:
 | Deutsch :de: :austria: :switzerland:   |  `de`   |
 | English :us: :uk: :earth_americas:     |  `en`   |
 | Español :es: :mexico: :argentina: :us: |  `es`   |
+| Magyar nyelv :hungary:                 |  `hu`   |
 | 日本語 :jp:                            |  `ja`   |
 | Polski :poland:                        |  `pl`   |
 | Português :portugal: :brazil:          |  `pt`   |
@@ -140,6 +141,7 @@ src-tauri
 
 **Special Thanks to:**
 
+- [@Levminer](https://github.com/Levminer) [#305](https://github.com/sprout2000/leafview/pull/305)
 - [@SuhaibAtef](https://github.com/SuhaibAtef) [#274](https://github.com/sprout2000/leafview/pull/274)
 - [@mwoz123](https://github.com/mwoz123) [#260](https://github.com/sprout2000/leafview/pull/260), [#261](https://github.com/sprout2000/leafview/pull/261)
 - [@ArcherGu](https://github.com/ArcherGu) [#235](https://github.com/sprout2000/leafview/pull/235)
