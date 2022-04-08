@@ -6,6 +6,7 @@ import { ArrowRight } from './icons/ArrowRight';
 import { Trash } from './icons/Trash';
 
 import './ToolBar.scss';
+import { memo } from 'react';
 
 interface Props {
   onOpen: () => void;
@@ -14,7 +15,7 @@ interface Props {
   onRemove: () => Promise<void>;
 }
 
-export const ToolBar = (props: Props): JSX.Element => {
+export const ToolBar = memo((props: Props): JSX.Element => {
   return (
     <div className="toolbar">
       <div className="folder">
@@ -53,4 +54,5 @@ export const ToolBar = (props: Props): JSX.Element => {
       </div>
     </div>
   );
-};
+});
+ToolBar.displayName = 'ToolBar';

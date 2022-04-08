@@ -20,7 +20,7 @@ export const App = () => {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapObj: React.MutableRefObject<L.Map | null> = useRef(null);
 
-  const readDir = async () => {
+  const readDir = useCallback(async () => {
     const dir = await dirname(url);
 
     const list: string[] = await invoke('get_entries', {
@@ -28,18 +28,21 @@ export const App = () => {
     });
 
     return list;
-  };
+  }, [url]);
 
-  const getZoom = (iw: number, width: number, ih: number, height: number) => {
-    if (iw > width || ih > height) {
-      const zoomX = width / iw;
-      const zoomY = height / ih;
+  const getZoom = useCallback(
+    (iw: number, width: number, ih: number, height: number) => {
+      if (iw > width || ih > height) {
+        const zoomX = width / iw;
+        const zoomY = height / ih;
 
-      return zoomX >= zoomY ? zoomY : zoomX;
-    } else {
-      return 1;
-    }
-  };
+        return zoomX >= zoomY ? zoomY : zoomX;
+      } else {
+        return 1;
+      }
+    },
+    []
+  );
 
   const draw = useCallback(
     (width: number, height: number) => {
@@ -90,7 +93,7 @@ export const App = () => {
         image.src = convertFileSrc(url);
       }
     },
-    [url]
+    [url, getZoom]
   );
 
   const preventDefault = (e: React.DragEvent<HTMLDivElement>) => {
@@ -98,7 +101,7 @@ export const App = () => {
     e.stopPropagation();
   };
 
-  const onOpen = () => {
+  const onOpen = useCallback(() => {
     open({
       multiple: false,
       directory: false,
@@ -112,9 +115,9 @@ export const App = () => {
       if (!filepath || Array.isArray(filepath)) return;
       setUrl(filepath);
     });
-  };
+  }, []);
 
-  const onNext = async () => {
+  const onNext = useCallback(async () => {
     if (url === empty) return;
 
     const list = await readDir();
@@ -130,9 +133,9 @@ export const App = () => {
     } else {
       setUrl(list[index + 1]);
     }
-  };
+  }, [url, readDir]);
 
-  const onPrev = async () => {
+  const onPrev = useCallback(async () => {
     if (url === empty) return;
 
     const list = await readDir();
@@ -150,9 +153,9 @@ export const App = () => {
     } else {
       setUrl(list[index - 1]);
     }
-  };
+  }, [url, readDir]);
 
-  const onRemove = async () => {
+  const onRemove = useCallback(async () => {
     if (url === empty) return;
 
     const list = await readDir();
@@ -179,7 +182,7 @@ export const App = () => {
     } else {
       setUrl(newList[index]);
     }
-  };
+  }, [url, readDir]);
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (url === empty) return;
@@ -231,7 +234,7 @@ export const App = () => {
     return () => {
       unlisten.then((f) => f());
     };
-  }, []);
+  }, [onOpen]);
 
   useEffect(() => {
     const currentWindow = getCurrent();
