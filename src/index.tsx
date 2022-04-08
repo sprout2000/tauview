@@ -1,4 +1,4 @@
-import React from 'react';
+import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 
 import { App } from './components/App';
@@ -13,10 +13,10 @@ const locale =
 setLocales(locale);
 
 const container = document.getElementById('root');
-const root = container && createRoot(container);
+const root = createRoot(container as Element);
 
-root?.render(
-  <React.StrictMode>
+root.render(
+  <StrictMode>
     <App />
-  </React.StrictMode>
+  </StrictMode>
 );
