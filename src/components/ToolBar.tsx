@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import i18next from 'i18next';
 
 import { FolderOpen } from './icons/FolderOpen';
@@ -6,16 +7,15 @@ import { ArrowRight } from './icons/ArrowRight';
 import { Trash } from './icons/Trash';
 
 import './ToolBar.scss';
-import { memo } from 'react';
 
-interface Props {
+type Props = {
   onOpen: () => void;
   onPrev: () => Promise<void>;
   onNext: () => Promise<void>;
   onRemove: () => Promise<void>;
-}
+};
 
-export const ToolBar = memo((props: Props): JSX.Element => {
+export const ToolBar = memo((props: Props) => {
   return (
     <div className="toolbar">
       <div className="folder">
