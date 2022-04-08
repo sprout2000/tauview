@@ -2,6 +2,8 @@ name: 'GitHub CI'
 
 on:
   push:
+    branches:
+      - main
     tags:
       - 'v*'
 
@@ -23,7 +25,8 @@ jobs:
 
       - uses: Swatinem/rust-cache@v1
         with:
-          working-directory: src-tauri/
+          working-directory: src-tauri
+          cache-on-failure: true
 
       - name: Install app dependencies
         run: npm install
