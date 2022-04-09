@@ -27,10 +27,12 @@ const config: Configuration = {
   plugins: [
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
-      template:
-        process.argv[process.argv.length - 1] === 'development'
-          ? './src/index.dev.html'
-          : './src/index.html',
+      templateParameters: {
+        src:
+          process.argv[process.argv.length - 1] === 'development'
+            ? '<script src="http://localhost:8097"></script>'
+            : undefined,
+      },
     }),
   ],
   stats: 'minimal',
