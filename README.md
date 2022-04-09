@@ -133,6 +133,18 @@ src-tauri
   import en from '../src-tauri/locales/en.json';
   import ja from '../src-tauri/locales/ja.json';
 + import cs from '../src-tauri/locales/cs.json';
+
+  export const setLocales = (locale: string): void => {
+    i18next.init({
+      lng: locale,
+      fallbackLng: 'en',
+      resources: {
+        en: { translation: en },
+        ja: { translation: ja },
++       cs: { translation: cs },
+      },
+    });
+  };
 ```
 
 3. And then please send a [pull request](https://github.com/sprout2000/leafview2/pulls) to this repository.
