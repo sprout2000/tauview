@@ -114,8 +114,8 @@ fn main() {
                 "close" => std::process::exit(0),
                 "minimize" => window_.minimize().unwrap(),
                 "zoom" => {
-                    if let Ok(result) = window_.is_maximized() {
-                        if result {
+                    if let Ok(maximized) = window_.is_maximized() {
+                        if maximized {
                             window_.unmaximize().unwrap();
                         } else {
                             window_.maximize().unwrap();
@@ -123,8 +123,8 @@ fn main() {
                     }
                 }
                 "fullscreen" => {
-                    if let Ok(result) = window_.is_fullscreen() {
-                        if result {
+                    if let Ok(fullscreen) = window_.is_fullscreen() {
+                        if fullscreen {
                             window_.set_fullscreen(false).unwrap();
                         } else {
                             window_.set_fullscreen(true).unwrap();
