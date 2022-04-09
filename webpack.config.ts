@@ -28,7 +28,7 @@ const config: Configuration = {
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
       templateParameters: {
-        src:
+        devtool:
           process.argv[process.argv.length - 1] === 'development'
             ? '<script src="http://localhost:8097"></script>'
             : undefined,
