@@ -30,7 +30,7 @@ const config: Configuration = {
       inject: 'body',
       scriptLoading: 'blocking',
       templateParameters: {
-        devtool:
+        devtools:
           process.argv[process.argv.length - 1] === 'development'
             ? '<script src="http://localhost:8097"></script>'
             : undefined,
