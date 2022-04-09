@@ -27,6 +27,8 @@ const config: Configuration = {
   plugins: [
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
+      inject: 'body',
+      scriptLoading: 'blocking',
       templateParameters: {
         devtool:
           process.argv[process.argv.length - 1] === 'development'
