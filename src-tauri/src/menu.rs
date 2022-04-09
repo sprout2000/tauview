@@ -49,42 +49,6 @@ pub fn default() -> Menu {
             ),
     );
 
-    #[cfg(target_os = "macos")]
-    let fullscreen_menu = CustomMenuItem::new(
-        "fullscreen",
-        get_text!(ctx, &locale, "Toggle Fullscreen")
-            .unwrap()
-            .to_string(),
-    )
-    .accelerator("Cmd+Option+F");
-
-    #[cfg(not(target_os = "macos"))]
-    let fullscreen_menu = CustomMenuItem::new(
-        "fullscreen",
-        get_text!(ctx, &locale, "Toggle Fullscreen")
-            .unwrap()
-            .to_string(),
-    )
-    .accelerator("F11");
-
-    let window_menu = Submenu::new(
-        get_text!(ctx, &locale, "Window").unwrap().to_string(),
-        Menu::new()
-            .add_item(
-                CustomMenuItem::new(
-                    "minimize",
-                    get_text!(ctx, &locale, "Minimize").unwrap().to_string(),
-                )
-                .accelerator("CmdOrCtrl+M"),
-            )
-            .add_item(CustomMenuItem::new(
-                "zoom",
-                get_text!(ctx, &locale, "Zoom").unwrap().to_string(),
-            ))
-            .add_native_item(MenuItem::Separator)
-            .add_item(fullscreen_menu),
-    );
-
     let help_menu = Submenu::new(
         get_text!(ctx, &locale, "Help").unwrap().to_string(),
         Menu::new().add_item(CustomMenuItem::new(
@@ -99,14 +63,10 @@ pub fn default() -> Menu {
     let menu = Menu::new()
         .add_submenu(app_menu)
         .add_submenu(file_menu)
-        .add_submenu(window_menu)
         .add_submenu(help_menu);
 
     #[cfg(not(target_os = "macos"))]
-    let menu = Menu::new()
-        .add_submenu(file_menu)
-        .add_submenu(window_menu)
-        .add_submenu(help_menu);
+    let menu = Menu::new().add_submenu(file_menu).add_submenu(help_menu);
 
     menu
 }

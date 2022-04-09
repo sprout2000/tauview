@@ -90,7 +90,7 @@ fn main() {
             if event.menu_item_id() == "support" {
                 shell::open(
                     &event.window().shell_scope(),
-                    "https://github.com/sprout2000/leafview2#readme",
+                    "https://github.com/sprout2000/leafview2#green_book-usage",
                     None,
                 )
                 .unwrap();
@@ -112,25 +112,6 @@ fn main() {
                     )
                     .expect("Error while emitting open event"),
                 "close" => std::process::exit(0),
-                "minimize" => window_.minimize().unwrap(),
-                "zoom" => {
-                    if let Ok(maximized) = window_.is_maximized() {
-                        if maximized {
-                            window_.unmaximize().unwrap();
-                        } else {
-                            window_.maximize().unwrap();
-                        }
-                    }
-                }
-                "fullscreen" => {
-                    if let Ok(fullscreen) = window_.is_fullscreen() {
-                        if fullscreen {
-                            window_.set_fullscreen(false).unwrap();
-                        } else {
-                            window_.set_fullscreen(true).unwrap();
-                        }
-                    }
-                }
                 _ => {}
             });
             Ok(())
