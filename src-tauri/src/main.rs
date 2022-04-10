@@ -86,16 +86,6 @@ async fn get_entries(dir: String) -> Vec<PathBuf> {
 fn main() {
     tauri::Builder::default()
         .menu(menu::default())
-        .on_menu_event(|event| {
-            if event.menu_item_id() == "support" {
-                shell::open(
-                    &event.window().shell_scope(),
-                    "https://github.com/sprout2000/leafview2#green_book-usage",
-                    None,
-                )
-                .unwrap();
-            }
-        })
         .setup(|app| {
             let window = app.get_window("main").unwrap();
             #[cfg(debug_assertions)]
@@ -112,6 +102,12 @@ fn main() {
                     )
                     .expect("Error while emitting open event"),
                 "close" => std::process::exit(0),
+                "support" => shell::open(
+                    &window_.shell_scope(),
+                    "https://github.com/sprout2000/leafview2#green_book-usage",
+                    None,
+                )
+                .expect("Error while opening external URL"),
                 _ => {}
             });
             Ok(())
