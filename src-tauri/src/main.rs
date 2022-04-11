@@ -3,12 +3,119 @@
     windows_subsystem = "windows"
 )]
 
+use json_gettext::get_text;
 use std::path::{Path, PathBuf};
+use sys_locale::get_locale;
+use tauri::api::dialog::blocking::FileDialogBuilder;
 use tauri::api::dir::{read_dir, DiskEntry};
 use tauri::api::shell;
-use tauri::Manager;
+use tauri::{CustomMenuItem, Manager, Menu, MenuItem, Submenu};
 
-mod menu;
+mod locales;
+
+fn menu_items() -> Menu {
+    let ctx = locales::default();
+    let locale = get_locale()
+        .unwrap_or_else(|| String::from("en-US"))
+        .replace('_', "-");
+
+    #[cfg(target_os = "macos")]
+    let app_ctx = tauri::generate_context!();
+
+    #[cfg(target_os = "macos")]
+    let app_menu = Submenu::new(
+        &app_ctx.package_info().name,
+        Menu::new()
+            .add_native_item(MenuItem::About(
+                app_ctx.package_info().name.clone(),
+                tauri::AboutMetadata::new(),
+            ))
+            .add_native_item(MenuItem::Separator)
+            .add_native_item(MenuItem::Hide)
+            .add_native_item(MenuItem::HideOthers)
+            .add_native_item(MenuItem::ShowAll)
+            .add_native_item(MenuItem::Separator)
+            .add_native_item(MenuItem::Quit),
+    );
+
+    let close_menu = CustomMenuItem::new(
+        "close",
+        get_text!(ctx, &locale, "Close").unwrap().to_string(),
+    )
+    .accelerator("CmdOrCtrl+W");
+
+    #[cfg(target_os = "macos")]
+    let file_menu = Submenu::new(
+        get_text!(ctx, &locale, "File").unwrap().to_string(),
+        Menu::new().add_item(close_menu),
+    );
+
+    #[cfg(not(target_os = "macos"))]
+    let file_menu = Submenu::new(
+        get_text!(ctx, &locale, "File").unwrap().to_string(),
+        Menu::new()
+            .add_item(
+                CustomMenuItem::new(
+                    "open",
+                    get_text!(ctx, &locale, "Open...").unwrap().to_string(),
+                )
+                .accelerator("CmdOrCtrl+O"),
+            )
+            .add_native_item(MenuItem::Separator)
+            .add_item(close_menu),
+    );
+
+    #[cfg(not(target_os = "macos"))]
+    let window_menu = Submenu::new(
+        get_text!(ctx, &locale, "Window").unwrap().to_string(),
+        Menu::new()
+            .add_item(
+                CustomMenuItem::new(
+                    "minimize",
+                    get_text!(ctx, &locale, "Minimize").unwrap().to_string(),
+                )
+                .accelerator("Ctrl+M"),
+            )
+            .add_item(CustomMenuItem::new(
+                "zoom",
+                get_text!(ctx, &locale, "Zoom").unwrap().to_string(),
+            ))
+            .add_native_item(MenuItem::Separator)
+            .add_item(
+                CustomMenuItem::new(
+                    "fullscreen",
+                    get_text!(ctx, &locale, "Toggle Fullscreen")
+                        .unwrap()
+                        .to_string(),
+                )
+                .accelerator("F11"),
+            ),
+    );
+
+    let help_menu = Submenu::new(
+        get_text!(ctx, &locale, "Help").unwrap().to_string(),
+        Menu::new().add_item(CustomMenuItem::new(
+            "support",
+            get_text!(ctx, &locale, "Support URL...")
+                .unwrap()
+                .to_string(),
+        )),
+    );
+
+    #[cfg(target_os = "macos")]
+    let menu = Menu::new()
+        .add_submenu(app_menu)
+        .add_submenu(file_menu)
+        .add_submenu(help_menu);
+
+    #[cfg(not(target_os = "macos"))]
+    let menu = Menu::new()
+        .add_submenu(file_menu)
+        .add_submenu(window_menu)
+        .add_submenu(help_menu);
+
+    menu
+}
 
 #[derive(Clone, serde::Serialize)]
 struct Payload {
@@ -85,14 +192,16 @@ async fn get_entries(dir: String) -> Vec<PathBuf> {
 
 fn main() {
     tauri::Builder::default()
-        .menu(menu::default())
+        .menu(menu_items())
         .setup(|app| {
             let window = app.get_window("main").unwrap();
+            let window_ = window.clone();
+
             #[cfg(debug_assertions)]
             window.open_devtools();
 
-            let window_ = window.clone();
             window.on_menu_event(move |event| match event.menu_item_id() {
+                #[cfg(not(target_os = "macos"))]
                 "open" => window_
                     .emit(
                         "open",
@@ -101,15 +210,44 @@ fn main() {
                         },
                     )
                     .expect("Error while emitting open event"),
+
+                #[cfg(not(target_os = "macos"))]
+                "minimize" => window_.minimize().unwrap(),
+
+                #[cfg(not(target_os = "macos"))]
+                "zoom" => {
+                    if let Ok(maximized) = window_.is_maximized() {
+                        if maximized {
+                            window_.unmaximize().unwrap();
+                        } else {
+                            window_.maximize().unwrap();
+                        }
+                    }
+                }
+
+                #[cfg(not(target_os = "macos"))]
+                "fullscreen" => {
+                    if let Ok(fullscreen) = window_.is_fullscreen() {
+                        if fullscreen {
+                            window_.set_fullscreen(false).unwrap();
+                        } else {
+                            window_.set_fullscreen(true).unwrap();
+                        }
+                    }
+                }
+
                 "close" => std::process::exit(0),
+
                 "support" => shell::open(
                     &window_.shell_scope(),
                     "https://github.com/sprout2000/leafview2#green_book-usage",
                     None,
                 )
                 .expect("Error while opening external URL"),
+
                 _ => {}
             });
+
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
