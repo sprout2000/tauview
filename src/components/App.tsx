@@ -1,7 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { event } from '@tauri-apps/api';
-import { open } from '@tauri-apps/api/dialog';
 import { dirname } from '@tauri-apps/api/path';
 import { getCurrent } from '@tauri-apps/api/window';
 import { convertFileSrc, invoke } from '@tauri-apps/api/tauri';
@@ -101,20 +100,14 @@ export const App = () => {
     e.stopPropagation();
   };
 
-  const onOpen = useCallback(() => {
-    open({
-      multiple: false,
-      directory: false,
-      filters: [
-        {
-          name: 'Image file',
-          extensions: ['ico', 'gif', 'png', 'jpg', 'jpeg', 'webp'],
-        },
-      ],
-    }).then((filepath) => {
-      if (!filepath || Array.isArray(filepath)) return;
-      setUrl(filepath);
-    });
+  const onOpen = useCallback(async () => {
+    await invoke('open_dialog')
+      .then((fpath) => {
+        if (typeof fpath === 'string') setUrl(fpath);
+      })
+      .catch(() => {
+        return;
+      });
   }, []);
 
   const onNext = useCallback(async () => {

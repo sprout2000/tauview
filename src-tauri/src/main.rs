@@ -142,6 +142,13 @@ fn mime_from<P: AsRef<Path>>(filepath: P) -> bool {
 }
 
 #[tauri::command]
+async fn open_dialog() -> Option<PathBuf> {
+    FileDialogBuilder::new()
+        .add_filter("Image File", &["ico", "gif", "png", "jpg", "jpeg", "webp"])
+        .pick_file()
+}
+
+#[tauri::command]
 async fn mime_check(filepath: String) -> bool {
     mime_from(filepath)
 }
@@ -252,6 +259,7 @@ fn main() {
         })
         .invoke_handler(tauri::generate_handler![
             mime_check,
+            open_dialog,
             get_entries,
             move_to_trash,
         ])
