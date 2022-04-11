@@ -113,9 +113,9 @@ src-tauri
 }
 ```
 
-2. Import the locale into [src-tauri/src/menu/locales.rs](https://github.com/sprout2000/leafview2/blob/main/src-tauri/src/menu/locales.rs) and [src/setLocales.ts](https://github.com/sprout2000/leafview2/blob/main/src/setLocales.ts) as follows:
+2. Import the locale into [src-tauri/src/locales.rs](https://github.com/sprout2000/leafview2/blob/main/src-tauri/src/locales.rs) and [src/setLocales.ts](https://github.com/sprout2000/leafview2/blob/main/src/setLocales.ts) as follows:
 
-`src-tauri/src/menu/locales.rs`:
+`src-tauri/src/locales.rs`:
 
 ```diff
       let locales = static_json_gettext_build!(
