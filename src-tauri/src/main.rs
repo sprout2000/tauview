@@ -44,13 +44,6 @@ fn menu_items() -> Menu {
     )
     .accelerator("CmdOrCtrl+W");
 
-    #[cfg(target_os = "macos")]
-    let file_menu = Submenu::new(
-        get_text!(ctx, &locale, "File").unwrap().to_string(),
-        Menu::new().add_item(close_menu),
-    );
-
-    #[cfg(not(target_os = "macos"))]
     let file_menu = Submenu::new(
         get_text!(ctx, &locale, "File").unwrap().to_string(),
         Menu::new()
