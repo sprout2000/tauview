@@ -236,7 +236,7 @@ export const App = () => {
     return () => {
       unlisten.then((f) => f());
     };
-  }, [onOpen]);
+  }, []);
 
   useEffect(() => {
     const currentWindow = getCurrent();
