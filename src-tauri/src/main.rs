@@ -38,12 +38,6 @@ fn menu_items() -> Menu {
             .add_native_item(MenuItem::Quit),
     );
 
-    let close_menu = CustomMenuItem::new(
-        "close",
-        get_text!(ctx, &locale, "Close").unwrap().to_string(),
-    )
-    .accelerator("CmdOrCtrl+W");
-
     let file_menu = Submenu::new(
         get_text!(ctx, &locale, "File").unwrap().to_string(),
         Menu::new()
@@ -55,7 +49,13 @@ fn menu_items() -> Menu {
                 .accelerator("CmdOrCtrl+O"),
             )
             .add_native_item(MenuItem::Separator)
-            .add_item(close_menu),
+            .add_item(
+                CustomMenuItem::new(
+                    "close",
+                    get_text!(ctx, &locale, "Close").unwrap().to_string(),
+                )
+                .accelerator("CmdOrCtrl+W"),
+            ),
     );
 
     #[cfg(not(target_os = "macos"))]
