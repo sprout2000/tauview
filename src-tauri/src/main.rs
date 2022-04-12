@@ -6,7 +6,7 @@
 use json_gettext::get_text;
 use std::path::{Path, PathBuf};
 use sys_locale::get_locale;
-use tauri::api::dialog::blocking::FileDialogBuilder;
+use tauri::api::dialog;
 use tauri::api::dir::{read_dir, DiskEntry};
 use tauri::api::shell;
 use tauri::{CustomMenuItem, Manager, Menu, MenuItem, Submenu};
@@ -119,7 +119,7 @@ fn menu_items() -> Menu {
 
 #[derive(Clone, serde::Serialize)]
 struct Payload {
-    message: String,
+    message: Option<PathBuf>,
 }
 
 fn mime_from<P: AsRef<Path>>(filepath: P) -> bool {
@@ -143,7 +143,7 @@ fn mime_from<P: AsRef<Path>>(filepath: P) -> bool {
 
 #[tauri::command]
 async fn open_dialog() -> Option<PathBuf> {
-    FileDialogBuilder::new()
+    dialog::blocking::FileDialogBuilder::new()
         .add_filter("Image File", &["ico", "gif", "png", "jpg", "jpeg", "webp"])
         .pick_file()
 }
@@ -200,6 +200,18 @@ async fn get_entries(dir: String) -> Vec<PathBuf> {
 fn main() {
     tauri::Builder::default()
         .menu(menu_items())
+        .on_menu_event(|event| {
+            if event.menu_item_id() == "open" {
+                dialog::FileDialogBuilder::new()
+                    .add_filter("Image File", &["ico", "gif", "png", "jpg", "jpeg", "webp"])
+                    .pick_file(move |f| {
+                        event
+                            .window()
+                            .emit("open", Payload { message: f })
+                            .expect("Error while emitting open event")
+                    })
+            }
+        })
         .setup(|app| {
             let window = app.get_window("main").unwrap();
             let window_ = window.clone();
@@ -208,20 +220,8 @@ fn main() {
             window.open_devtools();
 
             window.on_menu_event(move |event| match event.menu_item_id() {
-                #[cfg(not(target_os = "macos"))]
-                "open" => window_
-                    .emit(
-                        "open",
-                        Payload {
-                            message: "open".into(),
-                        },
-                    )
-                    .expect("Error while emitting open event"),
-
-                #[cfg(not(target_os = "macos"))]
                 "minimize" => window_.minimize().unwrap(),
-
-                #[cfg(not(target_os = "macos"))]
+                "close" => std::process::exit(0),
                 "zoom" => {
                     if let Ok(maximized) = window_.is_maximized() {
                         if maximized {
@@ -231,8 +231,6 @@ fn main() {
                         }
                     }
                 }
-
-                #[cfg(not(target_os = "macos"))]
                 "fullscreen" => {
                     if let Ok(fullscreen) = window_.is_fullscreen() {
                         if fullscreen {
@@ -242,19 +240,14 @@ fn main() {
                         }
                     }
                 }
-
-                "close" => std::process::exit(0),
-
                 "support" => shell::open(
                     &window_.shell_scope(),
                     "https://github.com/sprout2000/leafview2#green_book-usage",
                     None,
                 )
                 .expect("Error while opening external URL"),
-
                 _ => {}
             });
-
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![

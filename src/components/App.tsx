@@ -13,6 +13,10 @@ import empty from './empty.png';
 
 import './App.scss';
 
+type Payload = {
+  message: string | null;
+};
+
 export const App = () => {
   const [url, setUrl] = useState<string>(empty);
 
@@ -222,7 +226,12 @@ export const App = () => {
   }, []);
 
   useEffect(() => {
-    const unlisten = event.listen('open', () => onOpen());
+    const unlisten = event.listen('open', (e: event.Event<Payload>) => {
+      const filepath = e.payload.message;
+      if (!filepath) return;
+
+      setUrl(filepath);
+    });
 
     return () => {
       unlisten.then((f) => f());
