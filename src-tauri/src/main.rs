@@ -213,8 +213,8 @@ fn main() {
             window.open_devtools();
 
             window.on_menu_event(move |event| match event.menu_item_id() {
-                "minimize" => window_.minimize().unwrap(),
                 "close" => std::process::exit(0),
+                "minimize" => window_.minimize().unwrap(),
                 "zoom" => {
                     if let Ok(maximized) = window_.is_maximized() {
                         if maximized {
