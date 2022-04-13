@@ -109,9 +109,7 @@ export const App = () => {
       .then((fpath) => {
         if (typeof fpath === 'string') setUrl(fpath);
       })
-      .catch(() => {
-        return;
-      });
+      .catch((err) => console.log(`Error: ${err}`));
   }, []);
 
   const onNext = useCallback(async () => {
