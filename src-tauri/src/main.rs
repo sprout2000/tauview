@@ -249,7 +249,7 @@ fn main() {
             get_entries,
             move_to_trash,
         ])
-        .plugin(tauri_plugin_window_state::WindowState::default())
+        .plugin(tauri_plugin_window_state::Builder::default().build())
         .run(tauri::generate_context!())
         .expect("Error while running tauri application");
 }
