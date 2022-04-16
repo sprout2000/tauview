@@ -58,6 +58,16 @@ fn menu_items() -> Menu {
             ),
     );
 
+    #[cfg(target_os = "macos")]
+    let window_menu = Submenu::new(
+        get_text!(ctx, &locale, "Window").unwrap().to_string(),
+        Menu::new()
+            .add_native_item(MenuItem::Minimize)
+            .add_native_item(MenuItem::Zoom)
+            .add_native_item(MenuItem::Separator)
+            .add_native_item(MenuItem::EnterFullScreen),
+    );
+
     #[cfg(not(target_os = "macos"))]
     let window_menu = Submenu::new(
         get_text!(ctx, &locale, "Window").unwrap().to_string(),
@@ -99,6 +109,7 @@ fn menu_items() -> Menu {
     let menu = Menu::new()
         .add_submenu(app_menu)
         .add_submenu(file_menu)
+        .add_submenu(window_menu)
         .add_submenu(help_menu);
 
     #[cfg(not(target_os = "macos"))]
