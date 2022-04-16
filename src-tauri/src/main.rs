@@ -3,123 +3,13 @@
     windows_subsystem = "windows"
 )]
 
-use json_gettext::get_text;
 use std::path::{Path, PathBuf};
-use sys_locale::get_locale;
 use tauri::api::dialog;
 use tauri::api::dir::{read_dir, DiskEntry};
 use tauri::api::shell;
-use tauri::{CustomMenuItem, Manager, Menu, MenuItem, Submenu};
+use tauri::Manager;
 
-mod locales;
-
-fn menu_items() -> Menu {
-    let ctx = locales::default();
-    let locale = get_locale()
-        .unwrap_or_else(|| String::from("en-US"))
-        .replace('_', "-");
-
-    #[cfg(target_os = "macos")]
-    let app_ctx = tauri::generate_context!();
-
-    #[cfg(target_os = "macos")]
-    let app_menu = Submenu::new(
-        &app_ctx.package_info().name,
-        Menu::new()
-            .add_native_item(MenuItem::About(
-                app_ctx.package_info().name.clone(),
-                tauri::AboutMetadata::new(),
-            ))
-            .add_native_item(MenuItem::Separator)
-            .add_native_item(MenuItem::Hide)
-            .add_native_item(MenuItem::HideOthers)
-            .add_native_item(MenuItem::ShowAll)
-            .add_native_item(MenuItem::Separator)
-            .add_native_item(MenuItem::Quit),
-    );
-
-    let file_menu = Submenu::new(
-        get_text!(ctx, &locale, "File").unwrap().to_string(),
-        Menu::new()
-            .add_item(
-                CustomMenuItem::new(
-                    "open",
-                    get_text!(ctx, &locale, "Open...").unwrap().to_string(),
-                )
-                .accelerator("CmdOrCtrl+O"),
-            )
-            .add_native_item(MenuItem::Separator)
-            .add_item(
-                CustomMenuItem::new(
-                    "close",
-                    get_text!(ctx, &locale, "Close").unwrap().to_string(),
-                )
-                .accelerator("CmdOrCtrl+W"),
-            ),
-    );
-
-    #[cfg(target_os = "macos")]
-    let window_menu = Submenu::new(
-        get_text!(ctx, &locale, "Window").unwrap().to_string(),
-        Menu::new()
-            .add_native_item(MenuItem::Minimize)
-            .add_native_item(MenuItem::Zoom)
-            .add_native_item(MenuItem::Separator)
-            .add_native_item(MenuItem::EnterFullScreen),
-    );
-
-    #[cfg(not(target_os = "macos"))]
-    let window_menu = Submenu::new(
-        get_text!(ctx, &locale, "Window").unwrap().to_string(),
-        Menu::new()
-            .add_item(
-                CustomMenuItem::new(
-                    "minimize",
-                    get_text!(ctx, &locale, "Minimize").unwrap().to_string(),
-                )
-                .accelerator("Ctrl+M"),
-            )
-            .add_item(CustomMenuItem::new(
-                "zoom",
-                get_text!(ctx, &locale, "Zoom").unwrap().to_string(),
-            ))
-            .add_native_item(MenuItem::Separator)
-            .add_item(
-                CustomMenuItem::new(
-                    "fullscreen",
-                    get_text!(ctx, &locale, "Toggle Fullscreen")
-                        .unwrap()
-                        .to_string(),
-                )
-                .accelerator("F11"),
-            ),
-    );
-
-    let help_menu = Submenu::new(
-        get_text!(ctx, &locale, "Help").unwrap().to_string(),
-        Menu::new().add_item(CustomMenuItem::new(
-            "support",
-            get_text!(ctx, &locale, "Support URL...")
-                .unwrap()
-                .to_string(),
-        )),
-    );
-
-    #[cfg(target_os = "macos")]
-    let menu = Menu::new()
-        .add_submenu(app_menu)
-        .add_submenu(file_menu)
-        .add_submenu(window_menu)
-        .add_submenu(help_menu);
-
-    #[cfg(not(target_os = "macos"))]
-    let menu = Menu::new()
-        .add_submenu(file_menu)
-        .add_submenu(window_menu)
-        .add_submenu(help_menu);
-
-    menu
-}
+mod menu;
 
 #[derive(Clone, serde::Serialize)]
 struct Payload {
@@ -203,7 +93,7 @@ async fn get_entries(dir: String) -> Vec<PathBuf> {
 
 fn main() {
     tauri::Builder::default()
-        .menu(menu_items())
+        .menu(menu::default())
         .on_menu_event(|event| {
             if event.menu_item_id() == "open" {
                 dialog::FileDialogBuilder::new()
