@@ -94,54 +94,27 @@ async fn get_entries(dir: String) -> Vec<PathBuf> {
 fn main() {
     tauri::Builder::default()
         .menu(menu::default())
-        .on_menu_event(|event| {
-            if event.menu_item_id() == "open" {
-                dialog::FileDialogBuilder::new()
-                    .add_filter("Image File", &["ico", "gif", "png", "jpg", "jpeg", "webp"])
-                    .pick_file(move |f| {
-                        event
-                            .window()
-                            .emit("open", Payload { message: f })
-                            .expect("Error while emitting open event")
-                    })
-            }
+        .on_menu_event(|event| match event.menu_item_id() {
+            "open" => dialog::FileDialogBuilder::new()
+                .add_filter("Image File", &["ico", "git", "png", "jpg", "jpeg", "webp"])
+                .pick_file(move |f| {
+                    event
+                        .window()
+                        .emit("open", Payload { message: f })
+                        .expect("Error while emitting open event")
+                }),
+            "support" => shell::open(
+                &event.window().shell_scope(),
+                "https://github.com/sprout2000/leafview2#green_book-usage",
+                None,
+            )
+            .expect("Error while opening external URL"),
+            _ => {}
         })
         .setup(|app| {
-            let window = app.get_window("main").unwrap();
-            let window_ = window.clone();
-
+            let _window = app.get_window("main").unwrap();
             #[cfg(debug_assertions)]
-            window.open_devtools();
-
-            window.on_menu_event(move |event| match event.menu_item_id() {
-                "close" => std::process::exit(0),
-                "minimize" => window_.minimize().unwrap(),
-                "zoom" => {
-                    if let Ok(maximized) = window_.is_maximized() {
-                        if maximized {
-                            window_.unmaximize().unwrap();
-                        } else {
-                            window_.maximize().unwrap();
-                        }
-                    }
-                }
-                "fullscreen" => {
-                    if let Ok(fullscreen) = window_.is_fullscreen() {
-                        if fullscreen {
-                            window_.set_fullscreen(false).unwrap();
-                        } else {
-                            window_.set_fullscreen(true).unwrap();
-                        }
-                    }
-                }
-                "support" => shell::open(
-                    &window_.shell_scope(),
-                    "https://github.com/sprout2000/leafview2#green_book-usage",
-                    None,
-                )
-                .expect("Error while opening external URL"),
-                _ => {}
-            });
+            _window.open_devtools();
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
