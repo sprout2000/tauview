@@ -1,5 +1,2 @@
-*.js
-*.css
-*.ico
-*.txt
-*.html
+*
+!.gitignore
