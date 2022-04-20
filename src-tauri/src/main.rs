@@ -94,7 +94,7 @@ fn main() {
         .menu(menu::default())
         .on_menu_event(|event| match event.menu_item_id() {
             "open" => dialog::FileDialogBuilder::new()
-                .add_filter("Image File", &["ico", "git", "png", "jpg", "jpeg", "webp"])
+                .add_filter("Image File", &["ico", "gif", "png", "jpg", "jpeg", "webp"])
                 .pick_file(move |f| {
                     event
                         .window()
