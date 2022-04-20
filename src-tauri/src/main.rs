@@ -4,9 +4,7 @@
 )]
 
 use std::path::{Path, PathBuf};
-use tauri::api::dialog;
-use tauri::api::dir::{read_dir, DiskEntry};
-use tauri::api::shell;
+use tauri::api::{dialog, dir, shell};
 use tauri::Manager;
 
 mod menu;
@@ -55,27 +53,27 @@ async fn move_to_trash(url: String) -> Result<(), String> {
     }
 }
 
-fn is_dir(entry: &DiskEntry) -> bool {
+fn is_dir(entry: &dir::DiskEntry) -> bool {
     entry.children.is_some()
 }
 
-fn is_dot(entry: &DiskEntry) -> bool {
+fn is_dot(entry: &dir::DiskEntry) -> bool {
     match &entry.name {
         Some(name) => name.starts_with('.'),
         None => true,
     }
 }
 
-fn is_img(entry: &DiskEntry) -> bool {
+fn is_img(entry: &dir::DiskEntry) -> bool {
     mime_from(&entry.path)
 }
 
 #[tauri::command]
 async fn get_entries(dir: String) -> Vec<PathBuf> {
-    let entries = match read_dir(dir, false) {
+    let entries = match dir::read_dir(dir, false) {
         Err(why) => {
             println!("Error in read_dir(): {:?}", why);
-            let vec: Vec<DiskEntry> = Vec::new();
+            let vec: Vec<dir::DiskEntry> = Vec::new();
             vec
         }
         Ok(list) => list,
