@@ -214,7 +214,7 @@ export const App = () => {
         const mimeSafe: boolean = await invoke('mime_check', { filepath });
         if (!mimeSafe) return;
 
-        setUrl(e.payload[0]);
+        setUrl(filepath);
       }
     );
 
