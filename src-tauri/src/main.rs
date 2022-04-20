@@ -103,7 +103,7 @@ fn main() {
                 }),
             "support" => shell::open(
                 &event.window().shell_scope(),
-                "https://github.com/sprout2000/leafview2#green_book-usage",
+                "https://github.com/sprout2000/leafview2",
                 None,
             )
             .expect("Error while opening external URL"),
