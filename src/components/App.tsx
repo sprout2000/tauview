@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 
 import { event } from '@tauri-apps/api';
 import { dirname } from '@tauri-apps/api/path';
