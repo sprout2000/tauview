@@ -3,6 +3,8 @@ import { Configuration } from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import MiniCssExtractPlugin from 'mini-css-extract-plugin';
 
+const isDev = process.argv[process.argv.length - 1] === 'development';
+
 const config: Configuration = {
   resolve: {
     extensions: ['.js', '.ts', '.jsx', '.tsx', '.json'],
@@ -19,7 +21,7 @@ const config: Configuration = {
         use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
       },
       {
-        test: /\.(ico|jpe?g|png|svg)$/,
+        test: /\.png$/,
         type: 'asset/inline',
       },
     ],
@@ -27,19 +29,16 @@ const config: Configuration = {
   plugins: [
     new MiniCssExtractPlugin(),
     new HtmlWebpackPlugin({
-      inject: 'body',
-      scriptLoading: 'blocking',
       templateParameters: {
-        devtools:
-          process.argv[process.argv.length - 1] === 'development'
-            ? '<script src="http://localhost:8097"></script>'
-            : undefined,
+        devtools: isDev
+          ? '<script src="http://localhost:8097"></script>'
+          : undefined,
       },
     }),
   ],
-  stats: 'minimal',
-  performance: { hints: false },
-  devServer: { static: ['./dist'] },
+  devServer: {
+    static: { directory: './dist' },
+  },
 };
 
 export default config;
