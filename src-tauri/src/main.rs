@@ -109,12 +109,6 @@ fn main() {
             .expect("Error while opening external URL"),
             _ => {}
         })
-        .setup(|app| {
-            let _window = app.get_window("main").unwrap();
-            #[cfg(debug_assertions)]
-            _window.open_devtools();
-            Ok(())
-        })
         .invoke_handler(tauri::generate_handler![
             mime_check,
             open_dialog,
