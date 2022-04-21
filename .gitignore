@@ -1,11 +1,4 @@
-build
-public
-release
 node_modules
-
-npm-*.log
-yarn-*.log
-
 .env
-.csc_link
+.envrc
 .DS_Store
