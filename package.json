@@ -11,7 +11,7 @@
     "prepare": "git config --local core.hooksPath .githooks"
   },
   "dependencies": {
-    "@tauri-apps/api": "^1.0.0-rc.3",
+    "@tauri-apps/api": "^1.0.0-rc.4",
     "i18next": "^21.6.16",
     "leaflet": "^1.8.0",
     "react": "^18.1.0",
