@@ -1,28 +1,28 @@
-import 'webpack-dev-server';
-import { Configuration } from 'webpack';
-import HtmlWebpackPlugin from 'html-webpack-plugin';
-import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import "webpack-dev-server";
+import { Configuration } from "webpack";
+import HtmlWebpackPlugin from "html-webpack-plugin";
+import MiniCssExtractPlugin from "mini-css-extract-plugin";
 
-const isDev = process.argv[process.argv.length - 1] === 'development';
+const isDev = process.argv[process.argv.length - 1] === "development";
 
 const config: Configuration = {
   resolve: {
-    extensions: ['.js', '.ts', '.jsx', '.tsx', '.json'],
+    extensions: [".js", ".ts", ".jsx", ".tsx", ".json"],
   },
   module: {
     rules: [
       {
         test: /\.tsx?$/,
         exclude: /node_modules/,
-        loader: 'ts-loader',
+        loader: "ts-loader",
       },
       {
         test: /\.s?css$/,
-        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader'],
+        use: [MiniCssExtractPlugin.loader, "css-loader", "sass-loader"],
       },
       {
         test: /\.png$/,
-        type: 'asset/inline',
+        type: "asset/inline",
       },
     ],
   },
@@ -37,7 +37,7 @@ const config: Configuration = {
     }),
   ],
   devServer: {
-    static: { directory: './dist' },
+    static: { directory: "./dist" },
   },
 };
 
