@@ -9,8 +9,6 @@ import L from "leaflet";
 import "leaflet/dist/leaflet.css";
 
 import { ToolBar } from "./ToolBar";
-import empty from "./empty.png";
-
 import "./App.scss";
 
 type Payload = {
@@ -18,7 +16,7 @@ type Payload = {
 };
 
 export const App = () => {
-  const [url, setUrl] = useState<string>(empty);
+  const [url, setUrl] = useState("");
 
   const mapRef = useRef<HTMLDivElement>(null);
   const mapObj: React.MutableRefObject<L.Map | null> = useRef(null);
@@ -93,7 +91,7 @@ export const App = () => {
           node.blur();
           node.focus();
         };
-        image.src = convertFileSrc(url);
+        image.src = url ? convertFileSrc(url) : "";
       }
     },
     [url, getZoom]
@@ -113,7 +111,7 @@ export const App = () => {
   }, []);
 
   const onNext = useCallback(async () => {
-    if (url === empty) return;
+    if (!url) return;
 
     const list = await readDir();
     if (!list || list.length === 0) {
@@ -131,7 +129,7 @@ export const App = () => {
   }, [url, readDir]);
 
   const onPrev = useCallback(async () => {
-    if (url === empty) return;
+    if (!url) return;
 
     const list = await readDir();
     if (!list || list.length === 0) {
@@ -151,7 +149,7 @@ export const App = () => {
   }, [url, readDir]);
 
   const onRemove = useCallback(async () => {
-    if (url === empty) return;
+    if (!url) return;
 
     const list = await readDir();
     if (!list || list.length === 0) {
@@ -180,7 +178,7 @@ export const App = () => {
   }, [url, readDir]);
 
   const onKeyDown = (e: React.KeyboardEvent) => {
-    if (url === empty) return;
+    if (!url) return;
 
     switch (e.key) {
       case "0":
@@ -239,7 +237,7 @@ export const App = () => {
   useEffect(() => {
     const currentWindow = getCurrent();
 
-    if (url === empty) {
+    if (!url) {
       currentWindow.setTitle("LeafView");
     } else {
       currentWindow.setTitle(url.replace(/.+(\/|\\)/, ""));
@@ -276,7 +274,7 @@ export const App = () => {
           onRemove={onRemove}
         />
       </div>
-      <div className={url === empty ? "view init" : "view"} ref={mapRef} />
+      <div className={url ? "view init" : "view"} ref={mapRef} />
     </div>
   );
 };
