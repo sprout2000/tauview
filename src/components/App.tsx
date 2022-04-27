@@ -274,7 +274,7 @@ export const App = () => {
           onRemove={onRemove}
         />
       </div>
-      <div className={url ? "view init" : "view"} ref={mapRef} />
+      <div className={url ? "view" : "view init"} ref={mapRef} />
     </div>
   );
 };
