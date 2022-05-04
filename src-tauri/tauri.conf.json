@@ -1,7 +1,7 @@
 {
   "package": {
     "productName": "LeafView2",
-    "version": "0.2.15"
+    "version": "0.3.0"
   },
   "build": {
     "distDir": "../dist",
