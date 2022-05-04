@@ -1,35 +1,35 @@
 import i18next from "i18next";
 
-import en from "./locales/en.json";
-import ja from "./locales/ja.json";
-import zh_TW from "./locales/zh_TW.json";
+import en from "../src-tauri/locales/en.json";
+import ja from "../src-tauri/locales/ja.json";
+import zh_TW from "../src-tauri/locales/zh_TW.json";
 /** Merge the pull request sent by PetrTodorov. */
 /** https://github.com/sprout2000/leafview/pull/68 */
-import cs from "./locales/cs.json";
+import cs from "../src-tauri/locales/cs.json";
 /** Merge the pull request sent by DrDeee. */
 /** https://github.com/sprout2000/leafview/pull/166 */
-import de from "./locales/de.json";
+import de from "../src-tauri/locales/de.json";
 /** Merge the pull request sent by singuerinc */
 /** https://github.com/sprout2000/leafview/pull/178 */
-import es from "./locales/es.json";
+import es from "../src-tauri/locales/es.json";
 /** Merge the pull request sent by nukeop */
 /** https://github.com/sprout2000/leafview/pull/214 */
-import pl from "./locales/pl.json";
+import pl from "../src-tauri/locales/pl.json";
 /** Merge the pull request sent by kitt3911 */
 /** https://github.com/sprout2000/leafview/pull/215 */
-import ru from "./locales/ru.json";
+import ru from "../src-tauri/locales/ru.json";
 /** Merge the pull request sent by guaycuru */
 /** https://github.com/sprout2000/leafview/pull/232 */
-import pt from "./locales/pt.json";
+import pt from "../src-tauri/locales/pt.json";
 /** Merge the pull request sent by ArcherGu */
 /** https://github.com/sprout2000/leafview/pull/235 */
-import zh_CN from "./locales/zh_CN.json";
+import zh_CN from "../src-tauri/locales/zh_CN.json";
 /** Merge the pull request sent by SuhaibAtef */
 /** https://github.com/sprout2000/leafview/pull/274 */
-import ar from "./locales/ar.json";
+import ar from "../src-tauri/locales/ar.json";
 /** Merge the pull request sent by Levminer */
 /** https://github.com/sprout2000/leafview/pull/305 */
-import hu from "./locales/hu.json";
+import hu from "../src-tauri/locales/hu.json";
 
 export const setLocales = (locale: string) => {
   i18next.init({

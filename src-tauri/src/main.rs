@@ -101,6 +101,26 @@ fn main() {
                         .emit("open", Payload { message: f })
                         .expect("Error while emitting open event")
                 }),
+            "close" => std::process::exit(0),
+            "minimize" => event.window().minimize().unwrap(),
+            "zoom" => {
+                if let Ok(result) = event.window().is_maximized() {
+                    if result {
+                        event.window().unmaximize().unwrap();
+                    } else {
+                        event.window().maximize().unwrap();
+                    }
+                }
+            }
+            "fullscreen" => {
+                if let Ok(result) = event.window().is_fullscreen() {
+                    if result {
+                        event.window().set_fullscreen(false).unwrap();
+                    } else {
+                        event.window().set_fullscreen(true).unwrap();
+                    }
+                }
+            }
             "support" => shell::open(
                 &event.window().shell_scope(),
                 "https://github.com/sprout2000/leafview2#readme",
