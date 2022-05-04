@@ -21,11 +21,6 @@ jobs:
           toolchain: stable
           default: true
 
-      - uses: Swatinem/rust-cache@v1
-        with:
-          working-directory: src-tauri
-          cache-on-failure: true
-
       - name: Install app dependencies
         run: npm install
 
