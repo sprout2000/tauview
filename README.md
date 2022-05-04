@@ -41,7 +41,7 @@ You can download the latest version of LeafView2 from the releases page here:
 |    Wheel     | Zoom in/out |
 | Double click | Reset zoom  |
 
-<!-- ## :globe_with_meridians: Supported Languages
+## :globe_with_meridians: Supported Languages
 
 | Language                               |  Code   |
 | :------------------------------------- | :-----: |
@@ -162,7 +162,7 @@ src-tauri
 - [@nukeop](https://github.com/nukeop) [#214](https://github.com/sprout2000/leafview/pull/214)
 - [@singuerinc](https://github.com/singuerinc) [#178](https://github.com/sprout2000/leafview/pull/178)
 - [@DrDeee](https://github.com/DrDeee) [#166](https://github.com/sprout2000/leafview/pull/166)
-- [@PetrTodorov](https://github.com/PetrTodorov) [#68](https://github.com/sprout2000/leafview/pull/68) -->
+- [@PetrTodorov](https://github.com/PetrTodorov) [#68](https://github.com/sprout2000/leafview/pull/68)
 
 ## :hammer_and_wrench: Development
 
