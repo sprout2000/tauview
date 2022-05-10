@@ -49,6 +49,7 @@ pub fn default() -> Menu {
         "es-US" => "locales/es.json",
         "es-UY" => "locales/es.json",
         "es-VE" => "locales/es.json",
+        "hu-HU" => "locales/hu.json",
         "ja-JP" => "locales/ja.json",
         "pl-PL" => "locales/pl.json",
         "pt-BR" => "locales/pt.json",
