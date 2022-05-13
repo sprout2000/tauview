@@ -244,7 +244,6 @@ export const App = () => {
     const resizeObserver = new ResizeObserver((entries) => {
       const width = entries[0].contentRect.width;
       const height = entries[0].contentRect.height;
-
       draw(width, height);
     });
 
