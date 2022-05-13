@@ -2,7 +2,7 @@
   "name": "quotes",
   "description": "A minimalist image viewer based on Leaflet.js and Tauri.",
   "productName": "Quotes",
-  "version": "0.3.3",
+  "version": "0.3.4",
   "license": "MIT",
   "scripts": {
     "dev": "vite",
