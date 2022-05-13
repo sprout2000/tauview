@@ -2358,9 +2358,9 @@ checksum = "f2dd574626839106c320a323308629dcb1acfc96e32a8cba364ddc61ac23ee83"
 
 [[package]]
 name = "soup2"
-version = "0.2.0"
+version = "0.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "2eda64fb9a59670c3dca9edc9459a010ca1f8fb134eac5ea7edece453f90cc7b"
+checksum = "b2b4d76501d8ba387cf0fefbe055c3e0a59891d09f0f995ae4e4b16f6b60f3c0"
 dependencies = [
  "bitflags",
  "gio",
@@ -2894,9 +2894,9 @@ dependencies = [
 
 [[package]]
 name = "trash"
-version = "2.1.1"
+version = "2.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e97b1dc865b8552ca2855720fc8db93da8da66bc9750ab81dc55a1e17f77e7f9"
+checksum = "b309394ab0f17874c395ad94a52d0e74235c8e2b00f12898e94453ab47f34f7a"
 dependencies = [
  "chrono",
  "libc",
