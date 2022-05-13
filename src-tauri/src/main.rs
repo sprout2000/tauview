@@ -123,7 +123,7 @@ fn main() {
             }
             "support" => shell::open(
                 &event.window().shell_scope(),
-                "https://github.com/sprout2000/leafview2#readme",
+                "https://github.com/sprout2000/quotes#readme",
                 None,
             )
             .expect("Error while opening external URL"),

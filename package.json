@@ -1,7 +1,7 @@
 {
-  "name": "leafview2",
+  "name": "quotes",
   "description": "A minimalist image viewer based on Leaflet.js and Tauri.",
-  "productName": "LeafView2",
+  "productName": "Quotes",
   "version": "0.3.3",
   "license": "MIT",
   "scripts": {
