@@ -21,6 +21,8 @@ export const App = () => {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapObj: React.MutableRefObject<L.Map | null> = useRef(null);
 
+  const isDev = process.env.NODE_ENV === "development";
+
   const readDir = useCallback(async () => {
     const dir = await dirname(url);
 
@@ -260,6 +262,7 @@ export const App = () => {
       onDragOver={preventDefault}
       onDragEnter={preventDefault}
       onDragLeave={preventDefault}
+      onContextMenu={isDev ? undefined : preventDefault}
     >
       <div className="bottom">
         <ToolBar
