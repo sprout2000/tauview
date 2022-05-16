@@ -234,7 +234,7 @@ export const App = () => {
     const currentWindow = getCurrent();
 
     if (!url) {
-      currentWindow.setTitle("Quotes");
+      currentWindow.setTitle("LeafView");
     } else {
       currentWindow.setTitle(url.replace(/.+(\/|\\)/, ""));
     }

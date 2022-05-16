@@ -19,11 +19,11 @@
   "Close": "Bezárás",
   "Help": "Segítség",
   "About": "Névjegy",
-  "About Quotes": "Quotes névjegye",
+  "About LeafView": "LeafView névjegye",
   "Support URL...": "Támogatási link...",
-  "Hide Quotes": "Quotes elrejtése",
+  "Hide LeafView": "LeafView elrejtése",
   "Hide Others": "Mások elrejtése",
   "Show All": "Összes mutatása",
   "Quit": "Kilépés",
-  "Quit Quotes": "Kilépés a Quotes-ból"
+  "Quit LeafView": "Kilépés a LeafView-ból"
 }

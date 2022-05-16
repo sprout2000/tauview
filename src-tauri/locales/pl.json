@@ -18,12 +18,12 @@
   "Bring All to Front": "Przesuń wszystko na wierzch",
   "Close": "Zamknij",
   "Help": "Pomoc",
-  "About": "O Quotes",
-  "About Quotes": "O Quotes",
+  "About": "O LeafView",
+  "About LeafView": "O LeafView",
   "Support URL...": "URL pomocy...",
-  "Hide Quotes": "Ukryj Quotes",
+  "Hide LeafView": "Ukryj LeafView",
   "Hide Others": "Ukryj inne",
   "Show All": "Pokaż wszystko",
-  "Quit": "Zamknij Quotes",
-  "Quit Quotes": "Zamknij Quotes"
+  "Quit": "Zamknij LeafView",
+  "Quit LeafView": "Zamknij LeafView"
 }

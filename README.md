@@ -1,8 +1,8 @@
-# <img width="48" alt="leaves" src="https://user-images.githubusercontent.com/52094761/168190972-fcfa8bec-5e14-46eb-a43f-e528ccf06689.png" /> Quotes
+# <img width="48" alt="leaves" src="https://user-images.githubusercontent.com/52094761/168190972-fcfa8bec-5e14-46eb-a43f-e528ccf06689.png" /> LeafView
 
-[![GitHub CI](https://github.com/sprout2000/quotes/actions/workflows/release.yml/badge.svg)](https://github.com/sprout2000/quotes/actions/workflows/release.yml)
-[![GitHub stars](https://img.shields.io/github/stars/sprout2000/quotes)](https://github.com/sprout2000/quotes/stargazers)
-[![GitHub license](https://img.shields.io/github/license/sprout2000/quotes)](https://github.com/sprout2000/quotes/blob/main/LICENSE.md)
+[![GitHub CI](https://github.com/sprout2000/leafview-tauri/actions/workflows/release.yml/badge.svg)](https://github.com/sprout2000/leafview-tauri/actions/workflows/release.yml)
+[![GitHub stars](https://img.shields.io/github/stars/sprout2000/leafview-tauri)](https://github.com/sprout2000/leafview-tauri/stargazers)
+[![GitHub license](https://img.shields.io/github/license/sprout2000/leafview-tauri)](https://github.com/sprout2000/leafview-tauri/blob/main/LICENSE.md)
 
 A minimalist image viewer for macOS based on [Leaflet.js](https://leafletjs.com/) and [Tauri](https://tauri.studio/), which is formerly known as _[LeafView](https://github.com/sprout2000/leafview)_.
 
@@ -17,8 +17,8 @@ _Image by <a href="https://pixabay.com/users/myriams-fotos-1627417/?utm_source=l
 
 ## :inbox_tray: Download
 
-You can download the latest version of Quotes from the releases page here:
-[https://github.com/sprout2000/quotes/releases](https://github.com/sprout2000/quotes/releases)
+You can download the latest version of LeafView from the releases page here:
+[https://github.com/sprout2000/leafview-tauri/releases](https://github.com/sprout2000/leafview-tauri/releases)
 
 ## :green_book: Usage
 
@@ -102,18 +102,18 @@ src-tauri
   "Bring All to Front": "Přenést vše do popředí",
   "Close": "Storno",
   "Help": "Nápověda",
-  "About": "O aplikaci Quotes",
-  "About Quotes": "O aplikaci Quotes",
+  "About": "O aplikaci LeafView",
+  "About LeafView": "O aplikaci LeafView",
   "Support URL...": "URL podpory...",
-  "Hide Quotes": "Skrýt Quotes",
+  "Hide LeafView": "Skrýt LeafView",
   "Hide Others": "Skrýt ostatní",
   "Show All": "Zobrazit vše",
-  "Quit": "Ukončit Quotes",
-  "Quit Quotes": "Ukončit Quotes"
+  "Quit": "Ukončit LeafView",
+  "Quit LeafView": "Ukončit LeafView"
 }
 ```
 
-2. Import the locale into [src-tauri/src/locales.rs](https://github.com/sprout2000/quotes/blob/main/src-tauri/src/locales.rs) and [src/setLocales.ts](https://github.com/sprout2000/quotes/blob/main/src/setLocales.ts) as follows:
+2. Import the locale into [src-tauri/src/locales.rs](https://github.com/sprout2000/leafview-tauri/blob/main/src-tauri/src/locales.rs) and [src/setLocales.ts](https://github.com/sprout2000/leafview-tauri/blob/main/src/setLocales.ts) as follows:
 
 `src-tauri/src/locales.rs`:
 
@@ -147,7 +147,7 @@ src-tauri
   };
 ```
 
-3. And then please send a [pull request](https://github.com/sprout2000/quotes/pulls) to this repository.
+3. And then please send a [pull request](https://github.com/sprout2000/leafview-tauri/pulls) to this repository.
 
 ## :tada: Contributors
 
@@ -167,8 +167,8 @@ src-tauri
 ## :hammer_and_wrench: Development
 
 ```sh
-% git clone https://github.com/sprout2000/quotes.git
-% cd quotes
+% git clone https://github.com/sprout2000/leafview-tauri.git
+% cd leafview-tauri
 % npm install
 
 # on development
