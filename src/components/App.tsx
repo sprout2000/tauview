@@ -68,8 +68,8 @@ export const App = () => {
             maxBounds: bounds,
             crs: L.CRS.Simple,
             preferCanvas: true,
-            zoomDelta: 0.3,
             zoomSnap: 0.3,
+            zoomDelta: 0.3,
             wheelPxPerZoomLevel: 360,
             doubleClickZoom: false,
             zoomControl: false,
@@ -251,7 +251,9 @@ export const App = () => {
 
     mapRef.current && resizeObserver.observe(mapRef.current);
 
-    return () => resizeObserver.disconnect();
+    return () => {
+      resizeObserver.disconnect();
+    };
   }, [draw]);
 
   return (
