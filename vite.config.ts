@@ -10,7 +10,7 @@ export default defineConfig(({ command }) => {
     root: "./src",
     build: {
       outDir: "../dist",
-      emptyOutDir: false,
+      emptyOutDir: true,
     },
     plugins: [
       react(),
