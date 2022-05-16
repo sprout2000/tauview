@@ -1,10 +1,10 @@
-# <img width="48" alt="leaves" src="https://user-images.githubusercontent.com/52094761/168190972-fcfa8bec-5e14-46eb-a43f-e528ccf06689.png" /> LeafView
+# LeafView (Tauri)
 
 [![GitHub CI](https://github.com/sprout2000/leafview-tauri/actions/workflows/release.yml/badge.svg)](https://github.com/sprout2000/leafview-tauri/actions/workflows/release.yml)
 [![GitHub stars](https://img.shields.io/github/stars/sprout2000/leafview-tauri)](https://github.com/sprout2000/leafview-tauri/stargazers)
 [![GitHub license](https://img.shields.io/github/license/sprout2000/leafview-tauri)](https://github.com/sprout2000/leafview-tauri/blob/main/LICENSE.md)
 
-A minimalist image viewer for macOS based on [Leaflet.js](https://leafletjs.com/) and [Tauri](https://tauri.studio/), which is formerly known as _[LeafView](https://github.com/sprout2000/leafview)_.
+A minimalist image viewer for macOS based on [Leaflet.js](https://leafletjs.com/) and [Tauri](https://tauri.studio/).
 
 <img width="640" src="https://user-images.githubusercontent.com/52094761/157586637-4b2deb8e-a1f7-46ef-9f24-d0efeb6a97a8.png">
 
