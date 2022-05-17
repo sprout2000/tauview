@@ -1,3 +1,3 @@
 {
-  "recommendations": ["matklad.rust-analyzer", "tauri-apps.tauri-vscode"]
+  "recommendations": ["tauri-apps.tauri-vscode"]
 }
