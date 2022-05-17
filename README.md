@@ -43,20 +43,20 @@ You can download the latest version of LeafView from the releases page here:
 
 ## :globe_with_meridians: Supported Languages
 
-| Language                               |  Code   |
-| :------------------------------------- | :-----: |
-| اللغة العربية                          |  `ar`   |
-| Čeština :czech_republic:               |  `cs`   |
-| Deutsch :de: :austria: :switzerland:   |  `de`   |
-| English :us: :uk: :earth_americas:     |  `en`   |
-| Español :es: :mexico: :argentina: :us: |  `es`   |
-| Magyar nyelv :hungary:                 |  `hu`   |
-| 日本語 :jp:                            |  `ja`   |
-| Polski :poland:                        |  `pl`   |
-| Português :portugal: :brazil:          |  `pt`   |
-| Русский :ru:                           |  `ru`   |
-| 简体中文 :cn:                          | `zh_CN` |
-| 繁体中文 :taiwan:                      | `zh_TW` |
+| Language      |  Code   |
+| :------------ | :-----: |
+| اللغة العربية |  `ar`   |
+| Čeština       |  `cs`   |
+| Deutsch       |  `de`   |
+| English       |  `en`   |
+| Español       |  `es`   |
+| Magyar nyelv  |  `hu`   |
+| 日本語        |  `ja`   |
+| Polski        |  `pl`   |
+| Português     |  `pt`   |
+| Русский       |  `ru`   |
+| 简体中文      | `zh_CN` |
+| 繁体中文      | `zh_TW` |
 
 ## :scroll: Contributing
 
