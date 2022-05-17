@@ -1,4 +1,4 @@
-# LeafView (Tauri)
+# <img width="48" src="https://user-images.githubusercontent.com/52094761/168744997-034ac4a5-8c29-4693-be75-bbecd88c7b59.png" /> LeafView (Tauri)
 
 [![GitHub CI](https://github.com/sprout2000/leafview-tauri/actions/workflows/release.yml/badge.svg)](https://github.com/sprout2000/leafview-tauri/actions/workflows/release.yml)
 [![GitHub stars](https://img.shields.io/github/stars/sprout2000/leafview-tauri)](https://github.com/sprout2000/leafview-tauri/stargazers)
