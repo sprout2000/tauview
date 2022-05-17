@@ -9,6 +9,7 @@ export default defineConfig(({ command }) => {
   return {
     root: "./src",
     build: {
+      minify: !isDev,
       outDir: "../dist",
       emptyOutDir: true,
     },
