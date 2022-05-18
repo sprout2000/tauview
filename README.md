@@ -50,7 +50,7 @@ You can download the latest version of LeafView from the releases page here:
 | Deutsch       |  `de`   |
 | English       |  `en`   |
 | Español       |  `es`   |
-| Magyar nyelv  |  `hu`   |
+| Magyar        |  `hu`   |
 | 日本語        |  `ja`   |
 | Polski        |  `pl`   |
 | Português     |  `pt`   |
