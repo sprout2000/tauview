@@ -3,4 +3,3 @@ node_modules
 .env
 .envrc
 .DS_Store
-.githooks
