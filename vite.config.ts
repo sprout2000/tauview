@@ -1,16 +1,16 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
-import { createHtmlPlugin } from "vite-plugin-html";
+import { createHtmlPlugin } from 'vite-plugin-html';
 
 export default defineConfig(({ command }) => {
-  const isDev = command === "serve";
+  const isDev = command === 'serve';
 
   return {
-    root: "./src",
+    root: './src',
     build: {
       minify: !isDev,
-      outDir: "../dist",
+      outDir: '../dist',
       emptyOutDir: true,
     },
     plugins: [

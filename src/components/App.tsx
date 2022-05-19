@@ -1,33 +1,33 @@
-import React, { useState, useRef, useCallback, useEffect } from "react";
+import React, { useState, useRef, useCallback, useEffect } from 'react';
 
-import { event } from "@tauri-apps/api";
-import { dirname } from "@tauri-apps/api/path";
-import { getCurrent } from "@tauri-apps/api/window";
-import { convertFileSrc, invoke } from "@tauri-apps/api/tauri";
+import { event } from '@tauri-apps/api';
+import { dirname } from '@tauri-apps/api/path';
+import { getCurrent } from '@tauri-apps/api/window';
+import { convertFileSrc, invoke } from '@tauri-apps/api/tauri';
 
-import L from "leaflet";
-import "leaflet/dist/leaflet.css";
+import L from 'leaflet';
+import 'leaflet/dist/leaflet.css';
 
-import { ToolBar } from "./ToolBar";
-import "./App.scss";
+import { ToolBar } from './ToolBar';
+import './App.scss';
 
 type Payload = {
   message: string | null;
 };
 
 export const App = () => {
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState('');
 
   const mapRef = useRef<HTMLDivElement>(null);
   const mapObj: React.MutableRefObject<L.Map | null> = useRef(null);
 
-  const isDev = process.env.NODE_ENV === "development";
+  const isDev = process.env.NODE_ENV === 'development';
 
   const readDir = useCallback(async () => {
     const dir = await dirname(url);
 
-    const list: string[] = await invoke("get_entries", {
-      dir: dir.replace("asset://", ""),
+    const list: string[] = await invoke('get_entries', {
+      dir: dir.replace('asset://', ''),
     });
 
     return list;
@@ -76,7 +76,7 @@ export const App = () => {
             attributionControl: false,
           }).fitBounds(bounds);
 
-          mapObj.current.on("dblclick", () => {
+          mapObj.current.on('dblclick', () => {
             mapObj.current?.setView(bounds.getCenter(), 0);
           });
 
@@ -89,7 +89,7 @@ export const App = () => {
           node.blur();
           node.focus();
         };
-        image.src = url ? convertFileSrc(url) : "";
+        image.src = url ? convertFileSrc(url) : '';
       }
     },
     [url, getZoom]
@@ -101,9 +101,9 @@ export const App = () => {
   };
 
   const onOpen = useCallback(async () => {
-    await invoke("open_dialog")
+    await invoke('open_dialog')
       .then((fpath) => {
-        if (typeof fpath === "string") setUrl(fpath);
+        if (typeof fpath === 'string') setUrl(fpath);
       })
       .catch((err) => console.log(`Error: ${err}`));
   }, []);
@@ -156,7 +156,7 @@ export const App = () => {
     }
 
     const index = list.indexOf(url);
-    await invoke("move_to_trash", { url }).catch((err) => {
+    await invoke('move_to_trash', { url }).catch((err) => {
       console.log(`Error in move_to_trash(): ${err}`);
       window.location.reload();
       return;
@@ -179,21 +179,21 @@ export const App = () => {
     if (!url) return;
 
     switch (e.key) {
-      case "0":
+      case '0':
         e.preventDefault();
         mapObj.current && mapObj.current.setZoom(0);
         break;
-      case e.metaKey && "ArrowRight":
-      case "j":
+      case e.metaKey && 'ArrowRight':
+      case 'j':
         e.preventDefault();
         onNext();
         break;
-      case e.metaKey && "ArrowLeft":
-      case "k":
+      case e.metaKey && 'ArrowLeft':
+      case 'k':
         e.preventDefault();
         onPrev();
         break;
-      case "Delete":
+      case 'Delete':
         e.preventDefault();
         onRemove();
         break;
@@ -204,10 +204,10 @@ export const App = () => {
 
   useEffect(() => {
     const unlisten = event.listen(
-      "tauri://file-drop",
+      'tauri://file-drop',
       async (e: event.Event<string[]>) => {
         const filepath = e.payload[0];
-        const mimeSafe: boolean = await invoke("mime_check", { filepath });
+        const mimeSafe: boolean = await invoke('mime_check', { filepath });
         if (!mimeSafe) return;
 
         setUrl(filepath);
@@ -220,7 +220,7 @@ export const App = () => {
   }, []);
 
   useEffect(() => {
-    const unlisten = event.listen("open", (e: event.Event<Payload>) => {
+    const unlisten = event.listen('open', (e: event.Event<Payload>) => {
       const filepath = e.payload.message;
       if (!filepath) return;
 
@@ -236,9 +236,9 @@ export const App = () => {
     const currentWindow = getCurrent();
 
     if (!url) {
-      currentWindow.setTitle("LeafView");
+      currentWindow.setTitle('LeafView');
     } else {
-      currentWindow.setTitle(url.replace(/.+(\/|\\)/, ""));
+      currentWindow.setTitle(url.replace(/.+(\/|\\)/, ''));
     }
   }, [url]);
 
@@ -274,7 +274,7 @@ export const App = () => {
           onRemove={onRemove}
         />
       </div>
-      <div className={url ? "view" : "view init"} ref={mapRef} />
+      <div className={url ? 'view' : 'view init'} ref={mapRef} />
     </div>
   );
 };
