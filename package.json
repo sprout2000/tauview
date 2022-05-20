@@ -8,7 +8,8 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "tauri": "tauri",
-    "prepare": "mkdirp dist"
+    "prepare": "mkdirp dist",
+    "postinstall": "git config --local core.hooksPath .githooks"
   },
   "dependencies": {
     "@tauri-apps/api": "^1.0.0-rc.5",
