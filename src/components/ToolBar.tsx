@@ -1,4 +1,3 @@
-import { memo } from 'react';
 import i18next from 'i18next';
 
 import { FolderOpen } from './icons/FolderOpen';
@@ -15,7 +14,7 @@ type Props = {
   onRemove: () => Promise<void>;
 };
 
-export const ToolBar = memo((props: Props) => {
+export const ToolBar = (props: Props) => {
   return (
     <div className="toolbar">
       <div className="folder">
@@ -54,5 +53,4 @@ export const ToolBar = memo((props: Props) => {
       </div>
     </div>
   );
-});
-ToolBar.displayName = 'ToolBar';
+};
