@@ -1,5 +1,5 @@
 import { defineConfig } from 'vite';
-import preact from '@preact/preset-vite';
+import react from '@vitejs/plugin-react';
 
 export default defineConfig({
   root: './src',
@@ -8,5 +8,5 @@ export default defineConfig({
     minify: true,
     emptyOutDir: true,
   },
-  plugins: [preact()],
+  plugins: [react()],
 });

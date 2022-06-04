@@ -1,11 +1,4 @@
-import {
-  useState,
-  useRef,
-  useCallback,
-  useEffect,
-  MutableRef,
-} from 'preact/hooks';
-import { JSX } from 'preact';
+import { useState, useRef, useCallback, useEffect } from 'react';
 
 import { event } from '@tauri-apps/api';
 import { dirname } from '@tauri-apps/api/path';
@@ -26,7 +19,7 @@ export const App = () => {
   const [url, setUrl] = useState('');
 
   const mapRef = useRef<HTMLDivElement>(null);
-  const mapObj: MutableRef<L.Map | null> = useRef(null);
+  const mapObj: React.MutableRefObject<L.Map | null> = useRef(null);
 
   const isDev = process.env.NODE_ENV === 'development';
 
@@ -101,12 +94,7 @@ export const App = () => {
     [url, getZoom]
   );
 
-  const preventDefault = (e: JSX.TargetedDragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
-
-  const onContextMenu = (e: JSX.TargetedMouseEvent<HTMLDivElement>) => {
+  const preventDefault = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();
     e.stopPropagation();
   };
@@ -186,7 +174,7 @@ export const App = () => {
     }
   }, [url, readDir]);
 
-  const onKeyDown = (e: JSX.TargetedKeyboardEvent<HTMLDivElement>) => {
+  const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (!url) return;
 
     switch (e.key) {
@@ -275,7 +263,7 @@ export const App = () => {
       onDragOver={preventDefault}
       onDragEnter={preventDefault}
       onDragLeave={preventDefault}
-      onContextMenu={isDev ? undefined : onContextMenu}
+      onContextMenu={isDev ? undefined : preventDefault}
     >
       <div className="bottom">
         <ToolBar

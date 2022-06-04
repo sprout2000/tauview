@@ -1,4 +1,5 @@
-import { render } from 'preact';
+import React from 'react';
+import ReactDOM from 'react-dom/client';
 
 import { App } from './components/App';
 import { setLocales } from './setLocales';
@@ -12,4 +13,8 @@ const locale =
 setLocales(locale);
 
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-render(<App />, document.getElementById('root')!);
+ReactDOM.createRoot(document.getElementById('root')!).render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);

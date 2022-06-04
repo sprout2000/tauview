@@ -1,7 +1,14 @@
 {
   "env": {
     "es6": true,
-    "browser": true
+    "node": true,
+    "browser": true,
+    "commonjs": true
+  },
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -11,12 +18,17 @@
       "jsx": true
     }
   },
-  "plugins": ["@typescript-eslint"],
+  "plugins": ["react-hooks", "react", "@typescript-eslint"],
   "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/eslint-recommended",
     "plugin:@typescript-eslint/recommended",
-    "preact",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
     "prettier"
-  ]
+  ],
+  "rules": {
+    "react/prop-types": "off",
+    "react/react-in-jsx-scope": "off"
+  }
 }
