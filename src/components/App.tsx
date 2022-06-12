@@ -40,8 +40,9 @@ export const App = () => {
         const zoomY = height / ih;
 
         return zoomX >= zoomY ? zoomY : zoomX;
+      } else {
+        return 1;
       }
-      return 1;
     },
     []
   );
