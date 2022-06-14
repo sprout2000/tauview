@@ -9,7 +9,6 @@
     "build": "tsc && vite build",
     "tauri": "tauri",
     "prepare": "mkdirp dist",
-    "postinstall": "git config --local core.hooksPath .githooks",
     "prebuild": "npm r @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint eslint-config-prettier eslint-plugin-react eslint-plugin-react-hooks mkdirp prettier --no-save"
   },
   "dependencies": {
