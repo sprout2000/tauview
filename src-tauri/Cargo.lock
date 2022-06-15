@@ -2555,9 +2555,9 @@ dependencies = [
 
 [[package]]
 name = "tauri"
-version = "1.0.0-rc.15"
+version = "1.0.0-rc.16"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cb533e95e09fd191ef8e0a0ee6b61701b5f32175e48f82854a71a8f8367bdb41"
+checksum = "3c7576f2ebdf713c74678345b7ea240a7456c3a3bfd400e81edce10e2d3e42f6"
 dependencies = [
  "anyhow",
  "cocoa",
@@ -2603,9 +2603,9 @@ dependencies = [
 
 [[package]]
 name = "tauri-build"
-version = "1.0.0-rc.13"
+version = "1.0.0-rc.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "58f9a1c87ad53f584f970b06c9243b39d1c2aeca6116dd04c641f406133053b0"
+checksum = "f5e9c826e2107048c2e97d14522cfba8706c6051ea75386b338b42e545b61dc8"
 dependencies = [
  "anyhow",
  "cargo_toml",
@@ -2618,9 +2618,9 @@ dependencies = [
 
 [[package]]
 name = "tauri-codegen"
-version = "1.0.0-rc.9"
+version = "1.0.0-rc.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ceb3b7cb66f1a6ca30f601cccfa01820477881c27412909a3e6f80b6a2f73815"
+checksum = "eba70f986da0fdb18c84b02248757e1a380809c4fa61a9f2ab4a8fa4dfe2d7ed"
 dependencies = [
  "base64",
  "brotli",
@@ -2641,9 +2641,9 @@ dependencies = [
 
 [[package]]
 name = "tauri-macros"
-version = "1.0.0-rc.9"
+version = "1.0.0-rc.10"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "07883238ade4c96be38a6a0025f15cbb5e0539fe99ba92d444af9cdbc656b613"
+checksum = "7ba24b67e25134d0b26ab2980aca3dcec6954a0ac1a541d96d102acb2b6bd2f3"
 dependencies = [
  "heck 0.4.0",
  "proc-macro2",
@@ -2666,9 +2666,9 @@ dependencies = [
 
 [[package]]
 name = "tauri-runtime"
-version = "0.7.0"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7bad3a8ce06d4e71a52efef175446c8eb7e9109b6f988782fdc6a234526f226a"
+checksum = "3663622fade645f2bf14f4ba6aebea16a59200c9c03c315bfae03c6f36388531"
 dependencies = [
  "gtk",
  "http",
@@ -2685,9 +2685,9 @@ dependencies = [
 
 [[package]]
 name = "tauri-runtime-wry"
-version = "0.7.0"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "0c2cbc41ea88305f3e5dc133cc5c717c6913a15f121f99e7a238a0135dac083e"
+checksum = "78e96355f2ea391c6c36c60417eea8511ec9828599d7ae0f285b62bd2a1a9cda"
 dependencies = [
  "cocoa",
  "gtk",
