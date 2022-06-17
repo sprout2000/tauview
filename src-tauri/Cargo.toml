@@ -19,7 +19,7 @@ serde = { version = "1.0.137", features = [ "derive" ] }
 tauri = { version = "1.0.0", features = ["dialog-open", "path-all", "protocol-asset", "shell-open", "window-set-title"] }
 trash = "2.1.4"
 json-gettext = "4.0.3"
-sys-locale = "0.2.0"
+sys-locale = "0.2.1"
 
 [dependencies.tauri-plugin-window-state]
 git = "https://github.com/tauri-apps/tauri-plugin-window-state"
