@@ -100,8 +100,8 @@ export const App = () => {
     e.stopPropagation();
   };
 
-  const onOpen = useCallback(async () => {
-    await invoke('open_dialog')
+  const onOpen = useCallback(() => {
+    invoke('open_dialog')
       .then((fpath) => {
         if (typeof fpath === 'string') setUrl(fpath);
       })
