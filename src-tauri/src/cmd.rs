@@ -39,7 +39,13 @@ fn is_img(entry: &dir::DiskEntry) -> bool {
 #[tauri::command]
 pub async fn open_dialog() -> Option<PathBuf> {
     dialog::blocking::FileDialogBuilder::new()
-        .add_filter("Image File", &["ico", "gif", "png", "jpg", "jpeg", "webp"])
+        .add_filter(
+            "Image File",
+            &[
+                "ico", "ICO", "gif", "GIF", "png", "PNG", "jpg", "JPG", "jpeg", "JPEG", "webp",
+                "WEBP",
+            ],
+        )
         .pick_file()
 }
 
