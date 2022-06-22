@@ -178,6 +178,6 @@ src-tauri
 
 _NOTE: You will need to meet [Tauri prerequisites](https://tauri.studio/docs/getting-started/prerequisites)_.
 
-## :copyright: License
+## :copyright: Copyright
 
 Copyright (c) 2022 sprout2000 and other contributors
