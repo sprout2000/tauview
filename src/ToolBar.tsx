@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import i18next from 'i18next';
+import * as i18next from 'i18next';
 
 import { Trash } from './Trash';
 import { ArrowLeft } from './ArrowLeft';
