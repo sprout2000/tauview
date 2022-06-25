@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { render } from '@testing-library/react';
 
 import { randomFillSync } from 'crypto';
@@ -7,11 +6,10 @@ import { mockWindows, mockIPC } from '@tauri-apps/api/mocks';
 import { App } from '../App';
 
 beforeAll(() => {
-  //@ts-ignore
   window.crypto = {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
-    getRandomValues: function (buffer) {
-      // @ts-ignore
+    getRandomValues: (buffer: NodeJS.ArrayBufferView) => {
       return randomFillSync(buffer);
     },
   };
