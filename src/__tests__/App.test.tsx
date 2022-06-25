@@ -1,4 +1,6 @@
-import { render } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { randomFillSync } from 'crypto';
 import { mockWindows, mockIPC } from '@tauri-apps/api/mocks';
@@ -23,15 +25,20 @@ test('render App component', async () => {
       observe: jest.fn(),
     }));
 
-  mockIPC((cmd, args) => {
-    if (cmd === 'add') {
-      return (args.a as number) + (args.b as number);
+  mockWindows('main');
+
+  mockIPC((cmd) => {
+    if (cmd === 'open_dialog') {
+      jest.fn();
     }
   });
-  mockWindows('main');
+  const spy = jest.spyOn(window, '__TAURI_IPC__');
 
   const { getCurrent } = await import('@tauri-apps/api/window');
   expect(getCurrent()).toHaveProperty('label', 'main');
 
   render(<App />);
+
+  await userEvent.click(screen.getByTestId('open-button'));
+  expect(spy).toHaveBeenCalled();
 });

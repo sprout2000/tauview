@@ -11,6 +11,8 @@ const config: Config.InitialOptions = {
   moduleNameMapper: {
     '^.+\\.s?css$': '<rootDir>/src/__mocks__/styleMock.ts',
   },
+  collectCoverage: true,
+  coverageReporters: ['text'],
 };
 
 export default config;
