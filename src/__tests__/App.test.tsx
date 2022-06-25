@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { render } from '@testing-library/react';
-import { App } from '../App';
 
 import { randomFillSync } from 'crypto';
-
 import { mockWindows, mockIPC } from '@tauri-apps/api/mocks';
+
+import { App } from '../App';
 
 beforeAll(() => {
   //@ts-ignore
