@@ -20,6 +20,7 @@ export const ToolBar = memo((props: Props) => {
     <div className="toolbar">
       <div className="folder">
         <div
+          data-testid="open-button"
           className="icon"
           title={i18next.t('Open...')}
           onClick={props.onOpen}
