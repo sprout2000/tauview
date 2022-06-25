@@ -30,7 +30,6 @@ test('render App component', async () => {
   });
   mockWindows('main');
 
-  // const spy = vi.spyOn(window, '__TAURI_IPC__');
   const { getCurrent } = await import('@tauri-apps/api/window');
   expect(getCurrent()).toHaveProperty('label', 'main');
 
