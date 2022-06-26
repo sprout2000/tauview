@@ -2,10 +2,10 @@ import '@testing-library/jest-dom';
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { randomFillSync } from 'crypto';
+import { randomFillSync } from 'node:crypto';
 import { mockWindows, mockIPC } from '@tauri-apps/api/mocks';
 
-import { App } from '../App';
+import { App } from './App';
 
 beforeAll(() => {
   window.crypto = {
@@ -20,19 +20,19 @@ beforeAll(() => {
 test('render App component', async () => {
   window.ResizeObserver =
     window.ResizeObserver ||
-    jest.fn().mockImplementation(() => ({
-      disconnect: jest.fn(),
-      observe: jest.fn(),
+    vi.fn().mockImplementation(() => ({
+      disconnect: vi.fn(),
+      observe: vi.fn(),
     }));
 
   mockWindows('main');
 
   mockIPC((cmd) => {
     if (cmd === 'open_dialog') {
-      jest.fn();
+      vi.fn();
     }
   });
-  const spy = jest.spyOn(window, '__TAURI_IPC__');
+  const spy = vi.spyOn(window, '__TAURI_IPC__');
 
   const { getCurrent } = await import('@tauri-apps/api/window');
   expect(getCurrent()).toHaveProperty('label', 'main');
