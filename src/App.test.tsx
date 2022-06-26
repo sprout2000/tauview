@@ -1,9 +1,9 @@
 import '@testing-library/jest-dom';
-import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
+import { render, screen } from '@testing-library/react';
 
 import { randomFillSync } from 'node:crypto';
-import { mockWindows, mockIPC } from '@tauri-apps/api/mocks';
+import { mockIPC, mockWindows } from '@tauri-apps/api/mocks';
 
 import { App } from './App';
 
@@ -21,8 +21,8 @@ test('render App component', async () => {
   window.ResizeObserver =
     window.ResizeObserver ||
     vi.fn().mockImplementation(() => ({
-      disconnect: vi.fn(),
       observe: vi.fn(),
+      disconnect: vi.fn(),
     }));
 
   mockWindows('main');
