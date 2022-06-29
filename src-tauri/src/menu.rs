@@ -97,14 +97,11 @@ pub fn default() -> Menu {
     );
 
     #[cfg(target_os = "macos")]
-    let app_ctx = tauri::generate_context!();
-
-    #[cfg(target_os = "macos")]
     let app_menu = Submenu::new(
-        &app_ctx.package_info().name,
+        "LeafView",
         Menu::new()
             .add_native_item(MenuItem::About(
-                app_ctx.package_info().name.clone(),
+                "LeafView".to_string(),
                 tauri::AboutMetadata::new(),
             ))
             .add_native_item(MenuItem::Separator)
