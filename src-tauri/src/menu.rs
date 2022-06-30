@@ -1,8 +1,8 @@
 use json_gettext::{get_text, static_json_gettext_build};
 use sys_locale::get_locale;
-use tauri::{CustomMenuItem, Menu, MenuItem, Submenu};
+use tauri::{utils::assets::EmbeddedAssets, Context, CustomMenuItem, Menu, MenuItem, Submenu};
 
-pub fn default() -> Menu {
+pub fn default(app_context: &Context<EmbeddedAssets>) -> Menu {
     let locale = get_locale().unwrap_or_else(|| String::from("en-US"));
 
     let ctx = static_json_gettext_build!(
@@ -98,10 +98,10 @@ pub fn default() -> Menu {
 
     #[cfg(target_os = "macos")]
     let app_menu = Submenu::new(
-        "LeafView",
+        &app_context.package_info().name,
         Menu::new()
             .add_native_item(MenuItem::About(
-                "LeafView".to_string(),
+                app_context.package_info().name.clone(),
                 tauri::AboutMetadata::new(),
             ))
             .add_native_item(MenuItem::Separator)

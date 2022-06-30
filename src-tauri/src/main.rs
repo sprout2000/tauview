@@ -16,8 +16,9 @@ struct Payload {
 }
 
 fn main() {
+    let context = tauri::generate_context!();
     tauri::Builder::default()
-        .menu(menu::default())
+        .menu(menu::default(&context))
         .on_menu_event(|event| match event.menu_item_id() {
             "open" => dialog::FileDialogBuilder::new()
                 .add_filter("Image File", &["ico", "gif", "png", "jpg", "jpeg", "webp"])
@@ -62,6 +63,6 @@ fn main() {
             cmd::move_to_trash,
         ])
         .plugin(tauri_plugin_window_state::Builder::default().build())
-        .run(tauri::generate_context!())
+        .run(context)
         .expect("Error while running tauri application");
 }
