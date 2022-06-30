@@ -1,9 +1,11 @@
 use json_gettext::{get_text, static_json_gettext_build};
+use std::env::consts;
 use sys_locale::get_locale;
-use tauri::{utils::assets::EmbeddedAssets, Context, CustomMenuItem, Menu, MenuItem, Submenu};
+use tauri::utils::assets::EmbeddedAssets;
+use tauri::{Context, CustomMenuItem, Menu, MenuItem, Submenu};
 
 fn get_fullscreen_accelerator() -> String {
-    if std::env::consts::OS == "macos" {
+    if consts::OS == "macos" {
         "Cmd+Option+F".to_string()
     } else {
         "F11".to_string()
