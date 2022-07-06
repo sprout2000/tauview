@@ -57,7 +57,7 @@ checksum = "bb07d2053ccdbe10e2af2995a2f116c1330396493dc1269f6a91d0ae82e19704"
 name = "app"
 version = "0.4.6"
 dependencies = [
- "infer 0.8.1",
+ "infer 0.9.0",
  "json-gettext",
  "serde",
  "serde_json",
@@ -172,9 +172,9 @@ checksum = "37ccbd214614c6783386c1af30caf03192f17891059cecc394b4fb119e363de3"
 
 [[package]]
 name = "bytemuck"
-version = "1.9.1"
+version = "1.10.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cdead85bdec19c194affaeeb670c0e41fe23de31459efd1c174d049269cf02cc"
+checksum = "c53dfa917ec274df8ed3c572698f381a24eef2efba9492d797301b72b6db408a"
 
 [[package]]
 name = "byteorder"
@@ -247,9 +247,9 @@ dependencies = [
 
 [[package]]
 name = "cfb"
-version = "0.7.2"
+version = "0.7.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "19ff6ea9647f5b4fb422a553d5b6fe1b398986a6e4f458d1219eb77e0e6e0606"
+checksum = "d38f2da7a0a2c4ccf0065be06397cc26a81f4e528be095826eee9d4adbb8c60f"
 dependencies = [
  "byteorder",
  "fnv",
@@ -1239,11 +1239,11 @@ dependencies = [
 
 [[package]]
 name = "infer"
-version = "0.8.1"
+version = "0.9.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e035cede526e0b21d5adffc9fa0eb4ef5d6026fe9c5b0bfe8084b9472b587a55"
+checksum = "f178e61cdbfe084aa75a2f4f7a25a5bb09701a47ae1753608f194b15783c937a"
 dependencies = [
- "cfb 0.7.2",
+ "cfb 0.7.3",
 ]
 
 [[package]]
@@ -1674,9 +1674,9 @@ dependencies = [
 
 [[package]]
 name = "once_cell"
-version = "1.12.0"
+version = "1.13.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7709cef83f0c1f58f666e746a08b21e0085f7440fa6a29cc194d68aac97a4225"
+checksum = "18a6dbe30758c9f83eb00cbea4ac95966305f5a7772f3f42ebfc7fc7eddbd8e1"
 
 [[package]]
 name = "open"
@@ -2130,9 +2130,9 @@ dependencies = [
 
 [[package]]
 name = "regex"
-version = "1.5.6"
+version = "1.6.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d83f127d94bdbcda4c8cc2e50f6f84f4b611f69c902699ca385a39c3a75f9ff1"
+checksum = "4c4eb3267174b8c6c2f654116623910a0fef09c4753f8dd83db29c48a0df988b"
 dependencies = [
  "aho-corasick",
  "memchr",
@@ -2150,9 +2150,9 @@ dependencies = [
 
 [[package]]
 name = "regex-syntax"
-version = "0.6.26"
+version = "0.6.27"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "49b3de9ec5dc0a3417da371aab17d729997c15010e7fd24ff707773a33bddb64"
+checksum = "a3f87b73ce11b1619a3c6332f45341e0047173771e8b8b73f87bfeefb7b56244"
 
 [[package]]
 name = "remove_dir_all"
@@ -2612,9 +2612,9 @@ dependencies = [
 
 [[package]]
 name = "tauri"
-version = "1.0.2"
+version = "1.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "421641ec549d34935530886151a42ce5ecbbb57beb30e5eec1b22f8e08e10ee9"
+checksum = "d61fc211e0bd2c04c0aecd202d2cd72dd797a89da02989a39e1b9691462386d6"
 dependencies = [
  "anyhow",
  "cocoa",
@@ -2660,13 +2660,14 @@ dependencies = [
 
 [[package]]
 name = "tauri-build"
-version = "1.0.2"
+version = "1.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "598bd36884ee15ac73dfca9921066fd87d13d9beea60384b99a66c3a5d800d70"
+checksum = "2f2b32e551ec810ba4ab2ad735de5e3576e54bf0322ab0f4b7ce41244bc65ecf"
 dependencies = [
  "anyhow",
  "cargo_toml",
  "heck 0.4.0",
+ "json-patch",
  "semver 1.0.12",
  "serde_json",
  "tauri-utils",
@@ -2675,13 +2676,14 @@ dependencies = [
 
 [[package]]
 name = "tauri-codegen"
-version = "1.0.2"
+version = "1.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "048a7b404b92c86e7dc32458fd0963f042a76d520681e6f598d73a97c2feeeef"
+checksum = "f6f1f7928dd040fc03c94207adfad506c0cf5b152982fd1dc0a621f7fd777e22"
 dependencies = [
  "base64",
  "brotli",
  "ico",
+ "json-patch",
  "plist",
  "png 0.17.5",
  "proc-macro2",
@@ -2700,9 +2702,9 @@ dependencies = [
 
 [[package]]
 name = "tauri-macros"
-version = "1.0.2"
+version = "1.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "aaf70098bfab21efde9b2c089008b319ba333f4ee6e55c38bdea188dea86497f"
+checksum = "e50b9f52871c088857360319a37472d59f4644f1ed004489599d62831a1b6996"
 dependencies = [
  "heck 0.4.0",
  "proc-macro2",
@@ -2725,9 +2727,9 @@ dependencies = [
 
 [[package]]
 name = "tauri-runtime"
-version = "0.10.1"
+version = "0.10.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "82d34f58c61a6790ba3de5753daea61b5beb6926b2384d1ad03b9dfe622c72be"
+checksum = "4e4cff3b4d9469727fa2107c4b3d2eda110df1ba45103fb420178e536362fae4"
 dependencies = [
  "gtk",
  "http",
@@ -2745,9 +2747,9 @@ dependencies = [
 
 [[package]]
 name = "tauri-runtime-wry"
-version = "0.10.1"
+version = "0.10.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "cd9a56e25146ff1f13f37bdb010ed0d692e7e81c824b9f977ae439f446f37ab4"
+checksum = "3fa8c4edaf01d8b556e7172c844b1b4dd3399adcd1a606bd520fc3e65f698546"
 dependencies = [
  "cocoa",
  "gtk",
@@ -2765,9 +2767,9 @@ dependencies = [
 
 [[package]]
 name = "tauri-utils"
-version = "1.0.2"
+version = "1.0.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "616f178da1e0466ca45963ed108a1567d4b8803662addaca313169d0dcd97715"
+checksum = "12ff4b68d9faeb57c9c727bf58c9c9768d2b67d8e84e62ce6146e7859a2e9c6b"
 dependencies = [
  "brotli",
  "ctor",
@@ -2973,9 +2975,9 @@ dependencies = [
 
 [[package]]
 name = "trash"
-version = "2.1.4"
+version = "2.1.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "7d0492e349e41bfa40e9d446a5803b84275898f0b3bda568b23e10325702095d"
+checksum = "fe090367848cd40c4230ff3ce4e2ff6a2fd511c1e14ae047a4a4c37ef7965236"
 dependencies = [
  "chrono",
  "libc",
@@ -3004,9 +3006,9 @@ checksum = "dcf81ac59edc17cc8697ff311e8f5ef2d99fcbd9817b34cec66f90b6c3dfd987"
 
 [[package]]
 name = "ucd-trie"
-version = "0.1.3"
+version = "0.1.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "56dee185309b50d1f11bfedef0fe6d036842e3fb77413abef29f8f8d1c5d4c1c"
+checksum = "89570599c4fe5585de2b388aab47e99f7fa4e9238a1399f707a02e356058141c"
 
 [[package]]
 name = "unicode-bidi"
