@@ -8,6 +8,9 @@ export default defineConfig(({ command }) => {
 
   return {
     root: './src',
+    server: {
+      port: 3000,
+    },
     build: {
       outDir: '../dist',
       minify: true,
