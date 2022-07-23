@@ -25,10 +25,7 @@ export const App = () => {
 
   const readDir = useCallback(async () => {
     const dir = await dirname(url);
-
-    const list: string[] = await invoke('get_entries', {
-      dir: dir.replace('asset://', ''),
-    });
+    const list: string[] = await invoke('get_entries', { dir });
 
     return list;
   }, [url]);
