@@ -57,9 +57,9 @@ fn main() {
             _ => {}
         })
         .setup(|app| {
-            let window = app.get_window("main").unwrap();
+            let _window = app.get_window("main").unwrap();
             #[cfg(debug_assertions)]
-            window.open_devtools();
+            _window.open_devtools();
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
