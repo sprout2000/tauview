@@ -8,7 +8,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "tauri": "tauri",
-    "test": "vitest run",
+    "test": "vitest run --coverage",
     "lint": "eslint --fix . && prettier --write ."
   },
   "dependencies": {
