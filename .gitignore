@@ -1,6 +1,6 @@
 dist
-coverage
 node_modules
+coverage/tmp
 .env
 .envrc
 .DS_Store
