@@ -255,6 +255,7 @@ export const App = () => {
 
   return (
     <div
+      data-testid="container"
       className="container"
       onKeyDown={onKeyDown}
       onDrop={preventDefault}
