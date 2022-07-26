@@ -17,8 +17,14 @@ export default defineConfig(({ command }) => {
       emptyOutDir: true,
     },
     test: {
+      cache: false,
       globals: true,
       environment: 'jsdom',
+      coverage: {
+        enabled: true,
+        reporter: ['text'],
+        reportsDirectory: '../coverage',
+      },
     },
     plugins: [
       react(),
