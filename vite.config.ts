@@ -22,7 +22,7 @@ export default defineConfig(({ command }) => {
       environment: 'jsdom',
       coverage: {
         enabled: true,
-        reporter: ['text'],
+        reporter: ['text', 'json-summary'],
         reportsDirectory: '../coverage',
       },
     },
