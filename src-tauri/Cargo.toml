@@ -7,7 +7,7 @@ license = "MIT"
 repository = "https://github.com/sprout2000/leafview-tauri/"
 default-run = "app"
 edition = "2021"
-rust-version = "1.62"
+rust-version = "1.63"
 
 [build-dependencies]
 tauri-build = { version = "1.0.4", features = [] }
