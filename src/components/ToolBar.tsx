@@ -1,10 +1,10 @@
 import { memo } from 'react';
 import * as i18next from 'i18next';
 
-import { Trash } from './Trash';
-import { ArrowLeft } from './ArrowLeft';
-import { ArrowRight } from './ArrowRight';
-import { FolderOpen } from './FolderOpen';
+import { Trash } from './icons/Trash';
+import { ArrowLeft } from './icons/ArrowLeft';
+import { ArrowRight } from './icons/ArrowRight';
+import { FolderOpen } from './icons/FolderOpen';
 
 import './ToolBar.scss';
 
