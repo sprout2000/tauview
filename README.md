@@ -1,9 +1,8 @@
 # LeafView (Tauri)
 
-[![GitHub CI](https://github.com/sprout2000/leafview-tauri/actions/workflows/release.yml/badge.svg)](https://github.com/sprout2000/leafview-tauri/actions/workflows/release.yml)
+[![GitHub license](https://img.shields.io/github/license/sprout2000/leafview-tauri)](https://github.com/sprout2000/leafview-tauri/blob/main/LICENSE.md)
 [![GitHub all releases](https://img.shields.io/github/downloads/sprout2000/leafview-tauri/total)](https://github.com/sprout2000/leafview-tauri/releases)
 [![GitHub stars](https://img.shields.io/github/stars/sprout2000/leafview-tauri)](https://github.com/sprout2000/leafview-tauri/stargazers)
-[![GitHub license](https://img.shields.io/github/license/sprout2000/leafview-tauri)](https://github.com/sprout2000/leafview-tauri/blob/main/LICENSE.md)
 
 A minimalist image viewer for macOS based on [Leaflet.js](https://leafletjs.com/) and [Tauri](https://tauri.studio/).
 
