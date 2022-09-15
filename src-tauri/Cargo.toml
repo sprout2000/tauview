@@ -10,13 +10,13 @@ edition = "2021"
 rust-version = "1.63"
 
 [build-dependencies]
-tauri-build = { version = "1.0.4", features = [] }
+tauri-build = { version = "1.1.0", features = [] }
 
 [dependencies]
 infer = "0.9.0"
 serde_json = "1.0.85"
 serde = { version = "1.0.144", features = [ "derive" ] }
-tauri = { version = "1.0.5", features = ["dialog-open", "path-all", "protocol-asset", "shell-open", "window-set-title"] }
+tauri = { version = "1.1.0", features = ["dialog-open", "path-all", "protocol-asset", "shell-open", "window-set-title"] }
 trash = "2.1.5"
 json-gettext = "4.0.3"
 sys-locale = "0.2.1"
