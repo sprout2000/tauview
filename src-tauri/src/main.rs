@@ -3,6 +3,7 @@
     windows_subsystem = "windows"
 )]
 
+use std::env::consts;
 use std::path::PathBuf;
 use tauri::api::{dialog, shell};
 use tauri::{Manager, Menu};
@@ -19,7 +20,7 @@ fn main() {
     let context = tauri::generate_context!();
     tauri::Builder::default()
         .menu({
-            if std::env::consts::OS == "macos" {
+            if consts::OS == "macos" {
                 menu::default(&context)
             } else {
                 Menu::new()
