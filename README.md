@@ -32,13 +32,13 @@ winget install sprout2000.LeafView-Tauri
 
 |                                     Key                                     | Function       |
 | :-------------------------------------------------------------------------: | :------------- |
-|               <kbd>J</kbd> or <kbd>⌘</kbd>+<kbd>&#8594;</kbd>               | Next Image     |
-|               <kbd>K</kbd> or <kbd>⌘</kbd>+<kbd>&#8592;</kbd>               | Previous Image |
+|           <kbd>J</kbd> or <kbd>CmdOrCtrl</kbd>+<kbd>&#8594;</kbd>           | Next Image     |
+|           <kbd>K</kbd> or <kbd>CmdOrCtrl</kbd>+<kbd>&#8592;</kbd>           | Previous Image |
 |                                <kbd>+</kbd>                                 | Zoom In        |
 |                                <kbd>-</kbd>                                 | Zoom Out       |
 |                                <kbd>0</kbd>                                 | Reset Zoom     |
 | <kbd>&#8592;</kbd> <kbd>&#8593;</kbd> <kbd>&#8595;</kbd> <kbd>&#8594;</kbd> | Pan            |
-|                       <kbd>Fn</kbd>+<kbd>Delete</kbd>                       | Move to Trash  |
+|            <kbd>Fn</kbd>+<kbd>Delete</kbd> or <kbd>Delete</kbd>             | Move to Trash  |
 
 ### :computer_mouse: Mouse Operations
 
