@@ -5,7 +5,7 @@
 
 use std::path::PathBuf;
 use tauri::api::{dialog, shell};
-use tauri::Manager;
+use tauri::{Manager, Menu};
 
 mod cmd;
 mod menu;
@@ -18,7 +18,13 @@ struct Payload {
 fn main() {
     let context = tauri::generate_context!();
     tauri::Builder::default()
-        .menu(menu::default(&context))
+        .menu({
+            if std::env::consts::OS == "macos" {
+                menu::default(&context)
+            } else {
+                Menu::new()
+            }
+        })
         .on_menu_event(|event| match event.menu_item_id() {
             "open" => dialog::FileDialogBuilder::new()
                 .add_filter("Image File", &["ico", "gif", "png", "jpg", "jpeg", "webp"])

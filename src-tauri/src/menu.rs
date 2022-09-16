@@ -1,16 +1,7 @@
 use json_gettext::{get_text, static_json_gettext_build};
-use std::env::consts;
 use sys_locale::get_locale;
 use tauri::utils::assets::EmbeddedAssets;
 use tauri::{Context, CustomMenuItem, Menu, MenuItem, Submenu};
-
-fn get_fullscreen_accelerator() -> String {
-    if consts::OS == "macos" {
-        "Cmd+Option+F".to_string()
-    } else {
-        "F11".to_string()
-    }
-}
 
 pub fn default(app_context: &Context<EmbeddedAssets>) -> Menu {
     let locale = get_locale().unwrap_or_else(|| String::from("en-US"));
@@ -75,7 +66,6 @@ pub fn default(app_context: &Context<EmbeddedAssets>) -> Menu {
     )
     .unwrap();
 
-    #[cfg(target_os = "macos")]
     let app_menu = Submenu::new(
         &app_context.package_info().name,
         Menu::new()
@@ -99,7 +89,7 @@ pub fn default(app_context: &Context<EmbeddedAssets>) -> Menu {
                     "open",
                     get_text!(ctx, &locale, "Open...").unwrap().to_string(),
                 )
-                .accelerator("CmdOrCtrl+O"),
+                .accelerator("Cmd+O"),
             )
             .add_native_item(MenuItem::Separator)
             .add_item(
@@ -107,7 +97,7 @@ pub fn default(app_context: &Context<EmbeddedAssets>) -> Menu {
                     "close",
                     get_text!(ctx, &locale, "Close").unwrap().to_string(),
                 )
-                .accelerator("CmdOrCtrl+W"),
+                .accelerator("Cmd+W"),
             ),
     );
 
@@ -119,7 +109,7 @@ pub fn default(app_context: &Context<EmbeddedAssets>) -> Menu {
                     "minimize",
                     get_text!(ctx, &locale, "Minimize").unwrap().to_string(),
                 )
-                .accelerator("CmdOrCtrl+M"),
+                .accelerator("Cmd+M"),
             )
             .add_item(CustomMenuItem::new(
                 "zoom",
@@ -133,11 +123,10 @@ pub fn default(app_context: &Context<EmbeddedAssets>) -> Menu {
                         .unwrap()
                         .to_string(),
                 )
-                .accelerator(get_fullscreen_accelerator()),
+                .accelerator("Cmd+Option+F"),
             ),
     );
 
-    #[cfg(target_os = "macos")]
     let help_menu = Submenu::new(
         get_text!(ctx, &locale, "Help").unwrap().to_string(),
         Menu::new().add_item(CustomMenuItem::new(
@@ -148,32 +137,8 @@ pub fn default(app_context: &Context<EmbeddedAssets>) -> Menu {
         )),
     );
 
-    #[cfg(not(target_os = "macos"))]
-    let help_menu = Submenu::new(
-        get_text!(ctx, &locale, "Help").unwrap().to_string(),
-        Menu::new()
-            .add_native_item(MenuItem::About(
-                app_context.package_info().name.clone(),
-                tauri::AboutMetadata::new(),
-            ))
-            .add_native_item(MenuItem::Separator)
-            .add_item(CustomMenuItem::new(
-                "support",
-                get_text!(ctx, &locale, "Support URL...")
-                    .unwrap()
-                    .to_string(),
-            )),
-    );
-
-    #[cfg(target_os = "macos")]
     let menu = Menu::new()
         .add_submenu(app_menu)
-        .add_submenu(file_menu)
-        .add_submenu(window_menu)
-        .add_submenu(help_menu);
-
-    #[cfg(not(target_os = "macos"))]
-    let menu = Menu::new()
         .add_submenu(file_menu)
         .add_submenu(window_menu)
         .add_submenu(help_menu);
