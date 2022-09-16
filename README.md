@@ -48,16 +48,6 @@ winget install sprout2000.LeafView-Tauri
 |    Wheel     | Zoom in/out |
 | Double click | Reset zoom  |
 
-## :globe_with_meridians: Supported Languages
-
-| Language      | Code |     | Language  | Code |     | Language |  Code   |
-| :------------ | :--: | :-: | :-------- | :--: | :-: | :------- | :-----: |
-| اللغة العربية | `ar` |     | Français  | `fr` |     | Русский  |  `ru`   |
-| Čeština       | `cs` |     | Magyar    | `hu` |     | 简体中文 | `zh_CN` |
-| Deutsch       | `de` |     | 日本語    | `ja` |     | 繁体中文 | `zh_TW` |
-| English       | `en` |     | Polski    | `pl` |     |
-| Español       | `es` |     | Português | `pt` |     |
-
 ## :hammer_and_wrench: Development
 
 ```sh
