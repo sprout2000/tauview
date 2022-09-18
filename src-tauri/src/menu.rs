@@ -1,7 +1,16 @@
 use json_gettext::{get_text, static_json_gettext_build};
+use std::env::consts;
 use sys_locale::get_locale;
 use tauri::utils::assets::EmbeddedAssets;
 use tauri::{Context, CustomMenuItem, Menu, MenuItem, Submenu};
+
+fn get_fullscreen_accelerator() -> String {
+    if consts::OS == "macos" {
+        "Cmd+Option+F".to_string()
+    } else {
+        "F11".to_string()
+    }
+}
 
 pub fn default(app_context: &Context<EmbeddedAssets>) -> Menu {
     let locale = get_locale().unwrap_or_else(|| String::from("en-US"));
@@ -66,6 +75,7 @@ pub fn default(app_context: &Context<EmbeddedAssets>) -> Menu {
     )
     .unwrap();
 
+    #[cfg(target_os = "macos")]
     let app_menu = Submenu::new(
         &app_context.package_info().name,
         Menu::new()
@@ -89,7 +99,7 @@ pub fn default(app_context: &Context<EmbeddedAssets>) -> Menu {
                     "open",
                     get_text!(ctx, &locale, "Open...").unwrap().to_string(),
                 )
-                .accelerator("Cmd+O"),
+                .accelerator("CmdOrCtrl+O"),
             )
             .add_native_item(MenuItem::Separator)
             .add_item(
@@ -97,7 +107,7 @@ pub fn default(app_context: &Context<EmbeddedAssets>) -> Menu {
                     "close",
                     get_text!(ctx, &locale, "Close").unwrap().to_string(),
                 )
-                .accelerator("Cmd+W"),
+                .accelerator("CmdOrCtrl+W"),
             ),
     );
 
@@ -109,7 +119,7 @@ pub fn default(app_context: &Context<EmbeddedAssets>) -> Menu {
                     "minimize",
                     get_text!(ctx, &locale, "Minimize").unwrap().to_string(),
                 )
-                .accelerator("Cmd+M"),
+                .accelerator("CmdOrCtrl+M"),
             )
             .add_item(CustomMenuItem::new(
                 "zoom",
@@ -123,7 +133,7 @@ pub fn default(app_context: &Context<EmbeddedAssets>) -> Menu {
                         .unwrap()
                         .to_string(),
                 )
-                .accelerator("Cmd+Option+F"),
+                .accelerator(get_fullscreen_accelerator()),
             ),
     );
 
@@ -137,8 +147,15 @@ pub fn default(app_context: &Context<EmbeddedAssets>) -> Menu {
         )),
     );
 
+    #[cfg(target_os = "macos")]
     let menu = Menu::new()
         .add_submenu(app_menu)
+        .add_submenu(file_menu)
+        .add_submenu(window_menu)
+        .add_submenu(help_menu);
+
+    #[cfg(not(target_os = "macos"))]
+    let menu = Menu::new()
         .add_submenu(file_menu)
         .add_submenu(window_menu)
         .add_submenu(help_menu);
