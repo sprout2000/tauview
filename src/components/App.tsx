@@ -1,7 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 
 import { event } from '@tauri-apps/api';
-import { basename, dirname } from '@tauri-apps/api/path';
+import { dirname } from '@tauri-apps/api/path';
 import { getCurrent } from '@tauri-apps/api/window';
 import { convertFileSrc, invoke } from '@tauri-apps/api/tauri';
 
@@ -99,11 +99,8 @@ export const App = () => {
 
   const onOpen = useCallback(() => {
     invoke('open_dialog')
-      .then(async (fpath) => {
-        if (typeof fpath === 'string') {
-          const isDot = (await basename(fpath)).startsWith('.');
-          !isDot && setUrl(fpath);
-        }
+      .then((fpath) => {
+        typeof fpath === 'string' && setUrl(fpath);
       })
       .catch((err) => console.log(`Error: ${err}`));
   }, []);

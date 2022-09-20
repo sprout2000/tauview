@@ -1,3 +1,4 @@
+use std::env::consts;
 use std::path::{Path, PathBuf};
 use tauri::api::dialog;
 use tauri::api::dir;
@@ -27,7 +28,13 @@ fn is_dir(entry: &dir::DiskEntry) -> bool {
 
 fn is_dot(entry: &dir::DiskEntry) -> bool {
     match &entry.name {
-        Some(name) => name.starts_with('.'),
+        Some(name) => {
+            if consts::OS == "macos" {
+                name.starts_with('.')
+            } else {
+                name.starts_with("._")
+            }
+        }
         None => true,
     }
 }
