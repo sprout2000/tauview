@@ -51,5 +51,4 @@ jobs:
       - uses: vedantmgoyal2009/winget-releaser@latest
         with:
           identifier: sprout2000.LeafView-Tauri
-          release-tag: ${{ github.ref }}
           token: ${{ secrets.WINGET_TOKEN }}
