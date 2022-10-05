@@ -5,20 +5,9 @@
   -webkit-user-select: none;
 }
 
-@media (prefers-color-scheme: dark) {
-  body {
-    background: #1e1e1e;
-  }
-}
-
-@media (prefers-color-scheme: light) {
-  body {
-    background: #f6f6f6;
-  }
-}
-
 html,
 body,
 #root {
   height: 100%;
+  background: #1e1e1e;
 }
