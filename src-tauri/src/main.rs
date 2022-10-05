@@ -3,10 +3,9 @@
     windows_subsystem = "windows"
 )]
 
-use std::env::consts;
 use std::path::PathBuf;
 use tauri::api::{dialog, shell};
-use tauri::{Manager, Menu};
+use tauri::Manager;
 
 mod cmd;
 mod menu;
@@ -19,13 +18,7 @@ struct Payload {
 fn main() {
     let context = tauri::generate_context!();
     tauri::Builder::default()
-        .menu({
-            if consts::OS == "macos" {
-                menu::default(&context)
-            } else {
-                Menu::new()
-            }
-        })
+        .menu(menu::default(&context))
         .on_menu_event(|event| match event.menu_item_id() {
             "open" => dialog::FileDialogBuilder::new()
                 .add_filter("Image File", &["ico", "gif", "png", "jpg", "jpeg", "webp"])
