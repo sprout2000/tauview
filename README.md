@@ -1,4 +1,4 @@
-# LeafView (Tauri)
+# <img src="https://user-images.githubusercontent.com/52094761/193970617-a07eaee4-731e-4cc7-a553-f6333e01a46d.svg" height="48" /> LeafView (Tauri)
 
 [![GitHub license](https://img.shields.io/github/license/sprout2000/leafview-tauri)](https://github.com/sprout2000/leafview-tauri/blob/main/LICENSE.md)
 [![GitHub all releases](https://img.shields.io/github/downloads/sprout2000/leafview-tauri/total)](https://github.com/sprout2000/leafview-tauri/releases)
