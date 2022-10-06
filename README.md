@@ -20,12 +20,6 @@ _Image by <a href="https://pixabay.com/ja/users/publicdomainpictures-14/?utm_sou
 You can download the latest version of LeafView from the releases page here:
 [https://github.com/sprout2000/leafview-tauri/releases](https://github.com/sprout2000/leafview-tauri/releases)
 
-Or you can also get get the latest version via [winget](https://github.com/microsoft/winget-cli):
-
-```sh
-winget install sprout2000.LeafView-Tauri
-```
-
 ## :green_book: Usage
 
 ### :keyboard: Keyboard Shortcuts
@@ -53,13 +47,13 @@ winget install sprout2000.LeafView-Tauri
 ```sh
 % git clone https://github.com/sprout2000/leafview-tauri.git
 % cd leafview-tauri
-% npm install
+% yarn install
 
 # on development
-% npx tauri dev
+% yarn tauri dev
 
 # on production
-% npx tauri build
+% yarn tauri build
 ```
 
 _NOTE: You will need to meet [Tauri prerequisites](https://tauri.app/v1/guides/getting-started/prerequisites)_.
