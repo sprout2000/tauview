@@ -181,11 +181,13 @@ export const App = () => {
         mapObj.current?.setZoom(0);
         break;
       case (e.metaKey || e.ctrlKey) && 'ArrowRight':
+      case e.ctrlKey && 'n':
       case 'j':
         e.preventDefault();
         onNext();
         break;
       case (e.metaKey || e.ctrlKey) && 'ArrowLeft':
+      case e.ctrlKey && 'p':
       case 'k':
         e.preventDefault();
         onPrev();
