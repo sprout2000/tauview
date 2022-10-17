@@ -1175,9 +1175,9 @@ dependencies = [
 
 [[package]]
 name = "iana-time-zone-haiku"
-version = "0.1.0"
+version = "0.1.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fde6edd6cef363e9359ed3c98ba64590ba9eecba2293eb5a723ab32aee8926aa"
+checksum = "0703ae284fc167426161c2e3f1da3ea71d94b21bedbcc9494e92b28e334e3dca"
 dependencies = [
  "cxx",
  "cxx-build",
@@ -2729,7 +2729,7 @@ dependencies = [
 [[package]]
 name = "tauri-plugin-window-state"
 version = "0.1.0"
-source = "git+https://github.com/tauri-apps/tauri-plugin-window-state#ccb9436ba7bc8d5c1ee6a3287f947b6e0264af36"
+source = "git+https://github.com/tauri-apps/tauri-plugin-window-state#bf0df5d127a91b03cedd43842480f9c3c6aa3b38"
 dependencies = [
  "bincode",
  "serde",
@@ -3229,9 +3229,9 @@ dependencies = [
 
 [[package]]
 name = "webkit2gtk"
-version = "0.18.1"
+version = "0.18.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "9e35143128317257daa794f00be0f5545faedf778a10dab54ac4b06fd74a44f4"
+checksum = "b8f859735e4a452aeb28c6c56a852967a8a76c8eb1cc32dbf931ad28a13d6370"
 dependencies = [
  "bitflags",
  "cairo-rs",
