@@ -1,6 +1,7 @@
 import { memo } from 'react';
 import * as i18next from 'i18next';
 
+import { Grid } from './icons/Grid';
 import { Trash } from './icons/Trash';
 import { ArrowLeft } from './icons/ArrowLeft';
 import { ArrowRight } from './icons/ArrowRight';
@@ -13,6 +14,7 @@ type Props = {
   onPrev: () => Promise<void>;
   onNext: () => Promise<void>;
   onRemove: () => Promise<void>;
+  onToggleGrid: () => Promise<void>;
 };
 
 export const ToolBar = memo((props: Props) => {
@@ -26,6 +28,13 @@ export const ToolBar = memo((props: Props) => {
           onClick={props.onOpen}
         >
           <FolderOpen />
+        </div>
+        <div
+          className="icon"
+          title={i18next.t('Toggle Grid View')}
+          onClick={props.onToggleGrid}
+        >
+          <Grid />
         </div>
       </div>
       <div className="arrows">

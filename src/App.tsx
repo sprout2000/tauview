@@ -1,4 +1,11 @@
-import { useState, useRef, useCallback, useEffect } from 'react';
+import {
+  Fragment,
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 
 import { event } from '@tauri-apps/api';
 import { dirname } from '@tauri-apps/api/path';
@@ -17,8 +24,11 @@ type Payload = {
 
 export const App = () => {
   const [url, setUrl] = useState('');
+  const [grid, setGrid] = useState(false);
+  const [imgList, setImgList] = useState<string[]>([]);
 
   const mapRef = useRef<HTMLDivElement>(null);
+  const currentRef = useRef<HTMLImageElement>(null);
   const mapObj: React.MutableRefObject<L.Map | null> = useRef(null);
 
   const isDev = process.env.NODE_ENV === 'development';
@@ -107,6 +117,7 @@ export const App = () => {
 
   const onNext = useCallback(async () => {
     if (!url) return;
+    if (grid) setGrid(false);
 
     const list = await readDir();
     if (!list || list.length === 0) {
@@ -121,10 +132,11 @@ export const App = () => {
     } else {
       setUrl(list[index + 1]);
     }
-  }, [url, readDir]);
+  }, [url, grid, readDir]);
 
   const onPrev = useCallback(async () => {
     if (!url) return;
+    if (grid) setGrid(false);
 
     const list = await readDir();
     if (!list || list.length === 0) {
@@ -141,10 +153,10 @@ export const App = () => {
     } else {
       setUrl(list[index - 1]);
     }
-  }, [url, readDir]);
+  }, [url, grid, readDir]);
 
   const onRemove = useCallback(async () => {
-    if (!url) return;
+    if (!url || grid) return;
 
     const list = await readDir();
     if (!list || list.length === 0) {
@@ -170,7 +182,46 @@ export const App = () => {
     } else {
       setUrl(newList[index]);
     }
-  }, [url, readDir]);
+  }, [url, grid, readDir]);
+
+  const onToggleGrid = async () => {
+    if (!url) return;
+
+    const list = await readDir();
+    if (!list || list.length === 0) {
+      window.location.reload();
+      return;
+    }
+
+    setImgList(list);
+    setGrid(!grid);
+  };
+
+  const onClickThumb = async (
+    e: React.MouseEvent<HTMLImageElement, MouseEvent>,
+    item: string
+  ) => {
+    e.stopPropagation();
+
+    const list = await readDir();
+    if (!list || list.length === 0 || !list.includes(item)) {
+      window.location.reload();
+      return;
+    }
+
+    setUrl(item);
+    setGrid(false);
+  };
+
+  const onClickBlank = async () => {
+    const list = await readDir();
+    if (!list || list.length === 0 || !list.includes(url)) {
+      window.location.reload();
+      return;
+    }
+
+    setGrid(false);
+  };
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (!url) return;
@@ -205,6 +256,10 @@ export const App = () => {
     const unlisten = event.listen(
       'tauri://file-drop',
       async (e: event.Event<string[]>) => {
+        if (grid) {
+          return false;
+        }
+
         const filepath = e.payload[0];
         const mimeSafe: boolean = await invoke('mime_check', { filepath });
         if (!mimeSafe) return;
@@ -216,12 +271,13 @@ export const App = () => {
     return () => {
       unlisten.then((f) => f());
     };
-  }, []);
+  }, [grid]);
 
   useEffect(() => {
     const unlisten = event.listen('open', (e: event.Event<Payload>) => {
       const filepath = e.payload.message;
       if (!filepath) return;
+      if (grid) setGrid(false);
 
       setUrl(filepath);
     });
@@ -229,7 +285,7 @@ export const App = () => {
     return () => {
       unlisten.then((f) => f());
     };
-  }, []);
+  }, [grid]);
 
   useEffect(() => {
     const currentWindow = getCurrent();
@@ -253,12 +309,20 @@ export const App = () => {
     return () => {
       resizeObserver.disconnect();
     };
-  }, [draw]);
+  }, [draw, grid]);
+
+  useLayoutEffect(() => {
+    if (grid)
+      currentRef.current?.scrollIntoView({
+        behavior: 'smooth',
+        block: 'center',
+      });
+  }, [grid]);
 
   return (
     <div
       data-testid="container"
-      className="container"
+      className={grid ? 'container grid' : 'container'}
       onKeyDown={onKeyDown}
       onDrop={preventDefault}
       onDragOver={preventDefault}
@@ -266,15 +330,35 @@ export const App = () => {
       onDragLeave={preventDefault}
       onContextMenu={isDev ? undefined : preventDefault}
     >
-      <div className="bottom">
-        <ToolBar
-          onOpen={onOpen}
-          onPrev={onPrev}
-          onNext={onNext}
-          onRemove={onRemove}
-        />
-      </div>
-      <div className={url ? 'view' : 'view init'} ref={mapRef} />
+      {grid ? (
+        <div className="thumb-container" onClick={onClickBlank}>
+          {imgList.map((item) => (
+            <img
+              key={item}
+              src={convertFileSrc(item)}
+              ref={item === url ? currentRef : null}
+              className={item === url ? 'thumb current' : 'thumb'}
+              onClick={(e) => onClickThumb(e, item)}
+              onDragStart={() => {
+                return false;
+              }}
+            />
+          ))}
+        </div>
+      ) : (
+        <Fragment>
+          <div className="bottom">
+            <ToolBar
+              onOpen={onOpen}
+              onPrev={onPrev}
+              onNext={onNext}
+              onRemove={onRemove}
+              onToggleGrid={onToggleGrid}
+            />
+          </div>
+          <div className={url ? 'view' : 'view init'} ref={mapRef} />
+        </Fragment>
+      )}
     </div>
   );
 };
