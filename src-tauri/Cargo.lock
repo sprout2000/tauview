@@ -2247,9 +2247,9 @@ dependencies = [
 
 [[package]]
 name = "scoped-tls"
-version = "1.0.0"
+version = "1.0.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "ea6a9290e3c9cf0f18145ef7ffa62d68ee0bf5fcd651017e586dc7fd5da448c2"
+checksum = "e1cf6437eb19a8f4a6cc0f7dca544973b0b78843adbfeb3683d1a94a0024a294"
 
 [[package]]
 name = "scopeguard"
@@ -2738,7 +2738,7 @@ dependencies = [
 [[package]]
 name = "tauri-plugin-window-state"
 version = "0.1.0"
-source = "git+https://github.com/tauri-apps/tauri-plugin-window-state#bf0df5d127a91b03cedd43842480f9c3c6aa3b38"
+source = "git+https://github.com/tauri-apps/tauri-plugin-window-state#2f4cd57b1e7544155484faab769c91c4bf25120e"
 dependencies = [
  "bincode",
  "serde",
