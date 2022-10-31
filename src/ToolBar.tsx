@@ -29,13 +29,6 @@ export const ToolBar = memo((props: Props) => {
         >
           <FolderOpen />
         </div>
-        <div
-          className="icon"
-          title={i18next.t('Toggle Grid View')}
-          onClick={props.onToggleGrid}
-        >
-          <Grid />
-        </div>
       </div>
       <div className="arrows">
         <div
@@ -53,6 +46,13 @@ export const ToolBar = memo((props: Props) => {
           onClick={props.onNext}
         >
           <ArrowRight />
+        </div>
+        <div
+          className="icon"
+          title={i18next.t('Toggle Grid View')}
+          onClick={props.onToggleGrid}
+        >
+          <Grid />
         </div>
       </div>
       <div className="trash">
