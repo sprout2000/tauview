@@ -110,14 +110,16 @@ export const App = () => {
   const onOpen = useCallback(() => {
     invoke('open_dialog')
       .then((fpath) => {
-        typeof fpath === 'string' && setUrl(fpath);
+        if (typeof fpath === 'string') {
+          setUrl(fpath);
+          setGrid(false);
+        }
       })
       .catch((err) => console.log(`Error: ${err}`));
   }, []);
 
   const onNext = useCallback(async () => {
     if (!url) return;
-    if (grid) setGrid(false);
 
     const list = await readDir();
     if (!list || list.length === 0) {
@@ -132,11 +134,10 @@ export const App = () => {
     } else {
       setUrl(list[index + 1]);
     }
-  }, [url, grid, readDir]);
+  }, [url, readDir]);
 
   const onPrev = useCallback(async () => {
     if (!url) return;
-    if (grid) setGrid(false);
 
     const list = await readDir();
     if (!list || list.length === 0) {
@@ -153,10 +154,10 @@ export const App = () => {
     } else {
       setUrl(list[index - 1]);
     }
-  }, [url, grid, readDir]);
+  }, [url, readDir]);
 
   const onRemove = useCallback(async () => {
-    if (!url || grid) return;
+    if (!url) return;
 
     const list = await readDir();
     if (!list || list.length === 0) {
@@ -182,7 +183,7 @@ export const App = () => {
     } else {
       setUrl(newList[index]);
     }
-  }, [url, grid, readDir]);
+  }, [url, readDir]);
 
   const onToggleGrid = async () => {
     if (!url) return;
@@ -194,7 +195,7 @@ export const App = () => {
     }
 
     setImgList(list);
-    setGrid(!grid);
+    setGrid(true);
   };
 
   const onClickThumb = async (
