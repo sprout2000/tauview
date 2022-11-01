@@ -24,13 +24,13 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/leaflet": "^1.9.0",
-    "@types/node": "^18.11.8",
+    "@types/node": "^18.11.9",
     "@types/react": "^18.0.24",
     "@types/react-dom": "^18.0.8",
     "@typescript-eslint/eslint-plugin": "^5.42.0",
     "@typescript-eslint/parser": "^5.42.0",
     "@vitejs/plugin-react": "^2.2.0",
-    "@vitest/coverage-c8": "^0.24.4",
+    "@vitest/coverage-c8": "^0.24.5",
     "eslint": "^8.26.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-react": "^7.31.10",
@@ -41,6 +41,6 @@
     "typescript": "^4.8.4",
     "vite": "^3.2.2",
     "vite-plugin-html": "^3.2.0",
-    "vitest": "^0.24.4"
+    "vitest": "^0.24.5"
   }
 }
