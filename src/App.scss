@@ -1,8 +1,6 @@
 * {
   margin: 0;
   padding: 0;
-  user-select: none;
-  -webkit-user-select: none;
 }
 
 html,
@@ -15,6 +13,7 @@ body,
     height: 100%;
     overflow: hidden;
     user-select: none;
+    -webkit-user-select: none;
     position: relative;
 
     &.grid {
@@ -38,6 +37,7 @@ body,
         min-height: 100%;
         box-sizing: border-box;
         padding: 10px;
+
         .thumb {
           margin: 4px;
           max-width: 128px;
