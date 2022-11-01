@@ -226,23 +226,26 @@ export const App = () => {
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (!url) return;
-    e.preventDefault();
 
     switch (e.key) {
       case '0':
+        e.preventDefault();
         mapObj.current?.setZoom(0);
         break;
       case (e.metaKey || e.ctrlKey) && 'ArrowRight':
       case e.ctrlKey && 'n':
       case 'j':
+        e.preventDefault();
         onNext();
         break;
       case (e.metaKey || e.ctrlKey) && 'ArrowLeft':
       case e.ctrlKey && 'p':
       case 'k':
+        e.preventDefault();
         onPrev();
         break;
       case 'Delete':
+        e.preventDefault();
         onRemove();
         break;
       default:
