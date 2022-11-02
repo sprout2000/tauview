@@ -14,7 +14,6 @@ _Image by <a href="https://pixabay.com/ja/users/publicdomainpictures-14/?utm_sou
 
 - Pan & Wheel Zoom
 - Browse the images in a folder
-- Browse the images in a folder
 - Grid display mode is also available
 - Available in [13 languages](#globe_with_meridians-supported-languages)
 
@@ -33,7 +32,7 @@ _Image by <a href="https://pixabay.com/ja/users/publicdomainpictures-14/?utm_sou
 |                    <kbd>-</kbd>                     | Zoom Out         |
 |                    <kbd>0</kbd>                     | Reset Zoom       |
 | <kbd>←</kbd> <kbd>↑</kbd> <kbd>↓</kbd> <kbd>→</kbd> | Pan              |
-|  <kbd>CmdOrCtl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd>  | Move to Trash    |
+|  <kbd>Fn</kbd>+<kbd>Delete</kbd> or <kbd>Del</kbd>  | Move to Trash    |
 
 ### :computer_mouse: Mouse Operations
 
