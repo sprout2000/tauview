@@ -1352,9 +1352,9 @@ dependencies = [
 
 [[package]]
 name = "json-gettext"
-version = "4.0.3"
+version = "4.0.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "89152eacc36cc7db9986219c233b233b85f80f63bf21908eaa981a67a9800aee"
+checksum = "66896a8d212e6f18e96dcabd99f29bd39787e0ef9cf9351e919e577d23efa579"
 dependencies = [
  "manifest-dir-macros",
  "regex",
