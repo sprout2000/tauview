@@ -112,10 +112,49 @@ pub fn default(app_context: &Context<EmbeddedAssets>) -> Menu {
             .add_native_item(MenuItem::Separator)
             .add_item(
                 CustomMenuItem::new(
+                    "remove",
+                    get_text!(ctx, &locale, "Move to Trash")
+                        .unwrap()
+                        .to_string(),
+                )
+                .accelerator("CmdOrCtrl+Shift+D"),
+            )
+            .add_native_item(MenuItem::Separator)
+            .add_item(
+                CustomMenuItem::new(
                     "close",
                     get_text!(ctx, &locale, "Close").unwrap().to_string(),
                 )
                 .accelerator(get_close_accelerator()),
+            ),
+    );
+
+    let view_menu = Submenu::new(
+        get_text!(ctx, &locale, "View").unwrap().to_string(),
+        Menu::new()
+            .add_item(
+                CustomMenuItem::new(
+                    "next",
+                    get_text!(ctx, &locale, "Next Image").unwrap().to_string(),
+                )
+                .accelerator("J"),
+            )
+            .add_item(
+                CustomMenuItem::new(
+                    "prev",
+                    get_text!(ctx, &locale, "Prev Image").unwrap().to_string(),
+                )
+                .accelerator("K"),
+            )
+            .add_native_item(MenuItem::Separator)
+            .add_item(
+                CustomMenuItem::new(
+                    "grid",
+                    get_text!(ctx, &locale, "Toggle Grid View")
+                        .unwrap()
+                        .to_string(),
+                )
+                .accelerator("H"),
             ),
     );
 
@@ -176,12 +215,14 @@ pub fn default(app_context: &Context<EmbeddedAssets>) -> Menu {
     let menu = Menu::new()
         .add_submenu(app_menu)
         .add_submenu(file_menu)
+        .add_submenu(view_menu)
         .add_submenu(window_menu)
         .add_submenu(help_menu);
 
     #[cfg(not(target_os = "macos"))]
     let menu = Menu::new()
         .add_submenu(file_menu)
+        .add_submenu(view_menu)
         .add_submenu(window_menu)
         .add_submenu(help_menu);
 

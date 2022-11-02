@@ -34,6 +34,22 @@ fn main() {
                         .expect("Error while emitting open event")
                 }),
             "close" => std::process::exit(0),
+            "next" => event
+                .window()
+                .emit("menu-next", {})
+                .expect("Error while emitting next event"),
+            "prev" => event
+                .window()
+                .emit("menu-prev", {})
+                .expect("Error while emitting prev event"),
+            "grid" => event
+                .window()
+                .emit("menu-grid", {})
+                .expect("Error while emitting grid event"),
+            "remove" => event
+                .window()
+                .emit("menu-remove", {})
+                .expect("Error while emitting remove event"),
             "minimize" => event.window().minimize().unwrap(),
             "zoom" => {
                 if let Ok(result) = event.window().is_maximized() {

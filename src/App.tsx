@@ -178,6 +178,8 @@ export const App = () => {
       return;
     }
 
+    setImgList(newList);
+
     if (index > newList.length - 1) {
       setUrl(newList[0]);
     } else {
@@ -185,18 +187,22 @@ export const App = () => {
     }
   }, [url, readDir]);
 
-  const onToggleGrid = async () => {
+  const onToggleGrid = useCallback(async () => {
     if (!url) return;
 
     const list = await readDir();
-    if (!list || list.length === 0) {
+    if (!list || list.length === 0 || !list.includes(url)) {
       window.location.reload();
       return;
     }
 
-    setImgList(list);
-    setGrid(true);
-  };
+    if (!grid) {
+      setImgList(list);
+      setGrid(true);
+    } else {
+      setGrid(false);
+    }
+  }, [grid, url, readDir]);
 
   const onClickThumb = async (
     e: React.MouseEvent<HTMLImageElement, MouseEvent>,
@@ -225,33 +231,48 @@ export const App = () => {
   };
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (!url) return;
-
-    switch (e.key) {
-      case '0':
-        e.preventDefault();
-        mapObj.current?.setZoom(0);
-        break;
-      case (e.metaKey || e.ctrlKey) && 'ArrowRight':
-      case e.ctrlKey && 'n':
-      case 'j':
-        e.preventDefault();
-        onNext();
-        break;
-      case (e.metaKey || e.ctrlKey) && 'ArrowLeft':
-      case e.ctrlKey && 'p':
-      case 'k':
-        e.preventDefault();
-        onPrev();
-        break;
-      case 'Delete':
-        e.preventDefault();
-        onRemove();
-        break;
-      default:
-        return;
-    }
+    if (!url || e.key !== '0' || grid) return;
+    e.preventDefault();
+    mapObj.current?.setZoom(0);
   };
+
+  useEffect(() => {
+    const unlisten = event.listen('menu-next', () => {
+      if (grid) setGrid(false);
+      onNext();
+    });
+    return () => {
+      unlisten.then((f) => f());
+    };
+  }, [onNext, grid]);
+
+  useEffect(() => {
+    const unlisten = event.listen('menu-prev', () => {
+      if (grid) setGrid(false);
+      onPrev();
+    });
+    return () => {
+      unlisten.then((f) => f());
+    };
+  }, [onPrev, grid]);
+
+  useEffect(() => {
+    const unlisten = event.listen('menu-grid', () => {
+      onToggleGrid();
+    });
+    return () => {
+      unlisten.then((f) => f());
+    };
+  }, [onToggleGrid]);
+
+  useEffect(() => {
+    const unlisten = event.listen('menu-remove', () => {
+      onRemove();
+    });
+    return () => {
+      unlisten.then((f) => f());
+    };
+  }, [onRemove]);
 
   useEffect(() => {
     const unlisten = event.listen(
@@ -354,15 +375,13 @@ export const App = () => {
         </div>
       ) : (
         <Fragment>
-          <div className="bottom">
-            <ToolBar
-              onOpen={onOpen}
-              onPrev={onPrev}
-              onNext={onNext}
-              onRemove={onRemove}
-              onToggleGrid={onToggleGrid}
-            />
-          </div>
+          <ToolBar
+            onOpen={onOpen}
+            onPrev={onPrev}
+            onNext={onNext}
+            onRemove={onRemove}
+            onToggleGrid={onToggleGrid}
+          />
           <div className={url ? 'view' : 'view init'} ref={mapRef} />
         </Fragment>
       )}
