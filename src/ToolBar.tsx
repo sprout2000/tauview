@@ -19,50 +19,52 @@ type Props = {
 
 export const ToolBar = memo((props: Props) => {
   return (
-    <div className="toolbar">
-      <div className="folder">
-        <div
-          data-testid="open-button"
-          className="icon"
-          title={i18next.t('Open...')}
-          onClick={props.onOpen}
-        >
-          <FolderOpen />
+    <div className="bottom">
+      <div className="toolbar">
+        <div className="folder">
+          <div
+            data-testid="open-button"
+            className="icon"
+            title={i18next.t('Open...')}
+            onClick={props.onOpen}
+          >
+            <FolderOpen />
+          </div>
         </div>
-      </div>
-      <div className="arrows">
-        <div
-          data-testid="prev-button"
-          className="icon"
-          title={i18next.t('Prev Image')}
-          onClick={props.onPrev}
-        >
-          <ArrowLeft />
+        <div className="arrows">
+          <div
+            data-testid="prev-button"
+            className="icon"
+            title={i18next.t('Prev Image')}
+            onClick={props.onPrev}
+          >
+            <ArrowLeft />
+          </div>
+          <div
+            data-testid="next-button"
+            className="icon"
+            title={i18next.t('Next Image')}
+            onClick={props.onNext}
+          >
+            <ArrowRight />
+          </div>
+          <div
+            className="icon"
+            title={i18next.t('Toggle Grid View')}
+            onClick={props.onToggleGrid}
+          >
+            <Grid />
+          </div>
         </div>
-        <div
-          data-testid="next-button"
-          className="icon"
-          title={i18next.t('Next Image')}
-          onClick={props.onNext}
-        >
-          <ArrowRight />
-        </div>
-        <div
-          className="icon"
-          title={i18next.t('Toggle Grid View')}
-          onClick={props.onToggleGrid}
-        >
-          <Grid />
-        </div>
-      </div>
-      <div className="trash">
-        <div
-          data-testid="trash-button"
-          className="icon"
-          title={i18next.t('Move to Trash')}
-          onClick={props.onRemove}
-        >
-          <Trash />
+        <div className="trash">
+          <div
+            data-testid="trash-button"
+            className="icon"
+            title={i18next.t('Move to Trash')}
+            onClick={props.onRemove}
+          >
+            <Trash />
+          </div>
         </div>
       </div>
     </div>
