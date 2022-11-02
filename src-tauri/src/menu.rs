@@ -117,7 +117,7 @@ pub fn default(app_context: &Context<EmbeddedAssets>) -> Menu {
                         .unwrap()
                         .to_string(),
                 )
-                .accelerator("CmdOrCtrl+Shift+D"),
+                .accelerator("DELETE"),
             )
             .add_native_item(MenuItem::Separator)
             .add_item(
