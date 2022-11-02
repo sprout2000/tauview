@@ -1,4 +1,4 @@
-# <img src="https://user-images.githubusercontent.com/52094761/193970617-a07eaee4-731e-4cc7-a553-f6333e01a46d.svg" height="48" /> LeafView (Tauri)
+# LeafView (Tauri)
 
 [![GitHub license](https://img.shields.io/github/license/sprout2000/leafview-tauri)](https://github.com/sprout2000/leafview-tauri/blob/main/LICENSE.md)
 [![GitHub all releases](https://img.shields.io/github/downloads/sprout2000/leafview-tauri/total)](https://github.com/sprout2000/leafview-tauri/releases)
@@ -6,7 +6,7 @@
 
 A minimalist image viewer based on [Leaflet.js](https://leafletjs.com/) and [Tauri](https://tauri.studio/).
 
-<img width="640" alt="2022-10-05-115541" src="https://user-images.githubusercontent.com/52094761/193972873-4b562c06-09d7-46ff-b17f-b36e52677359.png">
+<img width="640" alt="Image by PublicDomainPictures from Pixabay" src="https://user-images.githubusercontent.com/52094761/198956815-36e0affd-7fb5-4761-812c-794b83ffcd0f.png">
 
 _Image by <a href="https://pixabay.com/ja/users/publicdomainpictures-14/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=163480">PublicDomainPictures</a> from <a href="https://pixabay.com/ja//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=163480">Pixabay</a>._
 
@@ -14,35 +14,26 @@ _Image by <a href="https://pixabay.com/ja/users/publicdomainpictures-14/?utm_sou
 
 - Pan & Wheel Zoom
 - Browse the images in a folder
+- Browse the images in a folder
+- Grid display mode is also available
+- Available in [13 languages](#globe_with_meridians-supported-languages)
 
-## :inbox_tray: Download
-
-### :computer: macOS
-
-You can download the latest version of LeafView from the releases page here:
-[https://github.com/sprout2000/leafview-tauri/releases](https://github.com/sprout2000/leafview-tauri/releases)
-
-### :desktop_computer: Windows 10 & 11
-
-You can get _(or upgrade to)_ the latest version of _LeafView_ via [winget](https://github.com/microsoft/winget-cli):
-
-```sh
-winget install sprout2000.LeafView-Tauri
-```
+<img width="480" alt="Grid View mode" src="https://user-images.githubusercontent.com/52094761/198906109-6e477983-dc38-4858-9455-133016b99c65.png">
 
 ## :green_book: Usage
 
 ### :keyboard: Keyboard Shortcuts
 
-|                                     Key                                     | Function       |
-| :-------------------------------------------------------------------------: | :------------- |
-|           <kbd>J</kbd> or <kbd>CmdOrCtrl</kbd>+<kbd>&#8594;</kbd>           | Next Image     |
-|           <kbd>K</kbd> or <kbd>CmdOrCtrl</kbd>+<kbd>&#8592;</kbd>           | Previous Image |
-|                                <kbd>+</kbd>                                 | Zoom In        |
-|                                <kbd>-</kbd>                                 | Zoom Out       |
-|                                <kbd>0</kbd>                                 | Reset Zoom     |
-| <kbd>&#8592;</kbd> <kbd>&#8593;</kbd> <kbd>&#8595;</kbd> <kbd>&#8594;</kbd> | Pan            |
-|            <kbd>Fn</kbd>+<kbd>Delete</kbd> or <kbd>Delete</kbd>             | Move to Trash  |
+|                         Key                         | Function         |
+| :-------------------------------------------------: | :--------------- |
+|                    <kbd>J</kbd>                     | Next Image       |
+|                    <kbd>K</kbd>                     | Previous Image   |
+|                    <kbd>H</kbd>                     | Toggle Grid View |
+|                    <kbd>+</kbd>                     | Zoom In          |
+|                    <kbd>-</kbd>                     | Zoom Out         |
+|                    <kbd>0</kbd>                     | Reset Zoom       |
+| <kbd>←</kbd> <kbd>↑</kbd> <kbd>↓</kbd> <kbd>→</kbd> | Pan              |
+|  <kbd>CmdOrCtl</kbd>+<kbd>Shift</kbd>+<kbd>D</kbd>  | Move to Trash    |
 
 ### :computer_mouse: Mouse Operations
 
