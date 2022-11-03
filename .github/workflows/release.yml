@@ -42,13 +42,12 @@ jobs:
           releaseDraft: false
           prerelease: false
 
-  publish:
-    name: Publish to WinGet
-    needs: [build]
-    # Action can only be run on windows
-    runs-on: windows-latest
-    steps:
-      - uses: vedantmgoyal2009/winget-releaser@v1
-        with:
-          identifier: sprout2000.LeafView-Tauri
-          token: ${{ secrets.WINGET_TOKEN }}
+  # publish:
+  #   name: Publish to WinGet
+  #   needs: [build]
+  #   runs-on: windows-latest
+  #   steps:
+  #     - uses: vedantmgoyal2009/winget-releaser@v1
+  #       with:
+  #         identifier: sprout2000.LeafView-Tauri
+  #         token: ${{ secrets.WINGET_TOKEN }}
