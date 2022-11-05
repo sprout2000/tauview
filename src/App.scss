@@ -51,7 +51,9 @@ body,
           }
           &:hover {
             cursor: pointer;
+            border-color: #666;
           }
+          transition: border-color 0.3s ease-in-out;
         }
       }
     }
