@@ -1,6 +1,6 @@
 [package]
 name = "app"
-version = "0.7.4"
+version = "0.7.5"
 description = "A minimalist image viewer"
 authors = [ "sprout2000" ]
 license = "MIT"
