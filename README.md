@@ -15,7 +15,7 @@ _Image by <a href="https://pixabay.com/ja/users/publicdomainpictures-14/?utm_sou
 - Pan & Wheel Zoom
 - Browse the images in a folder
 - Grid display mode is also available
-- Available in [13 languages](#globe_with_meridians-supported-languages)
+- Available in 13 languages
 
 <img width="480" alt="Grid View mode" src="https://user-images.githubusercontent.com/52094761/198906109-6e477983-dc38-4858-9455-133016b99c65.png">
 
