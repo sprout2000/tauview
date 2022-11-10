@@ -14,7 +14,7 @@ fn get_close_accelerator() -> String {
 
 fn get_fullscreen_accelerator() -> String {
     if consts::OS == "macos" {
-        "Cmd+Option+F".to_string()
+        "Cmd+Ctrl+F".to_string()
     } else {
         "F11".to_string()
     }
