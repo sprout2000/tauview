@@ -11,14 +11,14 @@
     "lint": "eslint --fix . && prettier --write ."
   },
   "dependencies": {
-    "@tauri-apps/api": "^1.1.0",
+    "@tauri-apps/api": "^1.2.0",
     "i18next": "^22.0.5",
     "leaflet": "^1.9.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@tauri-apps/cli": "^1.1.1",
+    "@tauri-apps/cli": "^1.2.0",
     "@types/leaflet": "^1.9.0",
     "@types/node": "^18.11.9",
     "@types/react": "^18.0.25",
