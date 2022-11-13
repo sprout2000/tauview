@@ -231,9 +231,27 @@ export const App = () => {
   };
 
   const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (!url || e.key !== '0' || grid) return;
-    e.preventDefault();
-    mapObj.current?.setZoom(0);
+    if (!url || e.metaKey || grid) return;
+
+    switch (e.key) {
+      case '0':
+        e.preventDefault();
+        mapObj.current?.setZoom(0);
+        break;
+      case 'j':
+      case e.ctrlKey && 'n':
+        e.preventDefault();
+        onNext();
+        break;
+      case 'k':
+      case e.ctrlKey && 'p':
+        e.preventDefault();
+        onPrev();
+        break;
+      default:
+        e.preventDefault();
+        return;
+    }
   };
 
   useEffect(() => {

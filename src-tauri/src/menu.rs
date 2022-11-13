@@ -137,14 +137,14 @@ pub fn default(app_context: &Context<EmbeddedAssets>) -> Menu {
                     "next",
                     get_text!(ctx, &locale, "Next Image").unwrap().to_string(),
                 )
-                .accelerator("J"),
+                .accelerator("CmdOrCtrl+RIGHT"),
             )
             .add_item(
                 CustomMenuItem::new(
                     "prev",
                     get_text!(ctx, &locale, "Prev Image").unwrap().to_string(),
                 )
-                .accelerator("K"),
+                .accelerator("CmdOrCtrl+LEFT"),
             )
             .add_native_item(MenuItem::Separator)
             .add_item(
@@ -154,7 +154,7 @@ pub fn default(app_context: &Context<EmbeddedAssets>) -> Menu {
                         .unwrap()
                         .to_string(),
                 )
-                .accelerator("H"),
+                .accelerator("CmdOrCtrl+UP"),
             ),
     );
 
