@@ -24,7 +24,7 @@ export const ToolBar = memo((props: Props) => {
         <div
           data-testid="open-button"
           className="icon"
-          title={i18next.t('Open...')}
+          title={i18next.t('Open...') as string}
           onClick={props.onOpen}
         >
           <FolderOpen />
@@ -34,7 +34,7 @@ export const ToolBar = memo((props: Props) => {
         <div className="grid">
           <div
             className="icon"
-            title={i18next.t('Toggle Grid View')}
+            title={i18next.t('Toggle Grid View') as string}
             onClick={props.onToggleGrid}
           >
             <Grid />
@@ -44,7 +44,7 @@ export const ToolBar = memo((props: Props) => {
           <div
             data-testid="prev-button"
             className="icon"
-            title={i18next.t('Prev Image')}
+            title={i18next.t('Prev Image') as string}
             onClick={props.onPrev}
           >
             <ArrowLeft />
@@ -52,7 +52,7 @@ export const ToolBar = memo((props: Props) => {
           <div
             data-testid="next-button"
             className="icon"
-            title={i18next.t('Next Image')}
+            title={i18next.t('Next Image') as string}
             onClick={props.onNext}
           >
             <ArrowRight />
@@ -62,7 +62,7 @@ export const ToolBar = memo((props: Props) => {
           <div
             data-testid="trash-button"
             className="icon"
-            title={i18next.t('Move to Trash')}
+            title={i18next.t('Move to Trash') as string}
             onClick={props.onRemove}
           >
             <Trash />
