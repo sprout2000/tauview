@@ -49,22 +49,6 @@ _Image by <a href="https://pixabay.com/ja/users/publicdomainpictures-14/?utm_sou
 |    Wheel     | Zoom in/out |
 | Double click | Reset zoom  |
 
-## :hammer_and_wrench: Development
-
-```sh
-% git clone https://github.com/sprout2000/leafview-tauri.git
-% cd leafview-tauri
-% yarn install
-
-# on development
-% yarn tauri dev
-
-# on production
-% yarn tauri build
-```
-
-_NOTE: You will need to meet [Tauri prerequisites](https://tauri.app/v1/guides/getting-started/prerequisites)_.
-
 ## :copyright: Copyright
 
 Copyright (c) 2022 sprout2000 and other contributors
