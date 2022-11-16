@@ -25,9 +25,9 @@ _Image by <a href="https://pixabay.com/ja/users/publicdomainpictures-14/?utm_sou
 
 |                         Key                         | Function         |
 | :-------------------------------------------------: | :--------------- |
-|              <kbd>⌘</kbd>+<kbd>→</kbd>              | Next Image       |
-|              <kbd>⌘</kbd>+<kbd>←</kbd>              | Previous Image   |
-|              <kbd>⌘</kbd>+<kbd>↑</kbd>              | Toggle Grid View |
+|                    <kbd>J</kbd>                     | Next Image       |
+|                    <kbd>K</kbd>                     | Previous Image   |
+|                    <kbd>H</kbd>                     | Toggle Grid View |
 |                    <kbd>+</kbd>                     | Zoom In          |
 |                    <kbd>-</kbd>                     | Zoom Out         |
 |                    <kbd>0</kbd>                     | Reset Zoom       |
@@ -36,10 +36,10 @@ _Image by <a href="https://pixabay.com/ja/users/publicdomainpictures-14/?utm_sou
 
 #### Additional shortcuts valid only in single image view mode
 
-|                   Key                   | Function       |
-| :-------------------------------------: | :------------- |
-| <kbd>J</kbd>, <kbd>⌃</kbd>+<kbd>N</kbd> | Next Image     |
-| <kbd>K</kbd>, <kbd>⌃</kbd>+<kbd>P</kbd> | Previous Image |
+|                         Key                          | Function       |
+| :--------------------------------------------------: | :------------- |
+| <kbd>⌘</kbd>+<kbd>→</kbd>, <kbd>⌃</kbd>+<kbd>N</kbd> | Next Image     |
+| <kbd>⌘</kbd>+<kbd>←</kbd>, <kbd>⌃</kbd>+<kbd>P</kbd> | Previous Image |
 
 ### :computer_mouse: Mouse Operations
 
