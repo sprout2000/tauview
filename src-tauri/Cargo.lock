@@ -49,7 +49,7 @@ checksum = "2cb2f989d18dd141ab8ae82f64d1a8cdd37e0840f73a406896cf5e99502fab61"
 
 [[package]]
 name = "app"
-version = "0.8.1"
+version = "0.8.2"
 dependencies = [
  "infer 0.11.0",
  "json-gettext",
