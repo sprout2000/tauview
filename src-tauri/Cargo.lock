@@ -59,6 +59,7 @@ dependencies = [
  "tauri",
  "tauri-build",
  "tauri-plugin-window-state",
+ "time 0.3.17",
  "trash",
 ]
 
