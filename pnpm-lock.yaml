@@ -14,7 +14,7 @@ specifiers:
   eslint-config-prettier: ^8.6.0
   eslint-plugin-react: ^7.31.11
   eslint-plugin-react-hooks: ^4.6.0
-  i18next: ^22.4.8
+  i18next: ^22.4.9
   leaflet: ^1.9.3
   prettier: ^2.8.2
   react: ^18.2.0
@@ -26,7 +26,7 @@ specifiers:
 
 dependencies:
   '@tauri-apps/api': 1.2.0
-  i18next: 22.4.8
+  i18next: 22.4.9
   leaflet: 1.9.3
   react: 18.2.0
   react-dom: 18.2.0_react@18.2.0
@@ -1776,8 +1776,8 @@ packages:
       terser: 5.15.1
     dev: true
 
-  /i18next/22.4.8:
-    resolution: {integrity: sha512-XSOy17ZWqflOiJRYE/dzv6vDle2Se32dnHREHb93UnZzZ1+UnvQ8yKtt1fpNL3zvXz5AwCqqixrtTVZmRetaiQ==}
+  /i18next/22.4.9:
+    resolution: {integrity: sha512-8gWMmUz460KJDQp/ob3MNUX84cVuDRY9PLFPnV8d+Qezz/6dkjxwOaH70xjrCNDO+JrUL25iXfAIN9wUkInNZw==}
     dependencies:
       '@babel/runtime': 7.20.7
     dev: false
