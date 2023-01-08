@@ -14,10 +14,10 @@ _Image by <a href="https://pixabay.com/ja/users/publicdomainpictures-14/?utm_sou
 
 - Pan & Wheel Zoom
 - Browse the images in a folder
-- Grid display mode is also available
+- Grid view mode available
 - Available in 13 languages
 
-<img width="480" alt="Grid View mode" src="https://user-images.githubusercontent.com/52094761/198906109-6e477983-dc38-4858-9455-133016b99c65.png">
+<img width="480" alt="Grid View mode" src="https://user-images.githubusercontent.com/52094761/211186666-f0c6b745-acdc-456e-be3f-84525249ba34.png">
 
 ## :green_book: Usage
 
