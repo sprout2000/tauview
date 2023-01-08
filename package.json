@@ -5,7 +5,9 @@
   "version": "0.8.3",
   "license": "MIT",
   "scripts": {
-    "dev": "vite",
+    "dev": "run-p dev:devtools dev:vite",
+    "dev:vite": "vite",
+    "dev:devtools": "react-devtools",
     "build": "tsc && vite build",
     "tauri": "tauri",
     "lint": "eslint --fix . && prettier --write ."
@@ -30,7 +32,9 @@
     "eslint-config-prettier": "^8.6.0",
     "eslint-plugin-react": "^7.31.11",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "npm-run-all": "^4.1.5",
     "prettier": "^2.8.2",
+    "react-devtools": "^4.27.1",
     "sass": "^1.57.1",
     "typescript": "^4.9.4",
     "vite": "^4.0.4",
