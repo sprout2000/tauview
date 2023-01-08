@@ -36,19 +36,19 @@ fn main() {
             "close" => std::process::exit(0),
             "next" => event
                 .window()
-                .emit("menu-next", {})
+                .emit("menu-next", ())
                 .expect("Error while emitting next event"),
             "prev" => event
                 .window()
-                .emit("menu-prev", {})
+                .emit("menu-prev", ())
                 .expect("Error while emitting prev event"),
             "grid" => event
                 .window()
-                .emit("menu-grid", {})
+                .emit("menu-grid", ())
                 .expect("Error while emitting grid event"),
             "remove" => event
                 .window()
-                .emit("menu-remove", {})
+                .emit("menu-remove", ())
                 .expect("Error while emitting remove event"),
             "minimize" => event.window().minimize().unwrap(),
             "zoom" => {
