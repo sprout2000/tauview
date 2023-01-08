@@ -15,5 +15,9 @@ body,
     user-select: none;
     -webkit-user-select: none;
     position: relative;
+
+    &.grid {
+      overflow-y: auto;
+    }
   }
 }
