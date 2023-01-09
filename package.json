@@ -2,7 +2,7 @@
   "name": "leafview-tauri",
   "description": "A minimalist image viewer.",
   "productName": "LeafView",
-  "version": "0.8.3",
+  "version": "0.8.4",
   "license": "MIT",
   "scripts": {
     "dev": "run-p dev:devtools dev:vite",
