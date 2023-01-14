@@ -1,10 +1,11 @@
-node_modules
 dist
+node_modules
 src-tauri
 *.md
-*.yml
 *.scss
 *.html
+*.yaml
+*.toml
 *.json
 .github
 .githooks
