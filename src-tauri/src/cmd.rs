@@ -11,6 +11,7 @@ fn mime_from<P: AsRef<Path>>(filepath: P) -> bool {
                     || filetype.mime_type() == "image/png"
                     || filetype.mime_type() == "image/gif"
                     || filetype.mime_type() == "image/webp"
+                    || filetype.mime_type() == "image/bmp"
                     || filetype.mime_type() == "image/vnd.microsoft.icon"
             }
             None => false,
