@@ -1,24 +1,3 @@
-:root {
-  @media (prefers-color-scheme: dark) {
-    --scroll-track: #333;
-    --scroll-thumb: #666;
-    --thumb-border: #333;
-    --thumb-hover: #666;
-  }
-
-  @media (prefers-color-scheme: light) {
-    --scroll-track: #ddd;
-    --scroll-thumb: #999;
-    --thumb-border: #bbb;
-    --thumb-hover: #acf;
-  }
-}
-
-$SCROLL_TRACK: var(--scroll-track);
-$SCROLL_THUMB: var(--scroll-thumb);
-$THUMB_BORDER: var(--thumb-border);
-$THUMB_HOVER: var(--thumb-hover);
-
 $THUMB_SIZE: 128px;
 $WRAPPER_SIZE: 148px;
 
@@ -30,10 +9,10 @@ $WRAPPER_SIZE: 148px;
       width: 6px;
     }
     &::-webkit-scrollbar-track {
-      background-color: $SCROLL_TRACK;
+      background-color: #333;
     }
     &::-webkit-scrollbar-thumb {
-      background-color: $SCROLL_THUMB;
+      background-color: #666;
       border-radius: 10px;
     }
 
@@ -52,14 +31,14 @@ $WRAPPER_SIZE: 148px;
           width: $WRAPPER_SIZE;
           height: $WRAPPER_SIZE;
           display: grid;
-          align-content: flex-end;
-          justify-content: center;
+          align-items: flex-end;
+          justify-items: center;
 
           .thumb {
             margin: 4px;
             max-width: $THUMB_SIZE;
             max-height: $THUMB_SIZE;
-            border: 4px solid $THUMB_BORDER;
+            border: 4px solid #333;
             border-radius: 6px;
 
             &.current {
@@ -71,7 +50,7 @@ $WRAPPER_SIZE: 148px;
             }
             &:hover {
               cursor: pointer;
-              border-color: $THUMB_HOVER;
+              border-color: #666;
             }
             transition: border-color 0.3s ease-in-out;
           }
