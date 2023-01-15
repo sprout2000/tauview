@@ -3,7 +3,8 @@
 /target/
 WixTools
 
-.env*
+.env
+.env.me
 .flaskenv*
 !.env.project
 !.env.vault
