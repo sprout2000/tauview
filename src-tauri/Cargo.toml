@@ -16,14 +16,12 @@ tauri-build = { version = "1.2.1", features = [] }
 infer = "0.12.0"
 serde_json = "1.0.91"
 serde = { version = "1.0.152", features = [ "derive" ] }
-tauri = { version = "1.2.3", features = ["dialog-open", "path-all", "protocol-asset", "shell-open", "window-set-title"] }
+tauri = { version = "1.2.4", features = ["dialog-open", "path-all", "protocol-asset", "shell-open", "window-set-title"] }
 time = "0.3.17"
 trash = "3.0.0"
 json-gettext = "4.0.5"
 sys-locale = "0.2.3"
-
-[dependencies.tauri-plugin-window-state]
-git = "https://github.com/tauri-apps/tauri-plugin-window-state"
+tauri-plugin-window-state = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "dev" }
 
 [features]
 default = [ "custom-protocol" ]
