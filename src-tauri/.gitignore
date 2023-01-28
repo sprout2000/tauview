@@ -8,3 +8,4 @@ WixTools
 .flaskenv*
 !.env.project
 !.env.vault
+.env*
