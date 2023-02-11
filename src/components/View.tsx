@@ -10,22 +10,19 @@ type Props = {
   url: string;
 };
 
+const getZoom = (iw: number, w: number, ih: number, h: number) => {
+  if (iw > w || ih > h) {
+    const zoomX = w / iw;
+    const zoomY = h / ih;
+    return zoomX >= zoomY ? zoomY : zoomX;
+  } else {
+    return 1;
+  }
+};
+
 export const View = memo(({ url = '' }: Props) => {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapObj: React.MutableRefObject<L.Map | null> = useRef(null);
-
-  const getZoom = useCallback(
-    (iw: number, w: number, ih: number, h: number) => {
-      if (iw > w || ih > h) {
-        const zoomX = w / iw;
-        const zoomY = h / ih;
-        return zoomX >= zoomY ? zoomY : zoomX;
-      } else {
-        return 1;
-      }
-    },
-    []
-  );
 
   const draw = useCallback(
     (width: number, height: number) => {
@@ -80,7 +77,7 @@ export const View = memo(({ url = '' }: Props) => {
         img.src = url ? convertFileSrc(url) : '';
       }
     },
-    [url, getZoom]
+    [url]
   );
 
   useEffect(() => {
