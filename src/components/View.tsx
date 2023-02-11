@@ -96,4 +96,5 @@ export const View = memo(({ url = '' }: Props) => {
 
   return <div className={!url ? 'view init' : 'view'} ref={mapRef} />;
 });
+
 View.displayName = 'View';
