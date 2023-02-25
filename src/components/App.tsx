@@ -32,7 +32,7 @@ export const App = () => {
     e.stopPropagation();
   };
 
-  const onOpen = useCallback(() => {
+  const handleOpen = useCallback(() => {
     invoke('open_dialog')
       .then((fpath) => {
         if (typeof fpath === 'string') {
@@ -43,7 +43,7 @@ export const App = () => {
       .catch((err) => console.log(`Error: ${err}`));
   }, []);
 
-  const onNext = useCallback(async () => {
+  const handleNext = useCallback(async () => {
     if (!url) return;
 
     const list = await readDir();
@@ -61,7 +61,7 @@ export const App = () => {
     }
   }, [url, readDir]);
 
-  const onPrev = useCallback(async () => {
+  const handlePrev = useCallback(async () => {
     if (!url) return;
 
     const list = await readDir();
@@ -81,7 +81,7 @@ export const App = () => {
     }
   }, [url, readDir]);
 
-  const onRemove = useCallback(async () => {
+  const handleRemove = useCallback(async () => {
     if (!url) return;
 
     const list = await readDir();
@@ -112,7 +112,7 @@ export const App = () => {
     }
   }, [url, readDir]);
 
-  const onToggleGrid = useCallback(async () => {
+  const handleToggleGrid = useCallback(async () => {
     if (!url) return;
 
     const list = await readDir();
@@ -129,7 +129,7 @@ export const App = () => {
     }
   }, [grid, url, readDir]);
 
-  const onClickThumb = async (
+  const handleClickThumb = async (
     e: React.MouseEvent<HTMLImageElement, MouseEvent>,
     item: string
   ) => {
@@ -145,7 +145,7 @@ export const App = () => {
     setGrid(false);
   };
 
-  const onClickBlank = async () => {
+  const handleClickBlank = async () => {
     const list = await readDir();
     if (!list || list.length === 0 || !list.includes(url)) {
       window.location.reload();
@@ -155,19 +155,19 @@ export const App = () => {
     setGrid(false);
   };
 
-  const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
     if (!url || grid) return;
 
     switch (e.key) {
       case e.metaKey && 'ArrowRight':
       case e.ctrlKey && 'n':
         e.preventDefault();
-        onNext();
+        handleNext();
         break;
       case e.metaKey && 'ArrowLeft':
       case e.ctrlKey && 'p':
         e.preventDefault();
-        onPrev();
+        handlePrev();
         break;
     }
   };
@@ -175,40 +175,40 @@ export const App = () => {
   useEffect(() => {
     const unlisten = event.listen('menu-next', () => {
       if (grid) setGrid(false);
-      onNext();
+      handleNext();
     });
     return () => {
       unlisten.then((f) => f());
     };
-  }, [onNext, grid]);
+  }, [handleNext, grid]);
 
   useEffect(() => {
     const unlisten = event.listen('menu-prev', () => {
       if (grid) setGrid(false);
-      onPrev();
+      handlePrev();
     });
     return () => {
       unlisten.then((f) => f());
     };
-  }, [onPrev, grid]);
+  }, [handlePrev, grid]);
 
   useEffect(() => {
     const unlisten = event.listen('menu-grid', () => {
-      onToggleGrid();
+      handleToggleGrid();
     });
     return () => {
       unlisten.then((f) => f());
     };
-  }, [onToggleGrid]);
+  }, [handleToggleGrid]);
 
   useEffect(() => {
     const unlisten = event.listen('menu-remove', () => {
-      onRemove();
+      handleRemove();
     });
     return () => {
       unlisten.then((f) => f());
     };
-  }, [onRemove]);
+  }, [handleRemove]);
 
   useEffect(() => {
     const unlisten = event.listen(
@@ -259,7 +259,7 @@ export const App = () => {
     <div
       data-testid="container"
       className={grid ? 'container grid' : 'container'}
-      onKeyDown={onKeyDown}
+      onKeyDown={handleKeyDown}
       onDrop={preventDefault}
       onDragOver={preventDefault}
       onDragEnter={preventDefault}
@@ -270,17 +270,17 @@ export const App = () => {
         <Grid
           url={url}
           imgList={imgList}
-          onClickBlank={onClickBlank}
-          onClickThumb={onClickThumb}
+          onClickBlank={handleClickBlank}
+          onClickThumb={handleClickThumb}
         />
       ) : (
         <>
           <ToolBar
-            onOpen={onOpen}
-            onPrev={onPrev}
-            onNext={onNext}
-            onRemove={onRemove}
-            onToggleGrid={onToggleGrid}
+            onOpen={handleOpen}
+            onPrev={handlePrev}
+            onNext={handleNext}
+            onRemove={handleRemove}
+            onToggleGrid={handleToggleGrid}
           />
           <View url={url} />
         </>
