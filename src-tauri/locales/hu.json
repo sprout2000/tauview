@@ -20,11 +20,11 @@
   "Close": "Bezárás",
   "Help": "Segítség",
   "About": "Névjegy",
-  "About LeafView": "LeafView névjegye",
+  "About TauView": "TauView névjegye",
   "Support URL...": "Támogatási link...",
-  "Hide LeafView": "LeafView elrejtése",
+  "Hide TauView": "TauView elrejtése",
   "Hide Others": "Mások elrejtése",
   "Show All": "Összes mutatása",
   "Quit": "Kilépés",
-  "Quit LeafView": "Kilépés a LeafView-ból"
+  "Quit TauView": "Kilépés a TauView-ból"
 }
