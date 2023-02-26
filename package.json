@@ -1,7 +1,7 @@
 {
   "name": "leafview-tauri",
   "description": "A minimalist image viewer.",
-  "productName": "TauView",
+  "productName": "Tauview",
   "version": "0.8.8",
   "license": "MIT",
   "scripts": {

@@ -1,6 +1,6 @@
 {
   "package": {
-    "productName": "TauView",
+    "productName": "Tauview",
     "version": "0.8.8"
   },
   "build": {
@@ -34,7 +34,7 @@
     "bundle": {
       "active": true,
       "targets": "all",
-      "identifier": "jp.sprout2000.TauView",
+      "identifier": "jp.sprout2000.Tauview",
       "icon": [
         "icons/icon.png",
         "icons/icon.ico",
@@ -57,7 +57,7 @@
     "windows": [
       {
         "label": "main",
-        "title": "TauView",
+        "title": "Tauview",
         "width": 800,
         "height": 500,
         "minWidth": 800,

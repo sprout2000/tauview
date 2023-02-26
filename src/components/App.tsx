@@ -249,7 +249,7 @@ export const App = () => {
     const currentWindow = getCurrent();
 
     if (!url) {
-      currentWindow.setTitle('TauView');
+      currentWindow.setTitle('Tauview');
     } else {
       currentWindow.setTitle(url.replace(/.+(\/|\\)/, ''));
     }
