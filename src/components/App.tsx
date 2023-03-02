@@ -155,23 +155,6 @@ export const App = () => {
     setGrid(false);
   };
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (!url || grid) return;
-
-    switch (e.key) {
-      case e.metaKey && 'ArrowRight':
-      case e.ctrlKey && 'n':
-        e.preventDefault();
-        handleNext();
-        break;
-      case e.metaKey && 'ArrowLeft':
-      case e.ctrlKey && 'p':
-        e.preventDefault();
-        handlePrev();
-        break;
-    }
-  };
-
   useEffect(() => {
     const unlisten = event.listen('menu-next', () => {
       if (grid) setGrid(false);
@@ -259,7 +242,6 @@ export const App = () => {
     <div
       data-testid="container"
       className={grid ? 'container grid' : 'container'}
-      onKeyDown={handleKeyDown}
       onDrop={preventDefault}
       onDragOver={preventDefault}
       onDragEnter={preventDefault}
