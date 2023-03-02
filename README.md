@@ -25,16 +25,16 @@ _Image by <a href="https://pixabay.com/ja/users/publicdomainpictures-14/?utm_sou
 
 ### :keyboard: Keyboard Shortcuts
 
-|                                Key                                 | Function         |
-| :----------------------------------------------------------------: | :--------------- |
-| <kbd>J</kbd>, <kbd>⌘</kbd>+<kbd>→</kbd>, <kbd>⌃</kbd>+<kbd>N</kbd> | Next Image       |
-| <kbd>K</kbd>, <kbd>⌘</kbd>+<kbd>←</kbd>, <kbd>⌃</kbd>+<kbd>P</kbd> | Previous Image   |
-|                            <kbd>H</kbd>                            | Toggle Grid View |
-|                            <kbd>+</kbd>                            | Zoom In          |
-|                            <kbd>-</kbd>                            | Zoom Out         |
-|                            <kbd>0</kbd>                            | Reset Zoom       |
-|        <kbd>←</kbd> <kbd>↑</kbd> <kbd>↓</kbd> <kbd>→</kbd>         | Pan              |
-|                  <kbd>Fn</kbd>+<kbd>Delete</kbd>                   | Move to Trash    |
+|                         Key                         | Function         |
+| :-------------------------------------------------: | :--------------- |
+|                    <kbd>J</kbd>                     | Next Image       |
+|                    <kbd>K</kbd>                     | Previous Image   |
+|                    <kbd>H</kbd>                     | Toggle Grid View |
+|                    <kbd>+</kbd>                     | Zoom In          |
+|                    <kbd>-</kbd>                     | Zoom Out         |
+|                    <kbd>0</kbd>                     | Reset Zoom       |
+| <kbd>←</kbd> <kbd>↑</kbd> <kbd>↓</kbd> <kbd>→</kbd> | Pan              |
+|           <kbd>Fn</kbd>+<kbd>Delete</kbd>           | Move to Trash    |
 
 ### :computer_mouse: Mouse Operations
 
