@@ -1,5 +1,5 @@
 dist
 coverage
 node_modules
-.env
+.envrc
 .DS_Store
