@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo } from "react";
 
 export const ArrowLeft = memo(() => (
   <svg
@@ -11,4 +11,4 @@ export const ArrowLeft = memo(() => (
   </svg>
 ));
 
-ArrowLeft.displayName = 'ArrowLeft';
+ArrowLeft.displayName = "ArrowLeft";

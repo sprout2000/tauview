@@ -1,28 +1,28 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from "react";
 
-import { event } from '@tauri-apps/api';
-import { invoke } from '@tauri-apps/api/tauri';
-import { dirname } from '@tauri-apps/api/path';
-import { getCurrent } from '@tauri-apps/api/window';
+import { event } from "@tauri-apps/api";
+import { invoke } from "@tauri-apps/api/tauri";
+import { dirname } from "@tauri-apps/api/path";
+import { getCurrent } from "@tauri-apps/api/window";
 
-import { View } from './View';
-import { Grid } from './Grid';
-import { ToolBar } from './ToolBar';
+import { View } from "./View";
+import { Grid } from "./Grid";
+import { ToolBar } from "./ToolBar";
 
-import './App.scss';
+import "./App.scss";
 
 type Payload = {
   message: string | null;
 };
 
 export const App = () => {
-  const [url, setUrl] = useState('');
+  const [url, setUrl] = useState("");
   const [grid, setGrid] = useState(false);
   const [imgList, setImgList] = useState<string[]>([]);
 
   const readDir = useCallback(async () => {
     const dir = await dirname(url);
-    const list: string[] = await invoke('get_entries', { dir });
+    const list: string[] = await invoke("get_entries", { dir });
 
     return list;
   }, [url]);
@@ -33,9 +33,9 @@ export const App = () => {
   };
 
   const handleOpen = useCallback(() => {
-    invoke('open_dialog')
+    invoke("open_dialog")
       .then((fpath) => {
-        if (typeof fpath === 'string') {
+        if (typeof fpath === "string") {
           setUrl(fpath);
           setGrid(false);
         }
@@ -91,7 +91,7 @@ export const App = () => {
     }
 
     const index = list.indexOf(url);
-    await invoke('move_to_trash', { url }).catch((err) => {
+    await invoke("move_to_trash", { url }).catch((err) => {
       console.log(`Error in move_to_trash(): ${err}`);
       window.location.reload();
       return;
@@ -156,7 +156,7 @@ export const App = () => {
   };
 
   useEffect(() => {
-    const unlisten = event.listen('menu-next', () => {
+    const unlisten = event.listen("menu-next", () => {
       if (grid) setGrid(false);
       handleNext();
     });
@@ -166,7 +166,7 @@ export const App = () => {
   }, [handleNext, grid]);
 
   useEffect(() => {
-    const unlisten = event.listen('menu-prev', () => {
+    const unlisten = event.listen("menu-prev", () => {
       if (grid) setGrid(false);
       handlePrev();
     });
@@ -176,7 +176,7 @@ export const App = () => {
   }, [handlePrev, grid]);
 
   useEffect(() => {
-    const unlisten = event.listen('menu-grid', () => {
+    const unlisten = event.listen("menu-grid", () => {
       handleToggleGrid();
     });
     return () => {
@@ -185,7 +185,7 @@ export const App = () => {
   }, [handleToggleGrid]);
 
   useEffect(() => {
-    const unlisten = event.listen('menu-remove', () => {
+    const unlisten = event.listen("menu-remove", () => {
       handleRemove();
     });
     return () => {
@@ -195,14 +195,14 @@ export const App = () => {
 
   useEffect(() => {
     const unlisten = event.listen(
-      'tauri://file-drop',
+      "tauri://file-drop",
       async (e: event.Event<string[]>) => {
         if (grid) {
           return false;
         }
 
         const filepath = e.payload[0];
-        const mimeSafe: boolean = await invoke('mime_check', { filepath });
+        const mimeSafe: boolean = await invoke("mime_check", { filepath });
         if (!mimeSafe) return;
 
         setUrl(filepath);
@@ -215,7 +215,7 @@ export const App = () => {
   }, [grid]);
 
   useEffect(() => {
-    const unlisten = event.listen('open', (e: event.Event<Payload>) => {
+    const unlisten = event.listen("open", (e: event.Event<Payload>) => {
       const filepath = e.payload.message;
       if (!filepath) return;
       if (grid) setGrid(false);
@@ -232,16 +232,16 @@ export const App = () => {
     const currentWindow = getCurrent();
 
     if (!url) {
-      currentWindow.setTitle('Tauview');
+      currentWindow.setTitle("Tauview");
     } else {
-      currentWindow.setTitle(url.replace(/.+(\/|\\)/, ''));
+      currentWindow.setTitle(url.replace(/.+(\/|\\)/, ""));
     }
   }, [url]);
 
   return (
     <div
       data-testid="container"
-      className={grid ? 'container grid' : 'container'}
+      className={grid ? "container grid" : "container"}
       onDrop={preventDefault}
       onDragOver={preventDefault}
       onDragEnter={preventDefault}

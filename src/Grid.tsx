@@ -1,7 +1,7 @@
-import { memo, useLayoutEffect, useRef } from 'react';
-import { convertFileSrc } from '@tauri-apps/api/tauri';
+import { memo, useLayoutEffect, useRef } from "react";
+import { convertFileSrc } from "@tauri-apps/api/tauri";
 
-import './Grid.scss';
+import "./Grid.scss";
 
 type Props = {
   url: string;
@@ -18,8 +18,8 @@ export const Grid = memo((props: Props) => {
 
   useLayoutEffect(() => {
     currentRef.current?.scrollIntoView({
-      behavior: 'smooth',
-      block: 'center',
+      behavior: "smooth",
+      block: "center",
     });
   }, []);
 
@@ -34,7 +34,7 @@ export const Grid = memo((props: Props) => {
           >
             <img
               src={convertFileSrc(item)}
-              className={item === props.url ? 'thumb current' : 'thumb'}
+              className={item === props.url ? "thumb current" : "thumb"}
               onClick={(e) => props.onClickThumb(e, item)}
               onDragStart={() => {
                 return false;
@@ -47,4 +47,4 @@ export const Grid = memo((props: Props) => {
   );
 });
 
-Grid.displayName = 'Grid';
+Grid.displayName = "Grid";

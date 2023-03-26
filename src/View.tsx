@@ -1,10 +1,10 @@
-import { memo, useCallback, useEffect, useRef } from 'react';
-import { convertFileSrc } from '@tauri-apps/api/tauri';
+import { memo, useCallback, useEffect, useRef } from "react";
+import { convertFileSrc } from "@tauri-apps/api/tauri";
 
-import L from 'leaflet';
-import 'leaflet/dist/leaflet.css';
+import L from "leaflet";
+import "leaflet/dist/leaflet.css";
 
-import './View.scss';
+import "./View.scss";
 
 type Props = {
   url: string;
@@ -20,7 +20,7 @@ const getZoom = (iw: number, w: number, ih: number, h: number) => {
   }
 };
 
-export const View = memo(({ url = '' }: Props) => {
+export const View = memo(({ url = "" }: Props) => {
   const mapRef = useRef<HTMLDivElement>(null);
   const mapObj: React.MutableRefObject<L.Map | null> = useRef(null);
 
@@ -54,12 +54,12 @@ export const View = memo(({ url = '' }: Props) => {
             attributionControl: false,
           }).fitBounds(bounds);
 
-          mapObj.current.on('dblclick', () => {
+          mapObj.current.on("dblclick", () => {
             mapObj.current?.setView(bounds.getCenter(), 0);
           });
 
-          mapObj.current.on('keydown', (e) => {
-            if (e.originalEvent.key === '0') {
+          mapObj.current.on("keydown", (e) => {
+            if (e.originalEvent.key === "0") {
               mapObj.current?.setZoom(0);
             }
           });
@@ -74,7 +74,7 @@ export const View = memo(({ url = '' }: Props) => {
           node.focus();
         };
 
-        img.src = url ? convertFileSrc(url) : '';
+        img.src = url ? convertFileSrc(url) : "";
       }
     },
     [url]
@@ -94,7 +94,7 @@ export const View = memo(({ url = '' }: Props) => {
     };
   }, [draw]);
 
-  return <div className={!url ? 'view init' : 'view'} ref={mapRef} />;
+  return <div className={!url ? "view init" : "view"} ref={mapRef} />;
 });
 
-View.displayName = 'View';
+View.displayName = "View";

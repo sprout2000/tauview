@@ -1,28 +1,28 @@
 [package]
-name = "app"
-version = "0.8.10"
+name = "leaafview-tauri"
+version = "0.0.0"
 description = "A minimalist image viewer"
-authors = [ "sprout2000" ]
+authors = ["sprout2000"]
 license = "MIT"
 repository = "https://github.com/sprout2000/leafview-tauri/"
-default-run = "app"
 edition = "2021"
-rust-version = "1.67.1"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [build-dependencies]
-tauri-build = { version = "1.2.1", features = [] }
+tauri-build = { version = "1.2", features = [] }
 
 [dependencies]
+tauri = { version = "1.2", features = ["dialog-open", "path-all", "protocol-asset", "shell-open", "window-set-title"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
 infer = "0.13.0"
-serde_json = "1.0.94"
-serde = { version = "1.0.158", features = [ "derive" ] }
-tauri = { version = "1.2.4", features = ["dialog-open", "path-all", "protocol-asset", "shell-open", "window-set-title"] }
-time = "0.3.20"
 trash = "3.0.1"
 json-gettext = "4.0.5"
 sys-locale = "0.2.4"
 tauri-plugin-window-state = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "dev" }
 
 [features]
-default = [ "custom-protocol" ]
-custom-protocol = [ "tauri/custom-protocol" ]
+# this feature is used for production builds or when `devPath` points to the filesystem
+# DO NOT REMOVE!!
+custom-protocol = ["tauri/custom-protocol"]

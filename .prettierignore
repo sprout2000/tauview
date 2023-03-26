@@ -1,8 +1,9 @@
 dist
-coverage
-node_modules
-pnpm-lock.yaml
+release
+devtools
 src-tauri/src
 src-tauri/target
-src-tauri/Cargo.lock
-src-tauri/*.toml
+node_modules
+
+Cargo.lock
+Cargo.toml

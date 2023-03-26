@@ -1,11 +1,4 @@
 dist
-node_modules
+release
 src-tauri
-*.md
-*.scss
-*.html
-*.yaml
-*.toml
-*.json
-.github
-.githooks
+node_modules

@@ -1,13 +1,14 @@
 {
+  "build": {
+    "beforeDevCommand": "npm run dev",
+    "beforeBuildCommand": "npm run build",
+    "devPath": "http://localhost:1420",
+    "distDir": "../dist",
+    "withGlobalTauri": false
+  },
   "package": {
     "productName": "Tauview",
-    "version": "0.8.10"
-  },
-  "build": {
-    "distDir": "../dist",
-    "devPath": "http://localhost:5173",
-    "beforeDevCommand": "npm run dev",
-    "beforeBuildCommand": "npm run build"
+    "version": "0.0.0"
   },
   "tauri": {
     "allowlist": {
@@ -33,20 +34,15 @@
     },
     "bundle": {
       "active": true,
-      "targets": "all",
-      "identifier": "jp.sprout2000.Tauview",
       "icon": [
-        "icons/icon.png",
-        "icons/icon.ico",
-        "icons/icon.icns",
         "icons/32x32.png",
         "icons/128x128.png",
-        "icons/128x128@2x.png"
+        "icons/128x128@2x.png",
+        "icons/icon.icns",
+        "icons/icon.ico"
       ],
-      "copyright": "© 2022 sprout2000 and other contributors",
-      "category": "Photography",
-      "shortDescription": "Image Viewer",
-      "longDescription": "A minimalist image viewer based on Leaflet.js and Tauri."
+      "identifier": "jp.sprout2000.Tauview",
+      "targets": "all"
     },
     "security": {
       "csp": "default-src 'self'; img-src 'self' asset: https://asset.localhost"
@@ -58,13 +54,13 @@
       {
         "label": "main",
         "title": "Tauview",
-        "width": 800,
-        "height": 500,
-        "minWidth": 800,
-        "minHeight": 500,
-        "visible": true,
+        "theme": "Dark",
         "resizable": true,
-        "theme": "Dark"
+        "fullscreen": false,
+        "width": 800,
+        "height": 560,
+        "minWidth": 800,
+        "minHeight": 560
       }
     ]
   }

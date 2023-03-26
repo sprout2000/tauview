@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo } from "react";
 
 export const Trash = memo(() => (
   <svg
@@ -11,4 +11,4 @@ export const Trash = memo(() => (
   </svg>
 ));
 
-Trash.displayName = 'Trash';
+Trash.displayName = "Trash";
