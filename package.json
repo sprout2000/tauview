@@ -14,8 +14,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "tauri": "tauri",
-    "test": "jest"
+    "tauri": "tauri"
   },
   "dependencies": {
     "@tauri-apps/api": "^1.2.0",
