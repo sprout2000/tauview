@@ -17,6 +17,11 @@ _Image by <a href="https://pixabay.com/ja/users/frankwinkler-64960/?utm_source=l
 
 <img width="480" alt="Grid View mode" src="https://user-images.githubusercontent.com/52094761/211186666-f0c6b745-acdc-456e-be3f-84525249ba34.png">
 
+## :inbox_tray: Download
+
+You can download the latest version of _Tauview_ from the releases page here:<br />
+[https://github.com/sprout2000/leafview-tauri/releases](https://github.com/sprout2000/leafview-tauri/releases)
+
 ## :green_book: Usage
 
 ### :keyboard: Keyboard Shortcuts
