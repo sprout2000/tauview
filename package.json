@@ -30,7 +30,7 @@
     "@testing-library/react": "^14.0.0",
     "@testing-library/user-event": "^14.4.3",
     "@types/leaflet": "^1.9.3",
-    "@types/react": "^18.0.31",
+    "@types/react": "^18.0.32",
     "@types/react-dom": "^18.0.11",
     "@typescript-eslint/eslint-plugin": "^5.57.0",
     "@typescript-eslint/parser": "^5.57.0",
@@ -42,7 +42,7 @@
     "jsdom": "^21.1.1",
     "prettier": "^2.8.7",
     "sass": "^1.60.0",
-    "typescript": "^4.9.5",
+    "typescript": "^5.0.3",
     "vite": "^4.2.1",
     "vite-plugin-html": "^3.2.0",
     "vitest": "^0.29.8"
