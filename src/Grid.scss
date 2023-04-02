@@ -4,6 +4,7 @@ $WRAPPER_SIZE: 148px;
 .container {
   &.grid {
     text-align: center;
+    overflow-y: auto;
 
     &::-webkit-scrollbar {
       width: 6px;
