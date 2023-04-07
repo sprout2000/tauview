@@ -19,7 +19,7 @@ serde_json = "1.0"
 infer = "0.13.0"
 trash = "3.0.1"
 json-gettext = "4.0.5"
-sys-locale = "0.2.4"
+sys-locale = "0.3.0"
 tauri-plugin-window-state = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "dev" }
 
 [features]
