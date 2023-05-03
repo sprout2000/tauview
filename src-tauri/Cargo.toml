@@ -1,6 +1,6 @@
 [package]
 name = "leaafview-tauri"
-version = "0.0.0"
+version = "0.0.1"
 description = "A minimalist image viewer"
 authors = ["sprout2000"]
 license = "MIT"
