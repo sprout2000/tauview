@@ -35,7 +35,7 @@
     "@typescript-eslint/eslint-plugin": "^6.7.2",
     "@typescript-eslint/parser": "^6.7.2",
     "@vitejs/plugin-react": "^4.0.4",
-    "eslint": "^8.49.0",
+    "eslint": "^8.50.0",
     "eslint-config-prettier": "^9.0.0",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
@@ -45,7 +45,7 @@
     "typescript": "^5.2.2",
     "vite": "^4.4.9",
     "vite-plugin-html": "^3.2.0",
-    "vitest": "^0.34.4"
+    "vitest": "^0.34.5"
   },
   "overrides": {
     "tough-cookie": "^4.1.3"
