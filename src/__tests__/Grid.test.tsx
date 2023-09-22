@@ -5,6 +5,6 @@ test("render Grid component", async () => {
   const mockFn = vi.fn();
 
   render(
-    <Grid url="" imgList={[]} onClickBlank={mockFn} onClickThumb={mockFn} />
+    <Grid url="" imgList={[]} onClickBlank={mockFn} onClickThumb={mockFn} />,
   );
 });

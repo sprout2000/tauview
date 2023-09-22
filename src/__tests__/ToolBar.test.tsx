@@ -12,7 +12,7 @@ test("render ToolBar component", async () => {
       onPrev={mockFn}
       onRemove={mockFn}
       onToggleGrid={mockFn}
-    />
+    />,
   );
 
   await userEvent.click(screen.getByLabelText("open-button"));

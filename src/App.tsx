@@ -131,7 +131,7 @@ export const App = () => {
 
   const handleClickThumb = async (
     e: React.MouseEvent<HTMLImageElement, MouseEvent>,
-    item: string
+    item: string,
   ) => {
     e.stopPropagation();
 
@@ -206,7 +206,7 @@ export const App = () => {
         if (!mimeSafe) return;
 
         setUrl(filepath);
-      }
+      },
     );
 
     return () => {

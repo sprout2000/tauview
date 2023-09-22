@@ -77,7 +77,7 @@ export const View = memo(({ url = "" }: Props) => {
         img.src = url ? convertFileSrc(url) : "";
       }
     },
-    [url]
+    [url],
   );
 
   useEffect(() => {
