@@ -45,7 +45,7 @@
     "typescript": "^5.2.2",
     "vite": "^4.4.9",
     "vite-plugin-html": "^3.2.0",
-    "vitest": "^0.34.5"
+    "vitest": "^0.34.6"
   },
   "overrides": {
     "get-func-name": "2.0.1",
