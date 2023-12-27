@@ -19,7 +19,7 @@ export const Grid = memo((props: Props) => {
   useLayoutEffect(() => {
     currentRef.current?.scrollIntoView({
       behavior: "smooth",
-      block: "center",
+      // block: "center",
     });
   }, []);
 
