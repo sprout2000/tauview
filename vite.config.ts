@@ -1,4 +1,3 @@
-/// <reference types="vitest" />
 import { defineConfig } from "vite";
 
 import react from "@vitejs/plugin-react";
@@ -33,9 +32,5 @@ export default defineConfig(async ({ command }) => ({
     outDir: "../dist",
     emptyOutDir: true,
     sourcemap: !!process.env.TAURI_DEBUG,
-  },
-  test: {
-    globals: true,
-    environment: "jsdom",
   },
 }));
