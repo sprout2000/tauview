@@ -22,6 +22,7 @@ fn get_fullscreen_accelerator() -> String {
 
 pub fn default(app_context: &Context<EmbeddedAssets>) -> Menu {
     let locale = get_locale().unwrap_or_else(|| String::from("en-US"));
+    // https://source.chromium.org/chromium/chromium/src/+/main:ui/base/l10n/l10n_util.cc
     let ctx = static_json_gettext_build!(
         "en-US";
         "ar-AE" => "locales/ar.json",
@@ -73,6 +74,9 @@ pub fn default(app_context: &Context<EmbeddedAssets>) -> Menu {
         "fr-LU" => "locales/fr.json",
         "fr-MC" => "locales/fr.json",
         "hu-HU" => "locales/hu.json",
+        "it" => "locales/it.json",
+        "it-CH" => "locales/it.json",
+        "it-IT" => "locales/it.json",
         "ja-JP" => "locales/ja.json",
         "pl-PL" => "locales/pl.json",
         "pt-BR" => "locales/pt.json",
