@@ -19,10 +19,10 @@ struct Payload {
 fn main() {
     let context = tauri::generate_context!();
     tauri::Builder::default()
-        .menu(if consts::OS == "macos" {
-            menu::default(&context)
-        } else {
+        .menu(if consts::OS == "windows" {
             Menu::new()
+        } else {
+            menu::default(&context)
         })
         .on_menu_event(|event| match event.menu_item_id() {
             "open" => dialog::FileDialogBuilder::new()
