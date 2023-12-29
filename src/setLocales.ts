@@ -13,8 +13,8 @@ import pl from "../src-tauri/locales/pl.json";
 import pt from "../src-tauri/locales/pt.json";
 import ru from "../src-tauri/locales/ru.json";
 import tr from "../src-tauri/locales/tr.json";
-import zh_CN from "../src-tauri/locales/zh_cn.json";
-import zh_TW from "../src-tauri/locales/zh_tw.json";
+import zh_CN from "../src-tauri/locales/zh_CN.json";
+import zh_TW from "../src-tauri/locales/zh_TW.json";
 
 export const setLocales = (locale: string) => {
   i18next.init({
