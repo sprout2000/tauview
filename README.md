@@ -3,11 +3,11 @@
 [![GitHub license](https://img.shields.io/github/license/sprout2000/leafview-tauri)](https://github.com/sprout2000/leafview-tauri/blob/main/LICENSE.md)
 [![GitHub stars](https://img.shields.io/github/stars/sprout2000/leafview-tauri)](https://github.com/sprout2000/leafview-tauri/stargazers)
 
-A minimalist image viewer for macOS based on [Leaflet.js](https://leafletjs.com/) and [Tauri](https://tauri.studio/).
+A minimalist image viewer based on [Leaflet.js](https://leafletjs.com/) and [Tauri](https://tauri.studio/).
 
 <img width="640" alt="Image by Frank Winkler from Pixabay" src="https://user-images.githubusercontent.com/52094761/227748216-a9c94a97-dfef-42b5-bce4-1df7a142d509.png">
 
-_Image by <a href="https://pixabay.com/ja/users/frankwinkler-64960/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=540123">Frank Winkler</a> from <a href="https://pixabay.com/ja//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=540123">Pixabay</a>_
+_Image by <a href="https://pixabay.com/ja/users/frankwinkler-64960/?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=540123">Frank Winkler</a> from <a href="https://pixabay.com/ja//?utm_source=link-attribution&amp;utm_medium=referral&amp;utm_campaign=image&amp;utm_content=540123">Pixabay</a>._
 
 ## :thumbsup: Features
 
