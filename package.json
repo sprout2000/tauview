@@ -1,6 +1,6 @@
 {
   "name": "leafview-tauri",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A minimal image viewer for macOS",
   "license": "MIT",
   "author": {
