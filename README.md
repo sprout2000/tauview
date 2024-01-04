@@ -1,9 +1,6 @@
 # Tauview
 
-[![GitHub license](https://img.shields.io/github/license/sprout2000/leafview-tauri)](https://github.com/sprout2000/leafview-tauri/blob/main/LICENSE.md)
-[![GitHub stars](https://img.shields.io/github/stars/sprout2000/leafview-tauri)](https://github.com/sprout2000/leafview-tauri/stargazers)
-
-A minimalist image viewer based on [Leaflet.js](https://leafletjs.com/) and [Tauri](https://tauri.studio/).
+Minimalist image viewer based on [Leaflet.js](https://leafletjs.com/) and [Tauri](https://tauri.studio/).
 
 <img width="640" alt="Image by Frank Winkler from Pixabay" src="https://user-images.githubusercontent.com/52094761/227748216-a9c94a97-dfef-42b5-bce4-1df7a142d509.png">
 
@@ -35,7 +32,7 @@ You can download the latest version of _Tauview_ from the releases page here:<br
 |                    <kbd>-</kbd>                     | Zoom Out         |
 |                    <kbd>0</kbd>                     | Reset Zoom       |
 | <kbd>←</kbd> <kbd>↑</kbd> <kbd>↓</kbd> <kbd>→</kbd> | Pan              |
-|           <kbd>Fn</kbd>+<kbd>Delete</kbd>           | Move to Trash    |
+|                  <kbd>Delete</kbd>                  | Move to Trash    |
 
 ### :computer_mouse: Mouse Operations
 
@@ -47,4 +44,4 @@ You can download the latest version of _Tauview_ from the releases page here:<br
 
 ## :copyright: Copyright
 
-Copyright (c) 2022 sprout2000 and other contributors
+Copyright (c) 2022-2024 sprout2000
