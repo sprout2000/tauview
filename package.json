@@ -1,5 +1,5 @@
 {
-  "name": "leafview-tauri",
+  "name": "tauview",
   "version": "0.0.5",
   "description": "A minimal image viewer for macOS",
   "license": "MIT",
@@ -7,7 +7,7 @@
     "name": "sprout2000"
   },
   "repository": {
-    "url": "https://github.com/sprout2000/leafview-tauri.git"
+    "url": "https://github.com/sprout2000/tauview.git"
   },
   "type": "module",
   "scripts": {
