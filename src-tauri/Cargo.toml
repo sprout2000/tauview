@@ -1,10 +1,10 @@
 [package]
-name = "leafview-tauri"
+name = "tauview"
 version = "0.0.5"
 description = "A minimalist image viewer"
 authors = ["sprout2000"]
 license = "MIT"
-repository = "https://github.com/sprout2000/leafview-tauri/"
+repository = "https://github.com/sprout2000/tauview/"
 edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
