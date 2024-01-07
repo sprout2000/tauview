@@ -189,7 +189,6 @@ pub fn default(app_context: &Context<EmbeddedAssets>) -> Menu {
             ),
     );
 
-    #[cfg(target_os = "macos")]
     let help_menu = Submenu::new(
         get_text!(ctx, &locale, "Help").unwrap().to_string(),
         Menu::new().add_item(CustomMenuItem::new(
@@ -198,22 +197,6 @@ pub fn default(app_context: &Context<EmbeddedAssets>) -> Menu {
                 .unwrap()
                 .to_string(),
         )),
-    );
-
-    #[cfg(not(target_os = "macos"))]
-    let help_menu = Submenu::new(
-        get_text!(ctx, &locale, "Help").unwrap().to_string(),
-        Menu::new()
-            .add_native_item(MenuItem::About(
-                app_context.package_info().name.clone(),
-                tauri::AboutMetadata::new(),
-            ))
-            .add_item(CustomMenuItem::new(
-                "support",
-                get_text!(ctx, &locale, "Support URL...")
-                    .unwrap()
-                    .to_string(),
-            )),
     );
 
     #[cfg(target_os = "macos")]
