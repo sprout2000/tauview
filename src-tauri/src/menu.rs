@@ -20,7 +20,7 @@ fn get_fullscreen_accelerator() -> String {
     }
 }
 
-pub fn default(app_context: &Context<EmbeddedAssets>) -> Menu {
+pub fn default(_app_context: &Context<EmbeddedAssets>) -> Menu {
     let locale = get_locale().unwrap_or_else(|| String::from("en-US"));
     // https://source.chromium.org/chromium/chromium/src/+/main:ui/base/l10n/l10n_util.cc
     let ctx = static_json_gettext_build!(
@@ -90,10 +90,10 @@ pub fn default(app_context: &Context<EmbeddedAssets>) -> Menu {
 
     #[cfg(target_os = "macos")]
     let app_menu = Submenu::new(
-        &app_context.package_info().name,
+        &_app_context.package_info().name,
         Menu::new()
             .add_native_item(MenuItem::About(
-                app_context.package_info().name.clone(),
+                _app_context.package_info().name.clone(),
                 tauri::AboutMetadata::new(),
             ))
             .add_native_item(MenuItem::Separator)
