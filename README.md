@@ -1,4 +1,4 @@
-# Tauview
+# <img width="48" alt="leaves" src="https://github.com/sprout2000/leafview/assets/52094761/33fe888a-e1bc-4418-a3e6-effdbba7f828" /> Tauview
 
 Minimalist image viewer based on [Leaflet.js](https://leafletjs.com/) and [Tauri](https://tauri.studio/).
 
