@@ -83,6 +83,7 @@ pub fn default(_app_context: &Context<EmbeddedAssets>) -> Menu {
         "pt-PT" => "locales/pt.json",
         "ru-RU" => "locales/ru.json",
         "tr" => "locales/tr.json",
+        "uk" => "locales/uk.json",
         "zh-CN" => "locales/zh_CN.json",
         "zh-TW" => "locales/zh_TW.json"
     )

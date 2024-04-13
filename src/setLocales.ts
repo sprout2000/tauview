@@ -13,6 +13,7 @@ import pl from "../src-tauri/locales/pl.json";
 import pt from "../src-tauri/locales/pt.json";
 import ru from "../src-tauri/locales/ru.json";
 import tr from "../src-tauri/locales/tr.json";
+import uk from "../src-tauri/locales/uk.json";
 import zh_CN from "../src-tauri/locales/zh_CN.json";
 import zh_TW from "../src-tauri/locales/zh_TW.json";
 
@@ -66,6 +67,7 @@ export const setLocales = (locale: string) => {
       "pt-PT": { translation: pt },
       ru: { translation: ru },
       tr: { translation: tr },
+      uk: { translation: uk },
       zh: { translation: zh_CN },
       "zh-CN": { translation: zh_CN },
       "zh-TW": { translation: zh_TW },
