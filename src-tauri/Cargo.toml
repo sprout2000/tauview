@@ -26,7 +26,7 @@ infer = "0.15.0"
 trash = "4.1.0"
 json-gettext = "4.0.10"
 sys-locale = "0.3.1"
-tauri-plugin-window-state = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "dev" }
+tauri-plugin-window-state = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
 
 [features]
 # this feature is used for production builds or when `devPath` points to the filesystem
