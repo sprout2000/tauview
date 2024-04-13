@@ -18,7 +18,7 @@
   },
   "dependencies": {
     "@tauri-apps/api": "^1.5.3",
-    "i18next": "^23.10.1",
+    "i18next": "^23.11.1",
     "leaflet": "^1.9.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0"
@@ -26,18 +26,18 @@
   "devDependencies": {
     "@tauri-apps/cli": "^1.5.11",
     "@types/leaflet": "^1.9.9",
-    "@types/react": "^18.2.74",
-    "@types/react-dom": "^18.2.24",
-    "@typescript-eslint/eslint-plugin": "^7.5.0",
-    "@typescript-eslint/parser": "^7.5.0",
+    "@types/react": "^18.2.77",
+    "@types/react-dom": "^18.2.25",
+    "@typescript-eslint/eslint-plugin": "^7.6.0",
+    "@typescript-eslint/parser": "^7.6.0",
     "@vitejs/plugin-react": "^4.2.1",
     "eslint": "^8.57.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^3.2.5",
-    "sass": "^1.74.1",
-    "typescript": "^5.4.4",
+    "sass": "^1.75.0",
+    "typescript": "^5.4.5",
     "vite": "^5.2.8",
     "vite-plugin-html": "^3.2.2"
   }
