@@ -17,14 +17,14 @@
     "tauri": "tauri"
   },
   "dependencies": {
-    "@tauri-apps/api": "^1.5.4",
-    "i18next": "^23.11.3",
+    "@tauri-apps/api": "^1.5.5",
+    "i18next": "^23.11.4",
     "leaflet": "^1.9.4",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
   "devDependencies": {
-    "@tauri-apps/cli": "^1.5.12",
+    "@tauri-apps/cli": "^1.5.13",
     "@types/leaflet": "^1.9.12",
     "@types/react": "^18.3.1",
     "@types/react-dom": "^18.3.0",
@@ -36,7 +36,7 @@
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.2",
     "prettier": "^3.2.5",
-    "sass": "^1.76.0",
+    "sass": "^1.77.1",
     "typescript": "^5.4.5",
     "vite": "^5.2.11",
     "vite-plugin-html": "^3.2.2"
