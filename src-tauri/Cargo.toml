@@ -1,6 +1,6 @@
 [package]
 name = "tauview"
-version = "0.0.10"
+version = "0.0.11"
 description = "A minimalist image viewer"
 authors = ["sprout2000"]
 license = "MIT"
