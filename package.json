@@ -1,6 +1,6 @@
 {
   "name": "tauview",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "Minimalist image viewer for macOS and Linux based on Leaflet.js.",
   "license": "MIT",
   "author": {
