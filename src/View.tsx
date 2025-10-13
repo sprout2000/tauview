@@ -1,9 +1,8 @@
-import { memo, useCallback, useEffect, useRef } from "react";
 import { convertFileSrc } from "@tauri-apps/api/tauri";
-
 import L from "leaflet";
-import "leaflet/dist/leaflet.css";
+import { memo, useCallback, useEffect, useRef } from "react";
 
+import "leaflet/dist/leaflet.css";
 import "./View.scss";
 
 type Props = {

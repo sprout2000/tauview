@@ -1,13 +1,11 @@
-import { useCallback, useEffect, useState } from "react";
-
 import { event } from "@tauri-apps/api";
-import { invoke } from "@tauri-apps/api/tauri";
 import { dirname } from "@tauri-apps/api/path";
+import { invoke } from "@tauri-apps/api/tauri";
 import { getCurrent } from "@tauri-apps/api/window";
-
-import { View } from "./View";
+import { useCallback, useEffect, useState } from "react";
 import { Grid } from "./Grid";
 import { ToolBar } from "./ToolBar";
+import { View } from "./View";
 
 import "./App.scss";
 

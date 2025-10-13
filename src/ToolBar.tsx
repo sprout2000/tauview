@@ -1,11 +1,10 @@
-import { memo } from "react";
 import * as i18next from "i18next";
-
-import { Trash } from "./icons/Trash";
-import { GridIcon } from "./icons/GridIcon";
+import { memo } from "react";
 import { ArrowLeft } from "./icons/ArrowLeft";
 import { ArrowRight } from "./icons/ArrowRight";
 import { FolderOpen } from "./icons/FolderOpen";
+import { GridIcon } from "./icons/GridIcon";
+import { Trash } from "./icons/Trash";
 
 import "./ToolBar.scss";
 
@@ -22,7 +21,6 @@ export const ToolBar = memo((props: Props) => {
     <div className="bottom">
       <div className="folder">
         <div
-          aria-label="open-button"
           className="icon"
           title={`${i18next.t("Open...")}`}
           onClick={props.onOpen}
@@ -33,7 +31,6 @@ export const ToolBar = memo((props: Props) => {
       <div className="toolbar">
         <div className="grid">
           <div
-            aria-label="grid-button"
             className="icon"
             title={`${i18next.t("Toggle Grid View")}`}
             onClick={props.onToggleGrid}
@@ -43,7 +40,6 @@ export const ToolBar = memo((props: Props) => {
         </div>
         <div className="arrows">
           <div
-            aria-label="prev-button"
             className="icon"
             title={`${i18next.t("Prev Image")}`}
             onClick={props.onPrev}
@@ -51,7 +47,6 @@ export const ToolBar = memo((props: Props) => {
             <ArrowLeft />
           </div>
           <div
-            aria-label="next-button"
             className="icon"
             title={`${i18next.t("Next Image")}`}
             onClick={props.onNext}
@@ -61,7 +56,6 @@ export const ToolBar = memo((props: Props) => {
         </div>
         <div className="trash">
           <div
-            aria-label="trash-button"
             className="icon"
             title={`${i18next.t("Move to Trash")}`}
             onClick={props.onRemove}
