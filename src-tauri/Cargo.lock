@@ -3082,7 +3082,7 @@ dependencies = [
 
 [[package]]
 name = "tauview"
-version = "0.0.14"
+version = "0.0.15"
 dependencies = [
  "infer 0.16.0",
  "json-gettext",
