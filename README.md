@@ -44,4 +44,4 @@ You can download the latest version of _Tauview_ from the releases page here:<br
 
 ## :copyright: Copyright
 
-Copyright (c) 2022-2024 sprout2000
+Copyright (c) 2022-2026 sprout2000
