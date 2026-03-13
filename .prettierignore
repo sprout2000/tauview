@@ -1,9 +1,0 @@
-dist
-release
-devtools
-src-tauri/src
-src-tauri/target
-node_modules
-
-Cargo.lock
-Cargo.toml
