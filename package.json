@@ -21,21 +21,21 @@
     "@tauri-apps/api": "^1.6.0",
     "i18next": "^25.10.10",
     "leaflet": "^1.9.4",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.10",
+    "@biomejs/biome": "2.4.11",
     "@tauri-apps/cli": "^1.6.3",
     "@types/leaflet": "^1.9.21",
-    "@types/node": "^25.5.2",
+    "@types/node": "^25.6.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
-    "baseline-browser-mapping": "^2.10.16",
+    "baseline-browser-mapping": "^2.10.17",
     "sass": "^1.99.0",
     "typescript": "^5.9.3",
-    "vite": "^8.0.7",
+    "vite": "^8.0.8",
     "vite-plugin-html": "^3.2.2"
   }
 }
