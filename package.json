@@ -25,14 +25,14 @@
     "react-dom": "^19.2.5"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.13",
+    "@biomejs/biome": "2.4.14",
     "@tauri-apps/cli": "^1.6.3",
     "@types/leaflet": "^1.9.21",
     "@types/node": "^25.6.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
-    "baseline-browser-mapping": "^2.10.24",
+    "baseline-browser-mapping": "^2.10.25",
     "sass": "^1.99.0",
     "typescript": "^6.0.3",
     "vite": "^8.0.10",
