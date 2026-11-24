@@ -1,4 +1,4 @@
-import { convertFileSrc } from "@tauri-apps/api/tauri";
+import { convertFileSrc } from "@tauri-apps/api/core";
 import L from "leaflet";
 import { memo, useCallback, useEffect, useRef } from "react";
 

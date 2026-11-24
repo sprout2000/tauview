@@ -1,7 +1,8 @@
-import { event } from "@tauri-apps/api";
+import { invoke } from "@tauri-apps/api/core";
+import { type Event, listen } from "@tauri-apps/api/event";
 import { dirname } from "@tauri-apps/api/path";
-import { invoke } from "@tauri-apps/api/tauri";
-import { getCurrent } from "@tauri-apps/api/window";
+import { getCurrentWebview } from "@tauri-apps/api/webview";
+import { getCurrentWindow } from "@tauri-apps/api/window";
 import { useCallback, useEffect, useState } from "react";
 import { Grid } from "./Grid";
 import { ToolBar } from "./ToolBar";
@@ -154,7 +155,7 @@ export const App = () => {
   };
 
   useEffect(() => {
-    const unlisten = event.listen("menu-next", () => {
+    const unlisten = listen("menu-next", () => {
       if (grid) setGrid(false);
       handleNext();
     });
@@ -164,7 +165,7 @@ export const App = () => {
   }, [handleNext, grid]);
 
   useEffect(() => {
-    const unlisten = event.listen("menu-prev", () => {
+    const unlisten = listen("menu-prev", () => {
       if (grid) setGrid(false);
       handlePrev();
     });
@@ -174,7 +175,7 @@ export const App = () => {
   }, [handlePrev, grid]);
 
   useEffect(() => {
-    const unlisten = event.listen("menu-grid", () => {
+    const unlisten = listen("menu-grid", () => {
       handleToggleGrid();
     });
     return () => {
@@ -183,7 +184,7 @@ export const App = () => {
   }, [handleToggleGrid]);
 
   useEffect(() => {
-    const unlisten = event.listen("menu-remove", () => {
+    const unlisten = listen("menu-remove", () => {
       handleRemove();
     });
     return () => {
@@ -192,20 +193,18 @@ export const App = () => {
   }, [handleRemove]);
 
   useEffect(() => {
-    const unlisten = event.listen(
-      "tauri://file-drop",
-      async (e: event.Event<string[]>) => {
-        if (grid) {
-          return false;
-        }
+    const unlisten = getCurrentWebview().onDragDropEvent(async (e) => {
+      if (e.payload.type !== "drop") return;
+      if (grid) return;
 
-        const filepath = e.payload[0];
-        const mimeSafe: boolean = await invoke("mime_check", { filepath });
-        if (!mimeSafe) return;
+      const filepath = e.payload.paths[0];
+      if (!filepath) return;
 
-        setUrl(filepath);
-      },
-    );
+      const mimeSafe: boolean = await invoke("mime_check", { filepath });
+      if (!mimeSafe) return;
+
+      setUrl(filepath);
+    });
 
     return () => {
       unlisten.then((f) => f());
@@ -213,7 +212,7 @@ export const App = () => {
   }, [grid]);
 
   useEffect(() => {
-    const unlisten = event.listen("open", (e: event.Event<Payload>) => {
+    const unlisten = listen("open", (e: Event<Payload>) => {
       const filepath = e.payload.message;
       if (!filepath) return;
       if (grid) setGrid(false);
@@ -227,7 +226,7 @@ export const App = () => {
   }, [grid]);
 
   useEffect(() => {
-    const currentWindow = getCurrent();
+    const currentWindow = getCurrentWindow();
 
     if (!url) {
       currentWindow.setTitle("Tauview");

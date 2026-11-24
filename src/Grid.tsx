@@ -1,4 +1,4 @@
-import { convertFileSrc } from "@tauri-apps/api/tauri";
+import { convertFileSrc } from "@tauri-apps/api/core";
 import { memo, useLayoutEffect, useRef } from "react";
 
 import "./Grid.scss";

@@ -1,54 +1,22 @@
 {
+  "$schema": "https://schema.tauri.app/config/2",
+  "productName": "Tauview",
+  "version": "0.0.17",
+  "identifier": "jp.sprout2000.Tauview",
   "build": {
     "beforeDevCommand": "npm run dev",
     "beforeBuildCommand": "npm run build",
-    "devPath": "http://localhost:1420",
-    "distDir": "../dist",
-    "withGlobalTauri": false
+    "devUrl": "http://localhost:1420",
+    "frontendDist": "../dist"
   },
-  "package": {
-    "productName": "Tauview",
-    "version": "0.0.17"
-  },
-  "tauri": {
-    "allowlist": {
-      "all": false,
-      "dialog": {
-        "all": false,
-        "open": true
-      },
-      "path": { "all": true },
-      "protocol": {
-        "all": false,
-        "asset": true,
-        "assetScope": ["/**/*"]
-      },
-      "shell": {
-        "all": false,
-        "open": true
-      },
-      "window": {
-        "all": false,
-        "setTitle": true
-      }
-    },
-    "bundle": {
-      "active": true,
-      "icon": [
-        "icons/32x32.png",
-        "icons/128x128.png",
-        "icons/128x128@2x.png",
-        "icons/icon.icns",
-        "icons/icon.ico"
-      ],
-      "identifier": "jp.sprout2000.Tauview",
-      "targets": "all"
-    },
+  "app": {
+    "withGlobalTauri": false,
     "security": {
-      "csp": "default-src 'self'; img-src 'self' asset: https://asset.localhost"
-    },
-    "updater": {
-      "active": false
+      "csp": "default-src 'self' ipc: http://ipc.localhost; img-src 'self' data: asset: http://asset.localhost https://asset.localhost",
+      "assetProtocol": {
+        "enable": true,
+        "scope": ["**"]
+      }
     },
     "windows": [
       {
@@ -62,6 +30,17 @@
         "minWidth": 800,
         "minHeight": 560
       }
+    ]
+  },
+  "bundle": {
+    "active": true,
+    "targets": "all",
+    "icon": [
+      "icons/32x32.png",
+      "icons/128x128.png",
+      "icons/128x128@2x.png",
+      "icons/icon.icns",
+      "icons/icon.ico"
     ]
   }
 }

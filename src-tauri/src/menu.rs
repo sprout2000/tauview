@@ -1,8 +1,8 @@
 use json_gettext::{get_text, static_json_gettext_build};
 use std::env::consts;
 use sys_locale::get_locale;
-use tauri::utils::assets::EmbeddedAssets;
-use tauri::{Context, CustomMenuItem, Menu, MenuItem, Submenu};
+use tauri::menu::{Menu, MenuBuilder, MenuItemBuilder, SubmenuBuilder};
+use tauri::{AppHandle, Runtime};
 
 fn get_close_accelerator() -> String {
     if consts::OS == "macos" {
@@ -20,7 +20,7 @@ fn get_fullscreen_accelerator() -> String {
     }
 }
 
-pub fn default(_app_context: &Context<EmbeddedAssets>) -> Menu {
+pub fn default<R: Runtime>(app: &AppHandle<R>) -> tauri::Result<Menu<R>> {
     let locale = get_locale().unwrap_or_else(|| String::from("en-US"));
     // https://source.chromium.org/chromium/chromium/src/+/main:ui/base/l10n/l10n_util.cc
     let ctx = static_json_gettext_build!(
@@ -89,131 +89,89 @@ pub fn default(_app_context: &Context<EmbeddedAssets>) -> Menu {
     )
     .unwrap();
 
-    #[cfg(target_os = "macos")]
-    let app_menu = Submenu::new(
-        &_app_context.package_info().name,
-        Menu::new()
-            .add_native_item(MenuItem::About(
-                _app_context.package_info().name.clone(),
-                tauri::AboutMetadata::new(),
-            ))
-            .add_native_item(MenuItem::Separator)
-            .add_native_item(MenuItem::Hide)
-            .add_native_item(MenuItem::HideOthers)
-            .add_native_item(MenuItem::ShowAll)
-            .add_native_item(MenuItem::Separator)
-            .add_native_item(MenuItem::Quit),
-    );
+    let t = |key: &str| -> String {
+        get_text!(ctx, locale.as_str(), key)
+            .map(|v| v.to_string())
+            .unwrap_or_else(|| key.to_string())
+    };
 
-    let file_menu = Submenu::new(
-        get_text!(ctx, &locale, "File").unwrap().to_string(),
-        Menu::new()
-            .add_item(
-                CustomMenuItem::new(
-                    "open",
-                    get_text!(ctx, &locale, "Open...").unwrap().to_string(),
-                )
-                .accelerator("CmdOrCtrl+O"),
-            )
-            .add_native_item(MenuItem::Separator)
-            .add_item(
-                CustomMenuItem::new(
-                    "remove",
-                    get_text!(ctx, &locale, "Move to Trash")
-                        .unwrap()
-                        .to_string(),
-                )
-                .accelerator("DELETE"),
-            )
-            .add_native_item(MenuItem::Separator)
-            .add_item(
-                CustomMenuItem::new(
-                    "close",
-                    get_text!(ctx, &locale, "Close").unwrap().to_string(),
-                )
-                .accelerator(get_close_accelerator()),
-            ),
-    );
+    let file_menu = SubmenuBuilder::new(app, t("File"))
+        .item(
+            &MenuItemBuilder::with_id("open", t("Open..."))
+                .accelerator("CmdOrCtrl+O")
+                .build(app)?,
+        )
+        .separator()
+        .item(
+            &MenuItemBuilder::with_id("remove", t("Move to Trash"))
+                .accelerator("Delete")
+                .build(app)?,
+        )
+        .separator()
+        .item(
+            &MenuItemBuilder::with_id("close", t("Close"))
+                .accelerator(get_close_accelerator())
+                .build(app)?,
+        )
+        .build()?;
 
-    let view_menu = Submenu::new(
-        get_text!(ctx, &locale, "View").unwrap().to_string(),
-        Menu::new()
-            .add_item(
-                CustomMenuItem::new(
-                    "next",
-                    get_text!(ctx, &locale, "Next Image").unwrap().to_string(),
-                )
-                .accelerator("J"),
-            )
-            .add_item(
-                CustomMenuItem::new(
-                    "prev",
-                    get_text!(ctx, &locale, "Prev Image").unwrap().to_string(),
-                )
-                .accelerator("K"),
-            )
-            .add_native_item(MenuItem::Separator)
-            .add_item(
-                CustomMenuItem::new(
-                    "grid",
-                    get_text!(ctx, &locale, "Toggle Grid View")
-                        .unwrap()
-                        .to_string(),
-                )
-                .accelerator("H"),
-            ),
-    );
+    let view_menu = SubmenuBuilder::new(app, t("View"))
+        .item(
+            &MenuItemBuilder::with_id("next", t("Next Image"))
+                .accelerator("J")
+                .build(app)?,
+        )
+        .item(
+            &MenuItemBuilder::with_id("prev", t("Prev Image"))
+                .accelerator("K")
+                .build(app)?,
+        )
+        .separator()
+        .item(
+            &MenuItemBuilder::with_id("grid", t("Toggle Grid View"))
+                .accelerator("H")
+                .build(app)?,
+        )
+        .build()?;
 
-    let window_menu = Submenu::new(
-        get_text!(ctx, &locale, "Window").unwrap().to_string(),
-        Menu::new()
-            .add_item(
-                CustomMenuItem::new(
-                    "minimize",
-                    get_text!(ctx, &locale, "Minimize").unwrap().to_string(),
-                )
-                .accelerator("CmdOrCtrl+M"),
-            )
-            .add_item(CustomMenuItem::new(
-                "zoom",
-                get_text!(ctx, &locale, "Zoom").unwrap().to_string(),
-            ))
-            .add_native_item(MenuItem::Separator)
-            .add_item(
-                CustomMenuItem::new(
-                    "fullscreen",
-                    get_text!(ctx, &locale, "Toggle Fullscreen")
-                        .unwrap()
-                        .to_string(),
-                )
-                .accelerator(get_fullscreen_accelerator()),
-            ),
-    );
+    let window_menu = SubmenuBuilder::new(app, t("Window"))
+        .item(
+            &MenuItemBuilder::with_id("minimize", t("Minimize"))
+                .accelerator("CmdOrCtrl+M")
+                .build(app)?,
+        )
+        .item(&MenuItemBuilder::with_id("zoom", t("Zoom")).build(app)?)
+        .separator()
+        .item(
+            &MenuItemBuilder::with_id("fullscreen", t("Toggle Fullscreen"))
+                .accelerator(get_fullscreen_accelerator())
+                .build(app)?,
+        )
+        .build()?;
 
-    let help_menu = Submenu::new(
-        get_text!(ctx, &locale, "Help").unwrap().to_string(),
-        Menu::new().add_item(CustomMenuItem::new(
-            "support",
-            get_text!(ctx, &locale, "Support URL...")
-                .unwrap()
-                .to_string(),
-        )),
-    );
+    let help_menu = SubmenuBuilder::new(app, t("Help"))
+        .item(&MenuItemBuilder::with_id("support", t("Support URL...")).build(app)?)
+        .build()?;
+
+    let menu = MenuBuilder::new(app);
 
     #[cfg(target_os = "macos")]
-    let menu = Menu::new()
-        .add_submenu(app_menu)
-        .add_submenu(file_menu)
-        .add_submenu(view_menu)
-        .add_submenu(window_menu)
-        .add_submenu(help_menu);
+    let menu = {
+        let app_menu = SubmenuBuilder::new(app, &app.package_info().name)
+            .about(None)
+            .separator()
+            .hide()
+            .hide_others()
+            .show_all()
+            .separator()
+            .quit()
+            .build()?;
+        menu.item(&app_menu)
+    };
 
-    #[cfg(not(target_os = "macos"))]
-    let menu = Menu::new()
-        .add_submenu(file_menu)
-        .add_submenu(view_menu)
-        .add_submenu(window_menu)
-        .add_submenu(help_menu);
-
-    menu
+    menu.item(&file_menu)
+        .item(&view_menu)
+        .item(&window_menu)
+        .item(&help_menu)
+        .build()
 }

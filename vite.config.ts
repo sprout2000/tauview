@@ -31,6 +31,6 @@ export default defineConfig(async ({ command }) => ({
   build: {
     outDir: "../dist",
     emptyOutDir: true,
-    sourcemap: !!process.env.TAURI_DEBUG,
+    sourcemap: !!process.env.TAURI_ENV_DEBUG,
   },
 }));
