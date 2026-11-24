@@ -4,99 +4,73 @@
   "bundle": {
     "fileAssociations": [
       {
-        "ext": [
-          "jpg",
-          "jpeg"
-        ],
+        "ext": ["jpg", "jpeg"],
         "name": "JPEG Image",
         "mimeType": "image/jpeg",
         "role": "Viewer"
       },
       {
-        "ext": [
-          "png"
-        ],
+        "ext": ["png"],
         "name": "PNG Image",
         "mimeType": "image/png",
         "role": "Viewer"
       },
       {
-        "ext": [
-          "gif"
-        ],
+        "ext": ["gif"],
         "name": "GIF Image",
         "mimeType": "image/gif",
         "role": "Viewer"
       },
       {
-        "ext": [
-          "webp"
-        ],
+        "ext": ["webp"],
         "name": "WebP Image",
         "mimeType": "image/webp",
         "role": "Viewer"
       },
       {
-        "ext": [
-          "bmp"
-        ],
+        "ext": ["bmp"],
         "name": "BMP Image",
         "mimeType": "image/bmp",
         "role": "Viewer"
       },
       {
-        "ext": [
-          "ico"
-        ],
+        "ext": ["ico"],
         "name": "ICO Image",
         "mimeType": "image/vnd.microsoft.icon",
         "role": "Viewer"
       },
       {
-        "ext": [
-          "svg"
-        ],
+        "ext": ["svg"],
         "name": "SVG Image",
         "mimeType": "image/svg+xml",
         "role": "Viewer"
       },
       {
-        "ext": [
-          "heic"
-        ],
+        "ext": ["heic"],
         "name": "HEIC Image",
         "mimeType": "image/heic",
         "role": "Viewer"
       },
       {
-        "ext": [
-          "heif"
-        ],
+        "ext": ["heif"],
         "name": "HEIF Image",
         "mimeType": "image/heif",
         "role": "Viewer"
       },
       {
-        "ext": [
-          "tif",
-          "tiff"
-        ],
+        "ext": ["tif", "tiff"],
         "name": "TIFF Image",
         "mimeType": "image/tiff",
         "role": "Viewer"
       },
       {
-        "ext": [
-          "icns"
-        ],
+        "ext": ["icns"],
         "name": "ICNS Image",
         "mimeType": "image/x-icns",
         "role": "Viewer"
       },
       {
-        "ext": [
-          "jxl"
-        ],
+        "ext": ["jxl"],
         "name": "JPEG XL Image",
         "mimeType": "image/jxl",
         "role": "Viewer"

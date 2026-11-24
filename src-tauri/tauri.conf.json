@@ -40,64 +40,49 @@
     ],
     "fileAssociations": [
       {
-        "ext": [
-          "jpg",
-          "jpeg"
-        ],
+        "ext": ["jpg", "jpeg"],
         "name": "JPEG Image",
         "description": "JPEG Image",
         "mimeType": "image/jpeg",
         "role": "Viewer"
       },
       {
-        "ext": [
-          "png"
-        ],
+        "ext": ["png"],
         "name": "PNG Image",
         "description": "PNG Image",
         "mimeType": "image/png",
         "role": "Viewer"
       },
       {
-        "ext": [
-          "gif"
-        ],
+        "ext": ["gif"],
         "name": "GIF Image",
         "description": "GIF Image",
         "mimeType": "image/gif",
         "role": "Viewer"
       },
       {
-        "ext": [
-          "webp"
-        ],
+        "ext": ["webp"],
         "name": "WebP Image",
         "description": "WebP Image",
         "mimeType": "image/webp",
         "role": "Viewer"
       },
       {
-        "ext": [
-          "bmp"
-        ],
+        "ext": ["bmp"],
         "name": "BMP Image",
         "description": "BMP Image",
         "mimeType": "image/bmp",
         "role": "Viewer"
       },
       {
-        "ext": [
-          "ico"
-        ],
+        "ext": ["ico"],
         "name": "ICO Image",
         "description": "ICO Image",
         "mimeType": "image/vnd.microsoft.icon",
         "role": "Viewer"
       },
       {
-        "ext": [
-          "svg"
-        ],
+        "ext": ["svg"],
         "name": "SVG Image",
         "description": "SVG Image",
         "mimeType": "image/svg+xml",

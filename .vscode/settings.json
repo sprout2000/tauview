@@ -1,7 +1,5 @@
 {
-  "rust-analyzer.linkedProjects": [
-    "./src-tauri/Cargo.toml"
-  ],
+  "rust-analyzer.linkedProjects": ["./src-tauri/Cargo.toml"],
   "[rust]": {
     "editor.defaultFormatter": "rust-lang.rust-analyzer",
     "editor.formatOnSave": true

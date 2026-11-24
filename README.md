@@ -15,10 +15,10 @@ _Image by <a href="https://pixabay.com/ja/users/frankwinkler-64960/?utm_source=l
 
 ### Supported Formats
 
-| Platform        | Formats                                                  |
-| :-------------- | :------------------------------------------------------- |
-| All             | JPEG, PNG, GIF, WebP, BMP, ICO, SVG                      |
-| macOS (only)    | HEIC, HEIF, TIFF, ICNS, JPEG XL (JPEG XL needs a WebKit that supports it) |
+| Platform     | Formats                                                                   |
+| :----------- | :------------------------------------------------------------------------ |
+| All          | JPEG, PNG, GIF, WebP, BMP, ICO, SVG                                       |
+| macOS (only) | HEIC, HEIF, TIFF, ICNS, JPEG XL (JPEG XL needs a WebKit that supports it) |
 
 <img width="480" alt="Grid View mode" src="https://user-images.githubusercontent.com/52094761/211186666-f0c6b745-acdc-456e-be3f-84525249ba34.png">
 
