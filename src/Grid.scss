@@ -35,6 +35,23 @@ $WRAPPER_SIZE: 148px;
           align-items: flex-end;
           justify-items: center;
 
+          .thumb-button {
+            padding: 0;
+            border: none;
+            background: none;
+            line-height: 0;
+            cursor: pointer;
+            outline: none;
+
+            &:focus-visible .thumb {
+              border-color: #666;
+            }
+
+            &:focus-visible .thumb.current {
+              border-color: #68f;
+            }
+          }
+
           .thumb {
             margin: 4px;
             max-width: $THUMB_SIZE;

@@ -1,4 +1,9 @@
 @mixin Icon {
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: none;
+  outline: none;
   width: 48px;
   height: 48px;
   display: flex;
@@ -9,7 +14,8 @@
   &:hover {
     cursor: pointer;
   }
-  &:active {
+  &:active,
+  &:focus-visible {
     fill: rgb(255, 255, 255);
   }
 }

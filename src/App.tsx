@@ -129,7 +129,7 @@ export const App = () => {
   }, [grid, url, readDir]);
 
   const handleClickThumb = async (
-    e: React.MouseEvent<HTMLImageElement, MouseEvent>,
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     item: string,
   ) => {
     e.stopPropagation();

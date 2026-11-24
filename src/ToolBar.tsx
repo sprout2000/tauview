@@ -20,48 +20,58 @@ export const ToolBar = memo((props: Props) => {
   return (
     <div className="bottom">
       <div className="folder">
-        <div
+        <button
+          type="button"
           className="icon"
-          title={`${i18next.t("Open...")}`}
+          title={i18next.t("Open...")}
+          aria-label={i18next.t("Open...")}
           onClick={props.onOpen}
         >
           <FolderOpen />
-        </div>
+        </button>
       </div>
       <div className="toolbar">
         <div className="grid">
-          <div
+          <button
+            type="button"
             className="icon"
-            title={`${i18next.t("Toggle Grid View")}`}
+            title={i18next.t("Toggle Grid View")}
+            aria-label={i18next.t("Toggle Grid View")}
             onClick={props.onToggleGrid}
           >
             <GridIcon />
-          </div>
+          </button>
         </div>
         <div className="arrows">
-          <div
+          <button
+            type="button"
             className="icon"
-            title={`${i18next.t("Prev Image")}`}
+            title={i18next.t("Prev Image")}
+            aria-label={i18next.t("Prev Image")}
             onClick={props.onPrev}
           >
             <ArrowLeft />
-          </div>
-          <div
+          </button>
+          <button
+            type="button"
             className="icon"
-            title={`${i18next.t("Next Image")}`}
+            title={i18next.t("Next Image")}
+            aria-label={i18next.t("Next Image")}
             onClick={props.onNext}
           >
             <ArrowRight />
-          </div>
+          </button>
         </div>
         <div className="trash">
-          <div
+          <button
+            type="button"
             className="icon"
-            title={`${i18next.t("Move to Trash")}`}
+            title={i18next.t("Move to Trash")}
+            aria-label={i18next.t("Move to Trash")}
             onClick={props.onRemove}
           >
             <Trash />
-          </div>
+          </button>
         </div>
       </div>
     </div>
