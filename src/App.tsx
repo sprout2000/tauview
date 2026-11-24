@@ -208,7 +208,7 @@ export const App = () => {
 
   useEffect(() => {
     // WebView 標準のドラッグ＆ドロップとコンテキストメニューを無効にする
-    const preventDefault = (e: Event) => {
+    const preventDefault = (e: globalThis.Event) => {
       e.preventDefault();
       e.stopPropagation();
     };
