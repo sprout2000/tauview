@@ -1,4 +1,6 @@
 {
+  "$schema": "https://schema.tauri.app/config/2",
+  "identifier": "jp.sprout2000.Tauview",
   "bundle": {
     "fileAssociations": [
       {
@@ -7,7 +9,6 @@
           "jpeg"
         ],
         "name": "JPEG Image",
-        "description": "JPEG Image",
         "mimeType": "image/jpeg",
         "role": "Viewer"
       },
@@ -16,7 +17,6 @@
           "png"
         ],
         "name": "PNG Image",
-        "description": "PNG Image",
         "mimeType": "image/png",
         "role": "Viewer"
       },
@@ -25,7 +25,6 @@
           "gif"
         ],
         "name": "GIF Image",
-        "description": "GIF Image",
         "mimeType": "image/gif",
         "role": "Viewer"
       },
@@ -34,7 +33,6 @@
           "webp"
         ],
         "name": "WebP Image",
-        "description": "WebP Image",
         "mimeType": "image/webp",
         "role": "Viewer"
       },
@@ -43,7 +41,6 @@
           "bmp"
         ],
         "name": "BMP Image",
-        "description": "BMP Image",
         "mimeType": "image/bmp",
         "role": "Viewer"
       },
@@ -52,7 +49,6 @@
           "ico"
         ],
         "name": "ICO Image",
-        "description": "ICO Image",
         "mimeType": "image/vnd.microsoft.icon",
         "role": "Viewer"
       },
@@ -61,7 +57,6 @@
           "svg"
         ],
         "name": "SVG Image",
-        "description": "SVG Image",
         "mimeType": "image/svg+xml",
         "role": "Viewer"
       },
@@ -70,7 +65,6 @@
           "heic"
         ],
         "name": "HEIC Image",
-        "description": "HEIC Image",
         "mimeType": "image/heic",
         "role": "Viewer"
       },
@@ -79,7 +73,6 @@
           "heif"
         ],
         "name": "HEIF Image",
-        "description": "HEIF Image",
         "mimeType": "image/heif",
         "role": "Viewer"
       },
@@ -89,7 +82,6 @@
           "tiff"
         ],
         "name": "TIFF Image",
-        "description": "TIFF Image",
         "mimeType": "image/tiff",
         "role": "Viewer"
       },
@@ -98,7 +90,6 @@
           "icns"
         ],
         "name": "ICNS Image",
-        "description": "ICNS Image",
         "mimeType": "image/x-icns",
         "role": "Viewer"
       },
@@ -107,7 +98,6 @@
           "jxl"
         ],
         "name": "JPEG XL Image",
-        "description": "JPEG XL Image",
         "mimeType": "image/jxl",
         "role": "Viewer"
       }
