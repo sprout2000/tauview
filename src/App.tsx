@@ -26,11 +26,6 @@ export const App = () => {
     return list;
   }, [url]);
 
-  const preventDefault = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
-
   const handleOpen = useCallback(() => {
     invoke("open_dialog")
       .then((fpath) => {
@@ -212,6 +207,24 @@ export const App = () => {
   }, [grid]);
 
   useEffect(() => {
+    // WebView 標準のドラッグ＆ドロップとコンテキストメニューを無効にする
+    const preventDefault = (e: Event) => {
+      e.preventDefault();
+      e.stopPropagation();
+    };
+    const events = ["drop", "dragover", "dragenter", "dragleave", "contextmenu"];
+
+    for (const type of events) {
+      window.addEventListener(type, preventDefault);
+    }
+    return () => {
+      for (const type of events) {
+        window.removeEventListener(type, preventDefault);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
     // 関連付けやコマンドライン引数で渡されたファイルを受け取る
     invoke<string | null>("frontend_ready")
       .then(async (filepath) => {
@@ -251,11 +264,6 @@ export const App = () => {
     <div
       data-testid="container"
       className={grid ? "container grid" : "container"}
-      onDrop={preventDefault}
-      onDragOver={preventDefault}
-      onDragEnter={preventDefault}
-      onDragLeave={preventDefault}
-      onContextMenu={preventDefault}
     >
       {grid ? (
         <Grid

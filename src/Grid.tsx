@@ -1,5 +1,5 @@
 import { convertFileSrc } from "@tauri-apps/api/core";
-import { memo, useLayoutEffect, useRef } from "react";
+import { memo, useEffect, useLayoutEffect, useRef } from "react";
 
 import "./Grid.scss";
 
@@ -22,21 +22,37 @@ export const Grid = memo((props: Props) => {
       behavior: "smooth",
       // block: "center",
     });
-    // Escape でグリッドを閉じられるように、表示中の画像のサムネイルにフォーカスする
+    // キーボードで操作できるように、表示中の画像のサムネイルにフォーカスする
     currentButtonRef.current?.focus({ preventScroll: true });
   }, []);
 
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
-    if (e.key === "Escape") props.onClickBlank();
-  };
+  const contentRef = useRef<HTMLDivElement>(null);
+  const { onClickBlank } = props;
+
+  useEffect(() => {
+    const node = contentRef.current;
+
+    // サムネイル以外の余白をクリックしたらグリッドを閉じる
+    const handleClick = (e: MouseEvent) => {
+      if ((e.target as Element).closest(".thumb-button")) return;
+      onClickBlank();
+    };
+
+    // Escape でグリッドを閉じる
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") onClickBlank();
+    };
+
+    node?.addEventListener("click", handleClick);
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      node?.removeEventListener("click", handleClick);
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [onClickBlank]);
 
   return (
-    <div
-      className="grid-content"
-      role="presentation"
-      onClick={props.onClickBlank}
-      onKeyDown={handleKeyDown}
-    >
+    <div className="grid-content" ref={contentRef}>
       <div className="thumb-container">
         {props.imgList.map((item) => (
           <div
