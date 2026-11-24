@@ -20,6 +20,15 @@ fn get_fullscreen_accelerator() -> String {
     }
 }
 
+#[cfg(debug_assertions)]
+fn get_devtools_accelerator() -> String {
+    if consts::OS == "macos" {
+        "Alt+Cmd+I".to_string()
+    } else {
+        "Ctrl+Shift+I".to_string()
+    }
+}
+
 pub fn default<R: Runtime>(app: &AppHandle<R>) -> tauri::Result<Menu<R>> {
     let locale = get_locale().unwrap_or_else(|| String::from("en-US"));
     // https://source.chromium.org/chromium/chromium/src/+/main:ui/base/l10n/l10n_util.cc
@@ -131,8 +140,24 @@ pub fn default<R: Runtime>(app: &AppHandle<R>) -> tauri::Result<Menu<R>> {
             &MenuItemBuilder::with_id("grid", t("Toggle Grid View"))
                 .accelerator("H")
                 .build(app)?,
+        );
+
+    // 開発用の項目は tauri dev（デバッグビルド）のときだけ表示する
+    #[cfg(debug_assertions)]
+    let view_menu = view_menu
+        .separator()
+        .item(
+            &MenuItemBuilder::with_id("reload", t("Reload"))
+                .accelerator("CmdOrCtrl+R")
+                .build(app)?,
         )
-        .build()?;
+        .item(
+            &MenuItemBuilder::with_id("devtools", t("Toggle Developer Tools"))
+                .accelerator(get_devtools_accelerator())
+                .build(app)?,
+        );
+
+    let view_menu = view_menu.build()?;
 
     let window_menu = SubmenuBuilder::new(app, t("Window"))
         .item(

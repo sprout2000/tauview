@@ -66,6 +66,24 @@ fn handle_menu_event(app: &AppHandle, id: &str) {
                 }
             }
         }
+        #[cfg(debug_assertions)]
+        "reload" => {
+            if let Some(window) = app.get_webview_window("main") {
+                window
+                    .eval("window.location.reload()")
+                    .expect("Error while reloading the webview");
+            }
+        }
+        #[cfg(debug_assertions)]
+        "devtools" => {
+            if let Some(window) = app.get_webview_window("main") {
+                if window.is_devtools_open() {
+                    window.close_devtools();
+                } else {
+                    window.open_devtools();
+                }
+            }
+        }
         "support" => app
             .opener()
             .open_url("https://github.com/sprout2000/tauview#readme", None::<&str>)
@@ -82,6 +100,23 @@ fn main() {
     let builder = builder.menu(|app| menu::default(app));
 
     builder
+        // 2 つ目の起動を既存のウィンドウにまとめる（最初に登録する必要がある）
+        .plugin(tauri_plugin_single_instance::init(|app, argv, cwd| {
+            if let Some(window) = app.get_webview_window("main") {
+                let _ = window.unminimize();
+                let _ = window.set_focus();
+            }
+
+            let cwd = PathBuf::from(cwd);
+            if let Some(path) = argv
+                .iter()
+                .skip(1)
+                .map(|arg| cwd.join(arg))
+                .find(|p| p.is_file())
+            {
+                cmd::open_path(app, path);
+            }
+        }))
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_opener::init())
         .plugin(tauri_plugin_window_state::Builder::default().build())
@@ -91,10 +126,6 @@ fn main() {
         })
         .on_menu_event(|app, event| handle_menu_event(app, event.id().as_ref()))
         .setup(|app| {
-            let _window = app.get_webview_window("main").unwrap();
-            #[cfg(debug_assertions)]
-            _window.open_devtools();
-
             // Windows・Linux では関連付けたファイルがコマンドライン引数で渡される
             if let Some(path) = std::env::args_os()
                 .skip(1)
