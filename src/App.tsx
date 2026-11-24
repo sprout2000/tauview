@@ -212,7 +212,13 @@ export const App = () => {
       e.preventDefault();
       e.stopPropagation();
     };
-    const events = ["drop", "dragover", "dragenter", "dragleave", "contextmenu"];
+    const events = [
+      "drop",
+      "dragover",
+      "dragenter",
+      "dragleave",
+      "contextmenu",
+    ];
 
     for (const type of events) {
       window.addEventListener(type, preventDefault);
