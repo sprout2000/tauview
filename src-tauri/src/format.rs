@@ -16,17 +16,30 @@ pub enum Format {
     Tiff,
     Icns,
     Jxl,
+    /// カメラの RAW（中身が TIFF と同じ構造の形式が多いので、拡張子で判定する）
+    Raw,
 }
+
+/// カメラの RAW の拡張子
+pub const RAW_EXTENSIONS: &[&str] = &[
+    "3fr", "arw", "cr2", "cr3", "crw", "dcr", "dng", "erf", "iiq", "k25", "kdc", "mef", "mos",
+    "mrw", "nef", "nrw", "orf", "pef", "raf", "raw", "rw2", "rwl", "sr2", "srf", "srw", "x3f",
+];
 
 /// ファイルダイアログで選べる拡張子
 #[cfg(target_os = "macos")]
 pub const EXTENSIONS: &[&str] = &[
     "bmp", "gif", "ico", "jpeg", "jpg", "png", "svg", "webp", "heic", "heif", "icns", "jxl", "tif",
-    "tiff",
+    "tiff", "3fr", "arw", "cr2", "cr3", "crw", "dcr", "dng", "erf", "iiq", "k25", "kdc", "mef",
+    "mos", "mrw", "nef", "nrw", "orf", "pef", "raf", "raw", "rw2", "rwl", "sr2", "srf", "srw",
+    "x3f",
 ];
 
 #[cfg(not(target_os = "macos"))]
 pub const EXTENSIONS: &[&str] = &["bmp", "gif", "ico", "jpeg", "jpg", "png", "svg", "webp"];
+
+/// グリッド表示のサムネイルの最大サイズ（px）。表示は 128px なので Retina 向けに 2 倍にする
+pub const THUMB_PIXEL_SIZE: u32 = 256;
 
 /// 判定のために読み込む先頭のバイト数（SVG の判定に余裕を持たせる）
 const HEAD_SIZE: usize = 4096;
@@ -45,18 +58,21 @@ impl Format {
             Format::Tiff => "image/tiff",
             Format::Icns => "image/x-icns",
             Format::Jxl => "image/jxl",
+            Format::Raw => "application/octet-stream",
         }
     }
 
-    /// WebView がそのまま表示できる形式か（false なら PNG に変換して渡す）
+    /// WebView がそのまま表示できる形式か（false なら変換して渡す）
     pub fn is_native(self) -> bool {
-        !matches!(self, Format::Icns)
+        !matches!(self, Format::Icns | Format::Raw)
     }
 
-    /// この OS で扱う形式か（HEIF・TIFF・ICNS・JPEG XL は macOS のみ）
+    /// この OS で扱う形式か（HEIF・TIFF・ICNS・JPEG XL・RAW は macOS のみ）
     fn is_supported(self) -> bool {
         match self {
-            Format::Heif | Format::Tiff | Format::Icns | Format::Jxl => cfg!(target_os = "macos"),
+            Format::Heif | Format::Tiff | Format::Icns | Format::Jxl | Format::Raw => {
+                cfg!(target_os = "macos")
+            }
             _ => true,
         }
     }
@@ -135,48 +151,53 @@ fn sniff(head: &[u8]) -> Option<Format> {
     }
 }
 
-/// ファイルの中身から画像形式を判定する（この OS で扱わない形式は None）
-pub fn detect<P: AsRef<Path>>(path: P) -> Option<Format> {
-    let mut buf = [0u8; HEAD_SIZE];
-    let n = read_head(path.as_ref(), &mut buf)?;
-    sniff(&buf[..n]).filter(|f| f.is_supported())
+fn is_raw_extension(path: &Path) -> bool {
+    path.extension()
+        .and_then(|ext| ext.to_str())
+        .map(|ext| RAW_EXTENSIONS.contains(&ext.to_ascii_lowercase().as_str()))
+        .unwrap_or(false)
 }
 
-/// WebView が表示できない画像を PNG に変換する（macOS 標準の sips を使う）
-#[cfg(target_os = "macos")]
-pub fn convert_to_png(path: &Path) -> Result<Vec<u8>, String> {
-    use std::process::{Command, Stdio};
-    use std::sync::atomic::{AtomicU64, Ordering};
+/// ファイルの中身から画像形式を判定する（この OS で扱わない形式は None）
+pub fn detect<P: AsRef<Path>>(path: P) -> Option<Format> {
+    let path = path.as_ref();
+    let mut buf = [0u8; HEAD_SIZE];
+    let n = read_head(path, &mut buf)?;
 
-    static COUNTER: AtomicU64 = AtomicU64::new(0);
-
-    let out = std::env::temp_dir().join(format!(
-        "tauview-{}-{}.png",
-        std::process::id(),
-        COUNTER.fetch_add(1, Ordering::Relaxed)
-    ));
-
-    let status = Command::new("/usr/bin/sips")
-        .args(["-s", "format", "png"])
-        .arg(path)
-        .arg("--out")
-        .arg(&out)
-        .stdout(Stdio::null())
-        .stderr(Stdio::null())
-        .status()
-        .map_err(|e| e.to_string())?;
-
-    let result = if status.success() {
-        std::fs::read(&out).map_err(|e| e.to_string())
+    let format = if is_raw_extension(path) {
+        (n > 0).then_some(Format::Raw)
     } else {
-        Err(format!("sips exited with {status}"))
+        sniff(&buf[..n])
     };
-    let _ = std::fs::remove_file(&out);
-    result
+    format.filter(|f| f.is_supported())
+}
+
+/// WebView が表示できない画像を変換し、(データ, MIME タイプ) を返す。
+/// thumbnail が true なら、グリッド表示用に縮小する
+#[cfg(target_os = "macos")]
+pub fn convert(
+    path: &Path,
+    format: Format,
+    thumbnail: bool,
+) -> Result<(Vec<u8>, &'static str), String> {
+    use crate::imageio::{self, Output};
+
+    match format {
+        Format::Raw => {
+            let max_pixel = thumbnail.then_some(THUMB_PIXEL_SIZE);
+            imageio::convert_photo(path, max_pixel).map(|data| (data, Output::Jpeg.mime()))
+        }
+        Format::Icns => imageio::convert_icon(path).map(|data| (data, Output::Png.mime())),
+        _ => Err(format!("{format:?} does not need conversion")),
+    }
 }
 
 #[cfg(not(target_os = "macos"))]
-pub fn convert_to_png(_path: &Path) -> Result<Vec<u8>, String> {
+pub fn convert(
+    _path: &Path,
+    _format: Format,
+    _thumbnail: bool,
+) -> Result<(Vec<u8>, &'static str), String> {
     Err("conversion is not supported on this platform".to_string())
 }
 
@@ -199,5 +220,13 @@ mod tests {
             Some(Format::Svg)
         );
         assert_eq!(sniff(b"<html><body></body></html>"), None);
+    }
+
+    #[test]
+    fn detects_raw_by_extension() {
+        assert!(is_raw_extension(Path::new("/photos/IMG_0001.CR2")));
+        assert!(is_raw_extension(Path::new("DSC0001.nef")));
+        assert!(!is_raw_extension(Path::new("photo.tiff")));
+        assert!(!is_raw_extension(Path::new("raw")));
     }
 }

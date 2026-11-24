@@ -68,7 +68,7 @@ export const Grid = memo((props: Props) => {
             >
               <img
                 alt={item.replace(/.+(\/|\\)/, "")}
-                src={convertFileSrc(item, "tauview")}
+                src={`${convertFileSrc(item, "tauview")}?size=thumb`}
                 className={item === props.url ? "thumb current" : "thumb"}
                 draggable={false}
               />

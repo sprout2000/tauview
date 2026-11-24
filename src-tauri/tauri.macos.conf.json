@@ -74,6 +74,12 @@
         "name": "JPEG XL Image",
         "mimeType": "image/jxl",
         "role": "Viewer"
+      },
+      {
+        "ext": ["3fr", "arw", "cr2", "cr3", "crw", "dcr", "dng", "erf", "iiq", "k25", "kdc", "mef", "mos", "mrw", "nef", "nrw", "orf", "pef", "raf", "raw", "rw2", "rwl", "sr2", "srf", "srw", "x3f"],
+        "name": "Camera RAW Image",
+        "role": "Viewer",
+        "rank": "Alternate"
       }
     ]
   }

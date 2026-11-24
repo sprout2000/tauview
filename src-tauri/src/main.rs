@@ -10,6 +10,8 @@ use tauri_plugin_opener::OpenerExt;
 
 mod cmd;
 mod format;
+#[cfg(target_os = "macos")]
+mod imageio;
 #[cfg(not(target_os = "windows"))]
 mod menu;
 mod protocol;
