@@ -1,0 +1,117 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "bundle": {
+    "fileAssociations": [
+      {
+        "ext": [
+          "jpg",
+          "jpeg"
+        ],
+        "name": "JPEG Image",
+        "description": "JPEG Image",
+        "mimeType": "image/jpeg",
+        "role": "Viewer"
+      },
+      {
+        "ext": [
+          "png"
+        ],
+        "name": "PNG Image",
+        "description": "PNG Image",
+        "mimeType": "image/png",
+        "role": "Viewer"
+      },
+      {
+        "ext": [
+          "gif"
+        ],
+        "name": "GIF Image",
+        "description": "GIF Image",
+        "mimeType": "image/gif",
+        "role": "Viewer"
+      },
+      {
+        "ext": [
+          "webp"
+        ],
+        "name": "WebP Image",
+        "description": "WebP Image",
+        "mimeType": "image/webp",
+        "role": "Viewer"
+      },
+      {
+        "ext": [
+          "bmp"
+        ],
+        "name": "BMP Image",
+        "description": "BMP Image",
+        "mimeType": "image/bmp",
+        "role": "Viewer"
+      },
+      {
+        "ext": [
+          "ico"
+        ],
+        "name": "ICO Image",
+        "description": "ICO Image",
+        "mimeType": "image/vnd.microsoft.icon",
+        "role": "Viewer"
+      },
+      {
+        "ext": [
+          "svg"
+        ],
+        "name": "SVG Image",
+        "description": "SVG Image",
+        "mimeType": "image/svg+xml",
+        "role": "Viewer"
+      },
+      {
+        "ext": [
+          "heic"
+        ],
+        "name": "HEIC Image",
+        "description": "HEIC Image",
+        "mimeType": "image/heic",
+        "role": "Viewer"
+      },
+      {
+        "ext": [
+          "heif"
+        ],
+        "name": "HEIF Image",
+        "description": "HEIF Image",
+        "mimeType": "image/heif",
+        "role": "Viewer"
+      },
+      {
+        "ext": [
+          "tif",
+          "tiff"
+        ],
+        "name": "TIFF Image",
+        "description": "TIFF Image",
+        "mimeType": "image/tiff",
+        "role": "Viewer"
+      },
+      {
+        "ext": [
+          "icns"
+        ],
+        "name": "ICNS Image",
+        "description": "ICNS Image",
+        "mimeType": "image/x-icns",
+        "role": "Viewer"
+      },
+      {
+        "ext": [
+          "jxl"
+        ],
+        "name": "JPEG XL Image",
+        "description": "JPEG XL Image",
+        "mimeType": "image/jxl",
+        "role": "Viewer"
+      }
+    ]
+  }
+}

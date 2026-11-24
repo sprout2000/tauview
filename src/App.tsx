@@ -212,6 +212,18 @@ export const App = () => {
   }, [grid]);
 
   useEffect(() => {
+    // 関連付けやコマンドライン引数で渡されたファイルを受け取る
+    invoke<string | null>("frontend_ready")
+      .then(async (filepath) => {
+        if (!filepath) return;
+
+        const mimeSafe: boolean = await invoke("mime_check", { filepath });
+        if (mimeSafe) setUrl(filepath);
+      })
+      .catch((err) => console.log(`Error in frontend_ready(): ${err}`));
+  }, []);
+
+  useEffect(() => {
     const unlisten = listen("open", (e: Event<Payload>) => {
       const filepath = e.payload.message;
       if (!filepath) return;

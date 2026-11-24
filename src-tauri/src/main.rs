@@ -9,13 +9,12 @@ use tauri_plugin_dialog::DialogExt;
 use tauri_plugin_opener::OpenerExt;
 
 mod cmd;
+mod format;
 #[cfg(not(target_os = "windows"))]
 mod menu;
+mod protocol;
 
-#[derive(Clone, serde::Serialize)]
-struct Payload {
-    message: Option<PathBuf>,
-}
+use cmd::{OpenedState, Payload};
 
 fn handle_menu_event(app: &AppHandle, id: &str) {
     match id {
@@ -23,7 +22,7 @@ fn handle_menu_event(app: &AppHandle, id: &str) {
             let handle = app.clone();
             app.dialog()
                 .file()
-                .add_filter("Image File", &cmd::IMAGE_EXTENSIONS)
+                .add_filter("Image File", format::EXTENSIONS)
                 .pick_file(move |f| {
                     let message = f.and_then(|p| p.into_path().ok());
                     handle
@@ -86,19 +85,42 @@ fn main() {
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_opener::init())
         .plugin(tauri_plugin_window_state::Builder::default().build())
+        .manage(OpenedState::default())
+        .register_asynchronous_uri_scheme_protocol("tauview", |_ctx, request, responder| {
+            std::thread::spawn(move || responder.respond(protocol::handle(&request)));
+        })
         .on_menu_event(|app, event| handle_menu_event(app, event.id().as_ref()))
         .setup(|app| {
             let _window = app.get_webview_window("main").unwrap();
             #[cfg(debug_assertions)]
             _window.open_devtools();
+
+            // Windows・Linux では関連付けたファイルがコマンドライン引数で渡される
+            if let Some(path) = std::env::args_os()
+                .skip(1)
+                .map(PathBuf::from)
+                .find(|p| p.is_file())
+            {
+                cmd::open_path(app.handle(), path);
+            }
             Ok(())
         })
         .invoke_handler(tauri::generate_handler![
+            cmd::frontend_ready,
             cmd::mime_check,
             cmd::open_dialog,
             cmd::get_entries,
             cmd::move_to_trash,
         ])
-        .run(tauri::generate_context!())
-        .expect("Error while running tauri application");
+        .build(tauri::generate_context!())
+        .expect("Error while building tauri application")
+        .run(|_app, _event| {
+            // macOS では関連付けたファイルが Apple Event で渡される（起動時・起動中とも）
+            #[cfg(target_os = "macos")]
+            if let tauri::RunEvent::Opened { urls } = _event {
+                if let Some(path) = urls.into_iter().find_map(|url| url.to_file_path().ok()) {
+                    cmd::open_path(_app, path);
+                }
+            }
+        });
 }

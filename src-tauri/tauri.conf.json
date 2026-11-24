@@ -12,11 +12,7 @@
   "app": {
     "withGlobalTauri": false,
     "security": {
-      "csp": "default-src 'self' ipc: http://ipc.localhost; img-src 'self' data: asset: http://asset.localhost https://asset.localhost",
-      "assetProtocol": {
-        "enable": true,
-        "scope": ["**"]
-      }
+      "csp": "default-src 'self' ipc: http://ipc.localhost; img-src 'self' data: tauview: http://tauview.localhost"
     },
     "windows": [
       {
@@ -41,6 +37,72 @@
       "icons/128x128@2x.png",
       "icons/icon.icns",
       "icons/icon.ico"
+    ],
+    "fileAssociations": [
+      {
+        "ext": [
+          "jpg",
+          "jpeg"
+        ],
+        "name": "JPEG Image",
+        "description": "JPEG Image",
+        "mimeType": "image/jpeg",
+        "role": "Viewer"
+      },
+      {
+        "ext": [
+          "png"
+        ],
+        "name": "PNG Image",
+        "description": "PNG Image",
+        "mimeType": "image/png",
+        "role": "Viewer"
+      },
+      {
+        "ext": [
+          "gif"
+        ],
+        "name": "GIF Image",
+        "description": "GIF Image",
+        "mimeType": "image/gif",
+        "role": "Viewer"
+      },
+      {
+        "ext": [
+          "webp"
+        ],
+        "name": "WebP Image",
+        "description": "WebP Image",
+        "mimeType": "image/webp",
+        "role": "Viewer"
+      },
+      {
+        "ext": [
+          "bmp"
+        ],
+        "name": "BMP Image",
+        "description": "BMP Image",
+        "mimeType": "image/bmp",
+        "role": "Viewer"
+      },
+      {
+        "ext": [
+          "ico"
+        ],
+        "name": "ICO Image",
+        "description": "ICO Image",
+        "mimeType": "image/vnd.microsoft.icon",
+        "role": "Viewer"
+      },
+      {
+        "ext": [
+          "svg"
+        ],
+        "name": "SVG Image",
+        "description": "SVG Image",
+        "mimeType": "image/svg+xml",
+        "role": "Viewer"
+      }
     ]
   }
 }

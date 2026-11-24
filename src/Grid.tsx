@@ -34,7 +34,7 @@ export const Grid = memo((props: Props) => {
           >
             <img
               alt="thumbnail"
-              src={convertFileSrc(item)}
+              src={convertFileSrc(item, "tauview")}
               className={item === props.url ? "thumb current" : "thumb"}
               onClick={(e) => props.onClickThumb(e, item)}
               onDragStart={() => {

@@ -73,7 +73,7 @@ export const View = memo(({ url = "" }: Props) => {
           node.focus();
         };
 
-        img.src = url ? convertFileSrc(url) : "";
+        img.src = url ? convertFileSrc(url, "tauview") : "";
       }
     },
     [url],
