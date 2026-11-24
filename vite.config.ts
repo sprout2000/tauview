@@ -9,12 +9,17 @@ export default defineConfig(async ({ command }) => ({
     createHtmlPlugin({
       minify: command === "build",
       inject: {
-        data: {
-          devtools:
-            command === "serve"
-              ? `<script src="http://localhost:8097"></script>`
-              : undefined,
-        },
+        // 開発時のみ React DevTools（スタンドアロン版）に接続する
+        tags:
+          command === "serve"
+            ? [
+                {
+                  injectTo: "head",
+                  tag: "script",
+                  attrs: { src: "http://localhost:8097" },
+                },
+              ]
+            : [],
       },
     }),
   ],
