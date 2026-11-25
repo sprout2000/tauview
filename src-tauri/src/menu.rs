@@ -183,13 +183,13 @@ pub fn default<R: Runtime>(app: &AppHandle<R>) -> tauri::Result<Menu<R>> {
     #[cfg(target_os = "macos")]
     let menu = {
         let app_menu = SubmenuBuilder::new(app, &app.package_info().name)
-            .about(None)
+            .about_with_text(t("About Tauview"), None)
             .separator()
-            .hide()
-            .hide_others()
-            .show_all()
+            .hide_with_text(t("Hide Tauview"))
+            .hide_others_with_text(t("Hide Others"))
+            .show_all_with_text(t("Show All"))
             .separator()
-            .quit()
+            .quit_with_text(t("Quit Tauview"))
             .build()?;
         menu.item(&app_menu)
     };
