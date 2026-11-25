@@ -1,0 +1,113 @@
+{
+  "$schema": "https://schema.tauri.app/config/2",
+  "identifier": "jp.sprout2000.Tauview",
+  "bundle": {
+    "fileAssociations": [
+      {
+        "ext": ["jpg", "jpeg"],
+        "name": "JPEG Image",
+        "mimeType": "image/jpeg",
+        "role": "Viewer"
+      },
+      {
+        "ext": ["png"],
+        "name": "PNG Image",
+        "mimeType": "image/png",
+        "role": "Viewer"
+      },
+      {
+        "ext": ["gif"],
+        "name": "GIF Image",
+        "mimeType": "image/gif",
+        "role": "Viewer"
+      },
+      {
+        "ext": ["webp"],
+        "name": "WebP Image",
+        "mimeType": "image/webp",
+        "role": "Viewer"
+      },
+      {
+        "ext": ["bmp"],
+        "name": "BMP Image",
+        "mimeType": "image/bmp",
+        "role": "Viewer"
+      },
+      {
+        "ext": ["ico"],
+        "name": "ICO Image",
+        "mimeType": "image/vnd.microsoft.icon",
+        "role": "Viewer"
+      },
+      {
+        "ext": ["svg"],
+        "name": "SVG Image",
+        "mimeType": "image/svg+xml",
+        "role": "Viewer"
+      },
+      {
+        "ext": ["heic"],
+        "name": "HEIC Image",
+        "mimeType": "image/heic",
+        "role": "Viewer"
+      },
+      {
+        "ext": ["heif"],
+        "name": "HEIF Image",
+        "mimeType": "image/heif",
+        "role": "Viewer"
+      },
+      {
+        "ext": ["tif", "tiff"],
+        "name": "TIFF Image",
+        "mimeType": "image/tiff",
+        "role": "Viewer"
+      },
+      {
+        "ext": ["icns"],
+        "name": "ICNS Image",
+        "mimeType": "image/x-icns",
+        "role": "Viewer"
+      },
+      {
+        "ext": ["jxl"],
+        "name": "JPEG XL Image",
+        "mimeType": "image/jxl",
+        "role": "Viewer"
+      },
+      {
+        "ext": [
+          "3fr",
+          "arw",
+          "cr2",
+          "cr3",
+          "crw",
+          "dcr",
+          "dng",
+          "erf",
+          "iiq",
+          "k25",
+          "kdc",
+          "mef",
+          "mos",
+          "mrw",
+          "nef",
+          "nrw",
+          "orf",
+          "pef",
+          "raf",
+          "raw",
+          "rw2",
+          "rwl",
+          "sr2",
+          "srf",
+          "srw",
+          "x3f"
+        ],
+        "name": "Camera RAW Image",
+        "role": "Viewer",
+        "rank": "Alternate"
+      }
+    ]
+  }
+}

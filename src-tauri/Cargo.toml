@@ -1,6 +1,6 @@
 [package]
 name = "tauview"
-version = "0.0.17"
+version = "0.1.0"
 description = "A minimalist image viewer"
 authors = ["sprout2000"]
 license = "MIT"
@@ -10,25 +10,17 @@ edition = "2021"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [build-dependencies]
-tauri-build = { version = "^1.5", features = [] }
+tauri-build = { version = "2", features = [] }
 
 [dependencies]
-tauri = { version = "^1.8", features = [
-  "dialog-open",
-  "path-all",
-  "protocol-asset",
-  "shell-open",
-  "window-set-title",
-] }
+tauri = { version = "2", features = [] }
+tauri-plugin-dialog = "2"
+tauri-plugin-opener = "2"
+tauri-plugin-single-instance = "2"
+tauri-plugin-window-state = "2"
 serde = { version = "1.0", features = ["derive"] }
 serde_json = "1.0"
-infer = "0.16.0"
+infer = "0.22"
 trash = "5.1.1"
 json-gettext = "4.0.10"
 sys-locale = "0.3.1"
-tauri-plugin-window-state = { git = "https://github.com/tauri-apps/plugins-workspace", branch = "v1" }
-
-[features]
-# this feature is used for production builds or when `devPath` points to the filesystem
-# DO NOT REMOVE!!
-custom-protocol = ["tauri/custom-protocol"]

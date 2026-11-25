@@ -1,6 +1,5 @@
-import { defineConfig } from "vite";
-
 import react from "@vitejs/plugin-react";
+import { defineConfig } from "vite";
 import { createHtmlPlugin } from "vite-plugin-html";
 
 export default defineConfig(async ({ command }) => ({
@@ -9,12 +8,17 @@ export default defineConfig(async ({ command }) => ({
     createHtmlPlugin({
       minify: command === "build",
       inject: {
-        data: {
-          devtools:
-            command === "serve"
-              ? `<script src="http://localhost:8097"></script>`
-              : undefined,
-        },
+        // 開発時のみ React DevTools（スタンドアロン版）に接続する
+        tags:
+          command === "serve"
+            ? [
+                {
+                  injectTo: "head",
+                  tag: "script",
+                  attrs: { src: "http://localhost:8097" },
+                },
+              ]
+            : [],
       },
     }),
   ],
@@ -31,6 +35,6 @@ export default defineConfig(async ({ command }) => ({
   build: {
     outDir: "../dist",
     emptyOutDir: true,
-    sourcemap: !!process.env.TAURI_DEBUG,
+    sourcemap: !!process.env.TAURI_ENV_DEBUG,
   },
 }));

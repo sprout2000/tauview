@@ -1,4 +1,4 @@
-import { convertFileSrc } from "@tauri-apps/api/tauri";
+import { convertFileSrc } from "@tauri-apps/api/core";
 import L from "leaflet";
 import { memo, useCallback, useEffect, useRef } from "react";
 
@@ -73,7 +73,7 @@ export const View = memo(({ url = "" }: Props) => {
           node.focus();
         };
 
-        img.src = url ? convertFileSrc(url) : "";
+        img.src = url ? convertFileSrc(url, "tauview") : "";
       }
     },
     [url],

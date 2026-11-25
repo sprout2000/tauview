@@ -1,34 +1,45 @@
 use std::env::consts;
+use std::fs;
 use std::path::{Path, PathBuf};
-use tauri::api::dialog;
-use tauri::api::dir;
+use std::sync::Mutex;
+use tauri::{AppHandle, Emitter, Manager, State};
+use tauri_plugin_dialog::DialogExt;
 
-fn mime_from<P: AsRef<Path>>(filepath: P) -> bool {
-    match infer::get_from_path(filepath) {
-        Ok(opt) => match opt {
-            Some(filetype) => {
-                filetype.mime_type() == "image/jpeg"
-                    || filetype.mime_type() == "image/png"
-                    || filetype.mime_type() == "image/gif"
-                    || filetype.mime_type() == "image/webp"
-                    || filetype.mime_type() == "image/bmp"
-                    || filetype.mime_type() == "image/vnd.microsoft.icon"
-            }
-            None => false,
-        },
-        Err(why) => {
-            println!("Error in infer::get_from_path: {:?}", why);
-            false
-        }
+use crate::format;
+
+#[derive(Clone, serde::Serialize)]
+pub struct Payload {
+    pub message: Option<PathBuf>,
+}
+
+/// 関連付けやコマンドライン引数で渡されたファイルを、フロントエンドの準備ができるまで預かる
+#[derive(Default)]
+pub struct Opened {
+    ready: bool,
+    pending: Option<PathBuf>,
+}
+
+pub type OpenedState = Mutex<Opened>;
+
+/// ファイルを開く。フロントエンドの準備ができていなければ預かっておく
+pub fn open_path(app: &AppHandle, path: PathBuf) {
+    let state = app.state::<OpenedState>();
+    let mut opened = state.lock().unwrap();
+    if opened.ready {
+        app.emit(
+            "open",
+            Payload {
+                message: Some(path),
+            },
+        )
+        .expect("Error while emitting open event");
+    } else {
+        opened.pending = Some(path);
     }
 }
 
-fn is_dir(entry: &dir::DiskEntry) -> bool {
-    entry.children.is_some()
-}
-
-fn is_dot(entry: &dir::DiskEntry) -> bool {
-    match &entry.name {
+fn is_dot(path: &Path) -> bool {
+    match path.file_name().and_then(|name| name.to_str()) {
         Some(name) => {
             if consts::OS == "macos" {
                 name.starts_with('.')
@@ -40,20 +51,26 @@ fn is_dot(entry: &dir::DiskEntry) -> bool {
     }
 }
 
-fn is_img(entry: &dir::DiskEntry) -> bool {
-    mime_from(&entry.path)
+/// フロントエンドの準備ができたことを受け取り、預かっていたファイルを返す
+#[tauri::command]
+pub fn frontend_ready(state: State<'_, OpenedState>) -> Option<PathBuf> {
+    let mut opened = state.lock().unwrap();
+    opened.ready = true;
+    opened.pending.take()
 }
 
 #[tauri::command]
-pub async fn open_dialog() -> Option<PathBuf> {
-    dialog::blocking::FileDialogBuilder::new()
-        .add_filter("Image File", &["ico", "gif", "png", "jpg", "jpeg", "webp"])
-        .pick_file()
+pub async fn open_dialog(app: AppHandle) -> Option<PathBuf> {
+    app.dialog()
+        .file()
+        .add_filter("Image File", format::EXTENSIONS)
+        .blocking_pick_file()
+        .and_then(|f| f.into_path().ok())
 }
 
 #[tauri::command]
 pub async fn mime_check(filepath: String) -> bool {
-    mime_from(filepath)
+    format::detect(filepath).is_some()
 }
 
 #[tauri::command]
@@ -66,19 +83,17 @@ pub async fn move_to_trash(url: String) -> Result<(), String> {
 
 #[tauri::command]
 pub async fn get_entries(dir: String) -> Vec<PathBuf> {
-    let entries = match dir::read_dir(dir, false) {
+    let entries = match fs::read_dir(dir) {
         Err(why) => {
             println!("Error in read_dir(): {:?}", why);
-            let vec: Vec<dir::DiskEntry> = Vec::new();
-            vec
+            return Vec::new();
         }
         Ok(list) => list,
     };
 
     let mut paths = entries
-        .iter()
-        .filter(|entry| !is_dir(entry) && !is_dot(entry) && is_img(entry))
-        .map(|entry| entry.path.to_path_buf())
+        .filter_map(|entry| entry.ok().map(|e| e.path()))
+        .filter(|path| !path.is_dir() && !is_dot(path) && format::detect(path).is_some())
         .collect::<Vec<PathBuf>>();
 
     paths.sort();

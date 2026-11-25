@@ -1,7 +1,8 @@
-import { event } from "@tauri-apps/api";
+import { invoke } from "@tauri-apps/api/core";
+import { type Event, listen } from "@tauri-apps/api/event";
 import { dirname } from "@tauri-apps/api/path";
-import { invoke } from "@tauri-apps/api/tauri";
-import { getCurrent } from "@tauri-apps/api/window";
+import { getCurrentWebview } from "@tauri-apps/api/webview";
+import { getCurrentWindow } from "@tauri-apps/api/window";
 import { useCallback, useEffect, useState } from "react";
 import { Grid } from "./Grid";
 import { ToolBar } from "./ToolBar";
@@ -24,11 +25,6 @@ export const App = () => {
 
     return list;
   }, [url]);
-
-  const preventDefault = (e: React.DragEvent<HTMLDivElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-  };
 
   const handleOpen = useCallback(() => {
     invoke("open_dialog")
@@ -128,7 +124,7 @@ export const App = () => {
   }, [grid, url, readDir]);
 
   const handleClickThumb = async (
-    e: React.MouseEvent<HTMLImageElement, MouseEvent>,
+    e: React.MouseEvent<HTMLButtonElement, MouseEvent>,
     item: string,
   ) => {
     e.stopPropagation();
@@ -154,7 +150,7 @@ export const App = () => {
   };
 
   useEffect(() => {
-    const unlisten = event.listen("menu-next", () => {
+    const unlisten = listen("menu-next", () => {
       if (grid) setGrid(false);
       handleNext();
     });
@@ -164,7 +160,7 @@ export const App = () => {
   }, [handleNext, grid]);
 
   useEffect(() => {
-    const unlisten = event.listen("menu-prev", () => {
+    const unlisten = listen("menu-prev", () => {
       if (grid) setGrid(false);
       handlePrev();
     });
@@ -174,7 +170,7 @@ export const App = () => {
   }, [handlePrev, grid]);
 
   useEffect(() => {
-    const unlisten = event.listen("menu-grid", () => {
+    const unlisten = listen("menu-grid", () => {
       handleToggleGrid();
     });
     return () => {
@@ -183,7 +179,7 @@ export const App = () => {
   }, [handleToggleGrid]);
 
   useEffect(() => {
-    const unlisten = event.listen("menu-remove", () => {
+    const unlisten = listen("menu-remove", () => {
       handleRemove();
     });
     return () => {
@@ -192,20 +188,18 @@ export const App = () => {
   }, [handleRemove]);
 
   useEffect(() => {
-    const unlisten = event.listen(
-      "tauri://file-drop",
-      async (e: event.Event<string[]>) => {
-        if (grid) {
-          return false;
-        }
+    const unlisten = getCurrentWebview().onDragDropEvent(async (e) => {
+      if (e.payload.type !== "drop") return;
+      if (grid) return;
 
-        const filepath = e.payload[0];
-        const mimeSafe: boolean = await invoke("mime_check", { filepath });
-        if (!mimeSafe) return;
+      const filepath = e.payload.paths[0];
+      if (!filepath) return;
 
-        setUrl(filepath);
-      },
-    );
+      const mimeSafe: boolean = await invoke("mime_check", { filepath });
+      if (!mimeSafe) return;
+
+      setUrl(filepath);
+    });
 
     return () => {
       unlisten.then((f) => f());
@@ -213,7 +207,43 @@ export const App = () => {
   }, [grid]);
 
   useEffect(() => {
-    const unlisten = event.listen("open", (e: event.Event<Payload>) => {
+    // WebView 標準のドラッグ＆ドロップとコンテキストメニューを無効にする
+    const preventDefault = (e: globalThis.Event) => {
+      e.preventDefault();
+      e.stopPropagation();
+    };
+    const events = [
+      "drop",
+      "dragover",
+      "dragenter",
+      "dragleave",
+      "contextmenu",
+    ];
+
+    for (const type of events) {
+      window.addEventListener(type, preventDefault);
+    }
+    return () => {
+      for (const type of events) {
+        window.removeEventListener(type, preventDefault);
+      }
+    };
+  }, []);
+
+  useEffect(() => {
+    // 関連付けやコマンドライン引数で渡されたファイルを受け取る
+    invoke<string | null>("frontend_ready")
+      .then(async (filepath) => {
+        if (!filepath) return;
+
+        const mimeSafe: boolean = await invoke("mime_check", { filepath });
+        if (mimeSafe) setUrl(filepath);
+      })
+      .catch((err) => console.log(`Error in frontend_ready(): ${err}`));
+  }, []);
+
+  useEffect(() => {
+    const unlisten = listen("open", (e: Event<Payload>) => {
       const filepath = e.payload.message;
       if (!filepath) return;
       if (grid) setGrid(false);
@@ -227,7 +257,7 @@ export const App = () => {
   }, [grid]);
 
   useEffect(() => {
-    const currentWindow = getCurrent();
+    const currentWindow = getCurrentWindow();
 
     if (!url) {
       currentWindow.setTitle("Tauview");
@@ -240,11 +270,6 @@ export const App = () => {
     <div
       data-testid="container"
       className={grid ? "container grid" : "container"}
-      onDrop={preventDefault}
-      onDragOver={preventDefault}
-      onDragEnter={preventDefault}
-      onDragLeave={preventDefault}
-      onContextMenu={preventDefault}
     >
       {grid ? (
         <Grid

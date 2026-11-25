@@ -47,13 +47,30 @@ $WRAPPER_SIZE: 148px;
               cursor: pointer;
               border-color: #666;
             }
-            
+
             &.current {
               border: 4px solid #68f;
               border-radius: 6px;
               &:hover {
                 border-color: #68f;
               }
+            }
+          }
+
+          .thumb-button {
+            padding: 0;
+            border: none;
+            background: none;
+            line-height: 0;
+            cursor: pointer;
+            outline: none;
+
+            &:focus-visible .thumb {
+              border-color: #666;
+            }
+
+            &:focus-visible .thumb.current {
+              border-color: #68f;
             }
           }
         }
