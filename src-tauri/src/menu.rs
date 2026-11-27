@@ -1,8 +1,8 @@
 use json_gettext::{get_text, static_json_gettext_build};
 use std::env::consts;
 use sys_locale::get_locale;
-use tauri::menu::{Menu, MenuBuilder, MenuItemBuilder, SubmenuBuilder};
-use tauri::{AppHandle, Runtime};
+use tauri::menu::{Menu, MenuBuilder, MenuItem, MenuItemBuilder, Submenu, SubmenuBuilder};
+use tauri::{AppHandle, Manager, Runtime, Window};
 
 fn get_close_accelerator() -> String {
     if consts::OS == "macos" {
@@ -29,7 +29,22 @@ fn get_devtools_accelerator() -> String {
     }
 }
 
-pub fn default<R: Runtime>(app: &AppHandle<R>) -> tauri::Result<Menu<R>> {
+/// メニュー項目を作る（accelerator はショートカットとして登録し、項目にも表示する）
+fn item<R: Runtime>(
+    app: &AppHandle<R>,
+    id: &str,
+    text: String,
+    accelerator: Option<&str>,
+) -> tauri::Result<MenuItem<R>> {
+    let builder = MenuItemBuilder::with_id(id, text);
+    match accelerator {
+        Some(accel) => builder.accelerator(accel).build(app),
+        None => builder.build(app),
+    }
+}
+
+/// OS の言語に合わせた翻訳関数を返す（訳がなければキーの英語をそのまま返す）
+fn translator() -> impl Fn(&str) -> String {
     let locale = get_locale().unwrap_or_else(|| String::from("en-US"));
     // https://source.chromium.org/chromium/chromium/src/+/main:ui/base/l10n/l10n_util.cc
     let ctx = static_json_gettext_build!(
@@ -98,105 +113,115 @@ pub fn default<R: Runtime>(app: &AppHandle<R>) -> tauri::Result<Menu<R>> {
     )
     .unwrap();
 
-    let t = |key: &str| -> String {
+    move |key: &str| -> String {
         get_text!(ctx, locale.as_str(), key)
             .map(|v| v.to_string())
             .unwrap_or_else(|| key.to_string())
-    };
+    }
+}
 
+/// メニューバーとコンテキストメニューで共通のサブメニュー（ファイル・表示・ウィンドウ・ヘルプ）
+fn submenus<R: Runtime>(
+    app: &AppHandle<R>,
+    t: &impl Fn(&str) -> String,
+) -> tauri::Result<[Submenu<R>; 4]> {
     let file_menu = SubmenuBuilder::new(app, t("File"))
-        .item(
-            &MenuItemBuilder::with_id("open", t("Open..."))
-                .accelerator("CmdOrCtrl+O")
-                .build(app)?,
-        )
+        .item(&item(app, "open", t("Open..."), Some("CmdOrCtrl+O"))?)
         .separator()
-        .item(
-            &MenuItemBuilder::with_id("remove", t("Move to Trash"))
-                .accelerator("Delete")
-                .build(app)?,
-        )
+        .item(&item(app, "remove", t("Move to Trash"), Some("Delete"))?)
         .separator()
-        .item(
-            &MenuItemBuilder::with_id("close", t("Close"))
-                .accelerator(get_close_accelerator())
-                .build(app)?,
-        )
+        .item(&item(
+            app,
+            "close",
+            t("Close"),
+            Some(get_close_accelerator().as_str()),
+        )?)
         .build()?;
 
     let view_menu = SubmenuBuilder::new(app, t("View"))
-        .item(
-            &MenuItemBuilder::with_id("next", t("Next Image"))
-                .accelerator("J")
-                .build(app)?,
-        )
-        .item(
-            &MenuItemBuilder::with_id("prev", t("Prev Image"))
-                .accelerator("K")
-                .build(app)?,
-        )
+        .item(&item(app, "next", t("Next Image"), Some("J"))?)
+        .item(&item(app, "prev", t("Prev Image"), Some("K"))?)
         .separator()
-        .item(
-            &MenuItemBuilder::with_id("grid", t("Toggle Grid View"))
-                .accelerator("H")
-                .build(app)?,
-        );
+        .item(&item(app, "grid", t("Toggle Grid View"), Some("H"))?);
 
     // 開発用の項目は tauri dev（デバッグビルド）のときだけ表示する
     #[cfg(debug_assertions)]
     let view_menu = view_menu
         .separator()
-        .item(
-            &MenuItemBuilder::with_id("reload", t("Reload"))
-                .accelerator("CmdOrCtrl+R")
-                .build(app)?,
-        )
-        .item(
-            &MenuItemBuilder::with_id("devtools", t("Toggle Developer Tools"))
-                .accelerator(get_devtools_accelerator())
-                .build(app)?,
-        );
+        .item(&item(app, "reload", t("Reload"), Some("CmdOrCtrl+R"))?)
+        .item(&item(
+            app,
+            "devtools",
+            t("Toggle Developer Tools"),
+            Some(get_devtools_accelerator().as_str()),
+        )?);
 
     let view_menu = view_menu.build()?;
 
     let window_menu = SubmenuBuilder::new(app, t("Window"))
-        .item(
-            &MenuItemBuilder::with_id("minimize", t("Minimize"))
-                .accelerator("CmdOrCtrl+M")
-                .build(app)?,
-        )
-        .item(&MenuItemBuilder::with_id("zoom", t("Zoom")).build(app)?)
+        .item(&item(app, "minimize", t("Minimize"), Some("CmdOrCtrl+M"))?)
+        .item(&item(app, "zoom", t("Zoom"), None)?)
         .separator()
-        .item(
-            &MenuItemBuilder::with_id("fullscreen", t("Toggle Fullscreen"))
-                .accelerator(get_fullscreen_accelerator())
-                .build(app)?,
-        )
+        .item(&item(
+            app,
+            "fullscreen",
+            t("Toggle Fullscreen"),
+            Some(get_fullscreen_accelerator().as_str()),
+        )?)
         .build()?;
 
     let help_menu = SubmenuBuilder::new(app, t("Help"))
-        .item(&MenuItemBuilder::with_id("support", t("Support URL...")).build(app)?)
+        .item(&item(app, "support", t("Support URL..."), None)?)
         .build()?;
 
-    let menu = MenuBuilder::new(app);
+    Ok([file_menu, view_menu, window_menu, help_menu])
+}
 
-    #[cfg(target_os = "macos")]
-    let menu = {
-        let app_menu = SubmenuBuilder::new(app, &app.package_info().name)
-            .about_with_text(t("About Tauview"), None)
-            .separator()
-            .hide_with_text(t("Hide Tauview"))
-            .hide_others_with_text(t("Hide Others"))
-            .show_all_with_text(t("Show All"))
-            .separator()
-            .quit_with_text(t("Quit Tauview"))
-            .build()?;
-        menu.item(&app_menu)
-    };
+/// macOS のメニューバー（Windows・Linux ではメニューバーを表示しない）
+#[cfg(target_os = "macos")]
+pub fn default<R: Runtime>(app: &AppHandle<R>) -> tauri::Result<Menu<R>> {
+    let t = translator();
 
-    menu.item(&file_menu)
+    let app_menu = SubmenuBuilder::new(app, &app.package_info().name)
+        .about_with_text(t("About Tauview"), None)
+        .separator()
+        .hide_with_text(t("Hide Tauview"))
+        .hide_others_with_text(t("Hide Others"))
+        .show_all_with_text(t("Show All"))
+        .separator()
+        .quit_with_text(t("Quit Tauview"))
+        .build()?;
+
+    let [file_menu, view_menu, window_menu, help_menu] = submenus(app, &t)?;
+
+    MenuBuilder::new(app)
+        .item(&app_menu)
+        .item(&file_menu)
         .item(&view_menu)
         .item(&window_menu)
         .item(&help_menu)
         .build()
+}
+
+/// 右クリックで表示するコンテキストメニュー（すべての OS で使う）。メニューバーと同じ階層にする。
+///
+/// ポップアップのメニューに付けたショートカットは表示のためだけで、キー入力は
+/// macOS ではメニューバーが、Windows・Linux ではフロントエンド（App.tsx）が処理する
+pub fn context<R: Runtime>(app: &AppHandle<R>) -> tauri::Result<Menu<R>> {
+    let t = translator();
+    let [file_menu, view_menu, window_menu, help_menu] = submenus(app, &t)?;
+
+    MenuBuilder::new(app)
+        .item(&file_menu)
+        .item(&view_menu)
+        .item(&window_menu)
+        .item(&help_menu)
+        .build()
+}
+
+/// フロントエンドの右クリックで、コンテキストメニューをカーソルの位置に表示する
+#[tauri::command]
+pub fn show_context_menu(window: Window) -> Result<(), String> {
+    let menu = context(window.app_handle()).map_err(|e| e.to_string())?;
+    window.popup_menu(&menu).map_err(|e| e.to_string())
 }

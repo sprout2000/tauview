@@ -12,7 +12,6 @@ mod cmd;
 mod format;
 #[cfg(target_os = "macos")]
 mod imageio;
-#[cfg(not(target_os = "windows"))]
 mod menu;
 mod protocol;
 
@@ -97,8 +96,8 @@ fn handle_menu_event(app: &AppHandle, id: &str) {
 fn main() {
     let builder = tauri::Builder::default();
 
-    // Windows ではメニューバーを表示しない（v1 版と同じ挙動）
-    #[cfg(not(target_os = "windows"))]
+    // メニューバーは macOS だけ。Windows・Linux では右クリックのコンテキストメニューを使う
+    #[cfg(target_os = "macos")]
     let builder = builder.menu(|app| menu::default(app));
 
     builder
@@ -144,6 +143,7 @@ fn main() {
             cmd::open_dialog,
             cmd::get_entries,
             cmd::move_to_trash,
+            menu::show_context_menu,
         ])
         .build(tauri::generate_context!())
         .expect("Error while building tauri application")
