@@ -39,6 +39,7 @@ pub const EXTENSIONS: &[&str] = &[
 pub const EXTENSIONS: &[&str] = &["bmp", "gif", "ico", "jpeg", "jpg", "png", "svg", "webp"];
 
 /// グリッド表示のサムネイルの最大サイズ（px）。表示は 128px なので Retina 向けに 2 倍にする
+#[cfg(target_os = "macos")]
 pub const THUMB_PIXEL_SIZE: u32 = 256;
 
 /// 判定のために読み込む先頭のバイト数（SVG の判定に余裕を持たせる）
