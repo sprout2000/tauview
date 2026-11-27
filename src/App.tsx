@@ -261,7 +261,14 @@ export const App = () => {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
     };
-  }, [grid, handleOpen, handleNext, handlePrev, handleToggleGrid, handleRemove]);
+  }, [
+    grid,
+    handleOpen,
+    handleNext,
+    handlePrev,
+    handleToggleGrid,
+    handleRemove,
+  ]);
 
   useEffect(() => {
     // WebView 標準のドラッグ＆ドロップとコンテキストメニューを無効にする
