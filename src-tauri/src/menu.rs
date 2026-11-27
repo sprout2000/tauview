@@ -1,9 +1,7 @@
 use json_gettext::{get_text, static_json_gettext_build};
 use std::env::consts;
 use sys_locale::get_locale;
-#[cfg(target_os = "macos")]
-use tauri::menu::SubmenuBuilder;
-use tauri::menu::{Menu, MenuBuilder, MenuItem, MenuItemBuilder};
+use tauri::menu::{Menu, MenuBuilder, MenuItem, MenuItemBuilder, Submenu, SubmenuBuilder};
 use tauri::{AppHandle, Manager, Runtime, Window};
 
 fn get_close_accelerator() -> String {
@@ -122,11 +120,11 @@ fn translator() -> impl Fn(&str) -> String {
     }
 }
 
-/// macOS のメニューバー（Windows・Linux ではメニューバーを表示しない）
-#[cfg(target_os = "macos")]
-pub fn default<R: Runtime>(app: &AppHandle<R>) -> tauri::Result<Menu<R>> {
-    let t = translator();
-
+/// メニューバーとコンテキストメニューで共通のサブメニュー（ファイル・表示・ウィンドウ・ヘルプ）
+fn submenus<R: Runtime>(
+    app: &AppHandle<R>,
+    t: &impl Fn(&str) -> String,
+) -> tauri::Result<[Submenu<R>; 4]> {
     let file_menu = SubmenuBuilder::new(app, t("File"))
         .item(&item(app, "open", t("Open..."), Some("CmdOrCtrl+O"))?)
         .separator()
@@ -162,7 +160,7 @@ pub fn default<R: Runtime>(app: &AppHandle<R>) -> tauri::Result<Menu<R>> {
 
     let window_menu = SubmenuBuilder::new(app, t("Window"))
         .item(&item(app, "minimize", t("Minimize"), Some("CmdOrCtrl+M"))?)
-        .item(&MenuItemBuilder::with_id("zoom", t("Zoom")).build(app)?)
+        .item(&item(app, "zoom", t("Zoom"), None)?)
         .separator()
         .item(&item(
             app,
@@ -173,76 +171,51 @@ pub fn default<R: Runtime>(app: &AppHandle<R>) -> tauri::Result<Menu<R>> {
         .build()?;
 
     let help_menu = SubmenuBuilder::new(app, t("Help"))
-        .item(&MenuItemBuilder::with_id("support", t("Support URL...")).build(app)?)
+        .item(&item(app, "support", t("Support URL..."), None)?)
         .build()?;
 
-    let menu = MenuBuilder::new(app);
+    Ok([file_menu, view_menu, window_menu, help_menu])
+}
 
-    #[cfg(target_os = "macos")]
-    let menu = {
-        let app_menu = SubmenuBuilder::new(app, &app.package_info().name)
-            .about_with_text(t("About Tauview"), None)
-            .separator()
-            .hide_with_text(t("Hide Tauview"))
-            .hide_others_with_text(t("Hide Others"))
-            .show_all_with_text(t("Show All"))
-            .separator()
-            .quit_with_text(t("Quit Tauview"))
-            .build()?;
-        menu.item(&app_menu)
-    };
+/// macOS のメニューバー（Windows・Linux ではメニューバーを表示しない）
+#[cfg(target_os = "macos")]
+pub fn default<R: Runtime>(app: &AppHandle<R>) -> tauri::Result<Menu<R>> {
+    let t = translator();
 
-    menu.item(&file_menu)
+    let app_menu = SubmenuBuilder::new(app, &app.package_info().name)
+        .about_with_text(t("About Tauview"), None)
+        .separator()
+        .hide_with_text(t("Hide Tauview"))
+        .hide_others_with_text(t("Hide Others"))
+        .show_all_with_text(t("Show All"))
+        .separator()
+        .quit_with_text(t("Quit Tauview"))
+        .build()?;
+
+    let [file_menu, view_menu, window_menu, help_menu] = submenus(app, &t)?;
+
+    MenuBuilder::new(app)
+        .item(&app_menu)
+        .item(&file_menu)
         .item(&view_menu)
         .item(&window_menu)
         .item(&help_menu)
         .build()
 }
 
-/// 右クリックで表示するコンテキストメニュー（すべての OS で使う）。
+/// 右クリックで表示するコンテキストメニュー（すべての OS で使う）。メニューバーと同じ階層にする。
 ///
 /// ポップアップのメニューに付けたショートカットは表示のためだけで、キー入力は
 /// macOS ではメニューバーが、Windows・Linux ではフロントエンド（App.tsx）が処理する
 pub fn context<R: Runtime>(app: &AppHandle<R>) -> tauri::Result<Menu<R>> {
     let t = translator();
+    let [file_menu, view_menu, window_menu, help_menu] = submenus(app, &t)?;
 
-    let menu = MenuBuilder::new(app)
-        .item(&item(app, "open", t("Open..."), Some("CmdOrCtrl+O"))?)
-        .item(&item(app, "remove", t("Move to Trash"), Some("Delete"))?)
-        .separator()
-        .item(&item(app, "next", t("Next Image"), Some("J"))?)
-        .item(&item(app, "prev", t("Prev Image"), Some("K"))?)
-        .item(&item(app, "grid", t("Toggle Grid View"), Some("H"))?)
-        .separator()
-        .item(&item(
-            app,
-            "fullscreen",
-            t("Toggle Fullscreen"),
-            Some(get_fullscreen_accelerator().as_str()),
-        )?)
-        .item(&item(app, "minimize", t("Minimize"), Some("CmdOrCtrl+M"))?);
-
-    // 開発用の項目は tauri dev（デバッグビルド）のときだけ表示する
-    #[cfg(debug_assertions)]
-    let menu = menu
-        .separator()
-        .item(&item(app, "reload", t("Reload"), Some("CmdOrCtrl+R"))?)
-        .item(&item(
-            app,
-            "devtools",
-            t("Toggle Developer Tools"),
-            Some(get_devtools_accelerator().as_str()),
-        )?);
-
-    menu.separator()
-        .item(&item(app, "support", t("Support URL..."), None)?)
-        .separator()
-        .item(&item(
-            app,
-            "close",
-            t("Close"),
-            Some(get_close_accelerator().as_str()),
-        )?)
+    MenuBuilder::new(app)
+        .item(&file_menu)
+        .item(&view_menu)
+        .item(&window_menu)
+        .item(&help_menu)
         .build()
 }
 
