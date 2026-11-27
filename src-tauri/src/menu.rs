@@ -2,7 +2,7 @@ use json_gettext::{get_text, static_json_gettext_build};
 use std::env::consts;
 use sys_locale::get_locale;
 use tauri::menu::{Menu, MenuBuilder, MenuItem, MenuItemBuilder, Submenu, SubmenuBuilder};
-use tauri::{AppHandle, Manager, Runtime, Window};
+use tauri::{AppHandle, Runtime};
 
 fn get_close_accelerator() -> String {
     if consts::OS == "macos" {
@@ -29,17 +29,34 @@ fn get_devtools_accelerator() -> String {
     }
 }
 
-/// メニュー項目を作る（accelerator はショートカットとして登録し、項目にも表示する）
+/// メニュー項目を作る。
+///
+/// Windows では WebView2 にフォーカスがあると、メニューのショートカットが（修飾キーを付けても）
+/// メニューに届かない。そこで Windows ではキー入力をフロントエンド（App.tsx）で処理し、
+/// メニュー項目にはショートカットを表示するだけにする（二重に実行されないように）。
+/// macOS・Linux ではメニューにショートカットを登録する
 fn item<R: Runtime>(
     app: &AppHandle<R>,
     id: &str,
     text: String,
     accelerator: Option<&str>,
 ) -> tauri::Result<MenuItem<R>> {
-    let builder = MenuItemBuilder::with_id(id, text);
-    match accelerator {
-        Some(accel) => builder.accelerator(accel).build(app),
-        None => builder.build(app),
+    #[cfg(target_os = "windows")]
+    {
+        let text = match accelerator {
+            Some(accel) => format!("{text}\t{}", accel.replace("CmdOrCtrl", "Ctrl")),
+            None => text,
+        };
+        MenuItemBuilder::with_id(id, text).build(app)
+    }
+
+    #[cfg(not(target_os = "windows"))]
+    {
+        let builder = MenuItemBuilder::with_id(id, text);
+        match accelerator {
+            Some(accel) => builder.accelerator(accel).build(app),
+            None => builder.build(app),
+        }
     }
 }
 
@@ -120,7 +137,7 @@ fn translator() -> impl Fn(&str) -> String {
     }
 }
 
-/// メニューバーとコンテキストメニューで共通のサブメニュー（ファイル・表示・ウィンドウ・ヘルプ）
+/// メニューバーのサブメニュー（ファイル・表示・ウィンドウ・ヘルプ）
 fn submenus<R: Runtime>(
     app: &AppHandle<R>,
     t: &impl Fn(&str) -> String,
@@ -177,51 +194,30 @@ fn submenus<R: Runtime>(
     Ok([file_menu, view_menu, window_menu, help_menu])
 }
 
-/// macOS のメニューバー（Windows・Linux ではメニューバーを表示しない）
-#[cfg(target_os = "macos")]
+/// メニューバー（すべての OS で表示する。macOS ではアプリメニューも付ける）
 pub fn default<R: Runtime>(app: &AppHandle<R>) -> tauri::Result<Menu<R>> {
     let t = translator();
-
-    let app_menu = SubmenuBuilder::new(app, &app.package_info().name)
-        .about_with_text(t("About Tauview"), None)
-        .separator()
-        .hide_with_text(t("Hide Tauview"))
-        .hide_others_with_text(t("Hide Others"))
-        .show_all_with_text(t("Show All"))
-        .separator()
-        .quit_with_text(t("Quit Tauview"))
-        .build()?;
-
     let [file_menu, view_menu, window_menu, help_menu] = submenus(app, &t)?;
 
-    MenuBuilder::new(app)
-        .item(&app_menu)
-        .item(&file_menu)
+    let menu = MenuBuilder::new(app);
+
+    #[cfg(target_os = "macos")]
+    let menu = {
+        let app_menu = SubmenuBuilder::new(app, &app.package_info().name)
+            .about_with_text(t("About Tauview"), None)
+            .separator()
+            .hide_with_text(t("Hide Tauview"))
+            .hide_others_with_text(t("Hide Others"))
+            .show_all_with_text(t("Show All"))
+            .separator()
+            .quit_with_text(t("Quit Tauview"))
+            .build()?;
+        menu.item(&app_menu)
+    };
+
+    menu.item(&file_menu)
         .item(&view_menu)
         .item(&window_menu)
         .item(&help_menu)
         .build()
-}
-
-/// 右クリックで表示するコンテキストメニュー（すべての OS で使う）。メニューバーと同じ階層にする。
-///
-/// ポップアップのメニューに付けたショートカットは表示のためだけで、キー入力は
-/// macOS ではメニューバーが、Windows・Linux ではフロントエンド（App.tsx）が処理する
-pub fn context<R: Runtime>(app: &AppHandle<R>) -> tauri::Result<Menu<R>> {
-    let t = translator();
-    let [file_menu, view_menu, window_menu, help_menu] = submenus(app, &t)?;
-
-    MenuBuilder::new(app)
-        .item(&file_menu)
-        .item(&view_menu)
-        .item(&window_menu)
-        .item(&help_menu)
-        .build()
-}
-
-/// フロントエンドの右クリックで、コンテキストメニューをカーソルの位置に表示する
-#[tauri::command]
-pub fn show_context_menu(window: Window) -> Result<(), String> {
-    let menu = context(window.app_handle()).map_err(|e| e.to_string())?;
-    window.popup_menu(&menu).map_err(|e| e.to_string())
 }

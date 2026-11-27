@@ -94,24 +94,8 @@ fn handle_menu_event(app: &AppHandle, id: &str) {
 }
 
 fn main() {
-    // Wayland では、右クリックから開くポップアップメニューに親ウィンドウが付かず、
-    // 「Couldn't map as window ... as popup because it doesn't have a parent」となって表示されない。
-    // GDK_BACKEND の指定がなく X11（XWayland）が使えるときは、X11 で動かす
-    #[cfg(target_os = "linux")]
-    if std::env::var_os("GDK_BACKEND").is_none()
-        && std::env::var_os("WAYLAND_DISPLAY").is_some()
-        && std::env::var_os("DISPLAY").is_some()
-    {
-        std::env::set_var("GDK_BACKEND", "x11");
-    }
-
-    let builder = tauri::Builder::default();
-
-    // メニューバーは macOS だけ。Windows・Linux では右クリックのコンテキストメニューを使う
-    #[cfg(target_os = "macos")]
-    let builder = builder.menu(|app| menu::default(app));
-
-    builder
+    tauri::Builder::default()
+        .menu(|app| menu::default(app))
         // 2 つ目の起動を既存のウィンドウにまとめる（最初に登録する必要がある）
         .plugin(tauri_plugin_single_instance::init(|app, argv, cwd| {
             if let Some(window) = app.get_webview_window("main") {
@@ -154,7 +138,6 @@ fn main() {
             cmd::open_dialog,
             cmd::get_entries,
             cmd::move_to_trash,
-            menu::show_context_menu,
         ])
         .build(tauri::generate_context!())
         .expect("Error while building tauri application")
