@@ -12,6 +12,7 @@ _Image by <a href="https://pixabay.com/ja/users/frankwinkler-64960/?utm_source=l
 - Browse the images in a folder
 - Grid view
 - File associations for supported image formats
+- Context menu on right click (the menu bar is on macOS only)
 
 ### Supported Formats
 

@@ -1,8 +1,10 @@
 use json_gettext::{get_text, static_json_gettext_build};
 use std::env::consts;
 use sys_locale::get_locale;
-use tauri::menu::{Menu, MenuBuilder, MenuItem, MenuItemBuilder, SubmenuBuilder};
-use tauri::{AppHandle, Runtime};
+#[cfg(target_os = "macos")]
+use tauri::menu::SubmenuBuilder;
+use tauri::menu::{Menu, MenuBuilder, MenuItem, MenuItemBuilder};
+use tauri::{AppHandle, Manager, Runtime, Window};
 
 fn get_close_accelerator() -> String {
     if consts::OS == "macos" {
@@ -29,37 +31,22 @@ fn get_devtools_accelerator() -> String {
     }
 }
 
-/// メニュー項目を作る。
-///
-/// Windows では WebView2 にフォーカスがあると、J のような修飾キーのないショートカットが
-/// メニューに届かない。そこで Windows ではキー入力をフロントエンド（App.tsx）で処理し、
-/// メニュー項目にはショートカットを表示するだけにする（二重に実行されないように）
+/// メニュー項目を作る（accelerator はショートカットとして登録し、項目にも表示する）
 fn item<R: Runtime>(
     app: &AppHandle<R>,
     id: &str,
     text: String,
     accelerator: Option<&str>,
 ) -> tauri::Result<MenuItem<R>> {
-    #[cfg(target_os = "windows")]
-    {
-        let text = match accelerator {
-            Some(accel) => format!("{text}\t{}", accel.replace("CmdOrCtrl", "Ctrl")),
-            None => text,
-        };
-        MenuItemBuilder::with_id(id, text).build(app)
-    }
-
-    #[cfg(not(target_os = "windows"))]
-    {
-        let builder = MenuItemBuilder::with_id(id, text);
-        match accelerator {
-            Some(accel) => builder.accelerator(accel).build(app),
-            None => builder.build(app),
-        }
+    let builder = MenuItemBuilder::with_id(id, text);
+    match accelerator {
+        Some(accel) => builder.accelerator(accel).build(app),
+        None => builder.build(app),
     }
 }
 
-pub fn default<R: Runtime>(app: &AppHandle<R>) -> tauri::Result<Menu<R>> {
+/// OS の言語に合わせた翻訳関数を返す（訳がなければキーの英語をそのまま返す）
+fn translator() -> impl Fn(&str) -> String {
     let locale = get_locale().unwrap_or_else(|| String::from("en-US"));
     // https://source.chromium.org/chromium/chromium/src/+/main:ui/base/l10n/l10n_util.cc
     let ctx = static_json_gettext_build!(
@@ -128,11 +115,17 @@ pub fn default<R: Runtime>(app: &AppHandle<R>) -> tauri::Result<Menu<R>> {
     )
     .unwrap();
 
-    let t = |key: &str| -> String {
+    move |key: &str| -> String {
         get_text!(ctx, locale.as_str(), key)
             .map(|v| v.to_string())
             .unwrap_or_else(|| key.to_string())
-    };
+    }
+}
+
+/// macOS のメニューバー（Windows・Linux ではメニューバーを表示しない）
+#[cfg(target_os = "macos")]
+pub fn default<R: Runtime>(app: &AppHandle<R>) -> tauri::Result<Menu<R>> {
+    let t = translator();
 
     let file_menu = SubmenuBuilder::new(app, t("File"))
         .item(&item(app, "open", t("Open..."), Some("CmdOrCtrl+O"))?)
@@ -204,4 +197,58 @@ pub fn default<R: Runtime>(app: &AppHandle<R>) -> tauri::Result<Menu<R>> {
         .item(&window_menu)
         .item(&help_menu)
         .build()
+}
+
+/// 右クリックで表示するコンテキストメニュー（すべての OS で使う）。
+///
+/// ポップアップのメニューに付けたショートカットは表示のためだけで、キー入力は
+/// macOS ではメニューバーが、Windows・Linux ではフロントエンド（App.tsx）が処理する
+pub fn context<R: Runtime>(app: &AppHandle<R>) -> tauri::Result<Menu<R>> {
+    let t = translator();
+
+    let menu = MenuBuilder::new(app)
+        .item(&item(app, "open", t("Open..."), Some("CmdOrCtrl+O"))?)
+        .item(&item(app, "remove", t("Move to Trash"), Some("Delete"))?)
+        .separator()
+        .item(&item(app, "next", t("Next Image"), Some("J"))?)
+        .item(&item(app, "prev", t("Prev Image"), Some("K"))?)
+        .item(&item(app, "grid", t("Toggle Grid View"), Some("H"))?)
+        .separator()
+        .item(&item(
+            app,
+            "fullscreen",
+            t("Toggle Fullscreen"),
+            Some(get_fullscreen_accelerator().as_str()),
+        )?)
+        .item(&item(app, "minimize", t("Minimize"), Some("CmdOrCtrl+M"))?);
+
+    // 開発用の項目は tauri dev（デバッグビルド）のときだけ表示する
+    #[cfg(debug_assertions)]
+    let menu = menu
+        .separator()
+        .item(&item(app, "reload", t("Reload"), Some("CmdOrCtrl+R"))?)
+        .item(&item(
+            app,
+            "devtools",
+            t("Toggle Developer Tools"),
+            Some(get_devtools_accelerator().as_str()),
+        )?);
+
+    menu.separator()
+        .item(&item(app, "support", t("Support URL..."), None)?)
+        .separator()
+        .item(&item(
+            app,
+            "close",
+            t("Close"),
+            Some(get_close_accelerator().as_str()),
+        )?)
+        .build()
+}
+
+/// フロントエンドの右クリックで、コンテキストメニューをカーソルの位置に表示する
+#[tauri::command]
+pub fn show_context_menu(window: Window) -> Result<(), String> {
+    let menu = context(window.app_handle()).map_err(|e| e.to_string())?;
+    window.popup_menu(&menu).map_err(|e| e.to_string())
 }

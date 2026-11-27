@@ -94,8 +94,13 @@ fn handle_menu_event(app: &AppHandle, id: &str) {
 }
 
 fn main() {
-    tauri::Builder::default()
-        .menu(|app| menu::default(app))
+    let builder = tauri::Builder::default();
+
+    // メニューバーは macOS だけ。Windows・Linux では右クリックのコンテキストメニューを使う
+    #[cfg(target_os = "macos")]
+    let builder = builder.menu(|app| menu::default(app));
+
+    builder
         // 2 つ目の起動を既存のウィンドウにまとめる（最初に登録する必要がある）
         .plugin(tauri_plugin_single_instance::init(|app, argv, cwd| {
             if let Some(window) = app.get_webview_window("main") {
@@ -138,6 +143,7 @@ fn main() {
             cmd::open_dialog,
             cmd::get_entries,
             cmd::move_to_trash,
+            menu::show_context_menu,
         ])
         .build(tauri::generate_context!())
         .expect("Error while building tauri application")
