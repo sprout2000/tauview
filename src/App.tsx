@@ -10,9 +10,9 @@ import { View } from "./View";
 
 import "./App.scss";
 
-// メニューバーがあるのは macOS だけなので、Windows・Linux ではショートカットをフロントエンドで受け取る
-const isMac = navigator.userAgent.includes("Mac OS X");
-const isLinux = !isMac && navigator.userAgent.includes("Linux");
+// Windows では WebView2 にフォーカスがあると、メニューのショートカットがメニューに届かないので、
+// キー入力をフロントエンドで受け取る（メニューにはショートカットを表示するだけにしている）
+const isWindows = navigator.userAgent.includes("Windows");
 
 type Payload = {
   message: string | null;
@@ -211,14 +211,14 @@ export const App = () => {
   }, [grid]);
 
   useEffect(() => {
-    if (isMac) return;
+    if (!isWindows) return;
 
     const toggleFullscreen = async () => {
       const currentWindow = getCurrentWindow();
       await currentWindow.setFullscreen(!(await currentWindow.isFullscreen()));
     };
 
-    // コンテキストメニューに表示しているショートカットと同じ割り当て（Alt+F4 は OS が処理する）
+    // メニューに表示しているショートカットと同じ割り当て（Alt+F4 は Windows が処理する）
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.altKey || e.metaKey) return;
       const key = e.key.toLowerCase();
@@ -231,10 +231,6 @@ export const App = () => {
         } else if (key === "m") {
           e.preventDefault();
           getCurrentWindow().minimize();
-        } else if (key === "r" && isLinux && import.meta.env.DEV) {
-          // Windows（WebView2）は開発時に Ctrl+R で自分で再読み込みする
-          e.preventDefault();
-          window.location.reload();
         }
         return;
       }
@@ -276,29 +272,18 @@ export const App = () => {
   ]);
 
   useEffect(() => {
-    // WebView 標準のメニューの代わりに、アプリのコンテキストメニューを出す（グリッド表示では出さない）
-    const handleContextMenu = (e: MouseEvent) => {
-      e.preventDefault();
-      if (grid) return;
-
-      invoke("show_context_menu").catch((err) =>
-        console.log(`Error in show_context_menu(): ${err}`),
-      );
-    };
-
-    window.addEventListener("contextmenu", handleContextMenu);
-    return () => {
-      window.removeEventListener("contextmenu", handleContextMenu);
-    };
-  }, [grid]);
-
-  useEffect(() => {
-    // WebView 標準のドラッグ＆ドロップを無効にする
+    // WebView 標準のドラッグ＆ドロップとコンテキストメニューを無効にする
     const preventDefault = (e: globalThis.Event) => {
       e.preventDefault();
       e.stopPropagation();
     };
-    const events = ["drop", "dragover", "dragenter", "dragleave"];
+    const events = [
+      "drop",
+      "dragover",
+      "dragenter",
+      "dragleave",
+      "contextmenu",
+    ];
 
     for (const type of events) {
       window.addEventListener(type, preventDefault);
