@@ -298,12 +298,7 @@ export const App = () => {
       e.preventDefault();
       e.stopPropagation();
     };
-    const events = [
-      "drop",
-      "dragover",
-      "dragenter",
-      "dragleave",
-    ];
+    const events = ["drop", "dragover", "dragenter", "dragleave"];
 
     for (const type of events) {
       window.addEventListener(type, preventDefault);
