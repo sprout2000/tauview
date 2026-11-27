@@ -10,6 +10,9 @@ import { View } from "./View";
 
 import "./App.scss";
 
+// Windows ではメニューバーを作らないので、ショートカットをフロントエンドで受け取る
+const isWindows = navigator.userAgent.includes("Windows");
+
 type Payload = {
   message: string | null;
 };
@@ -205,6 +208,67 @@ export const App = () => {
       unlisten.then((f) => f());
     };
   }, [grid]);
+
+  useEffect(() => {
+    if (!isWindows) return;
+
+    const toggleFullscreen = async () => {
+      const currentWindow = getCurrentWindow();
+      await currentWindow.setFullscreen(!(await currentWindow.isFullscreen()));
+    };
+
+    // macOS・Linux のメニューのアクセラレータと同じ割り当て
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.altKey || e.metaKey) return;
+      const key = e.key.toLowerCase();
+
+      if (e.ctrlKey) {
+        if (e.shiftKey) return;
+        if (key === "o") {
+          e.preventDefault();
+          handleOpen();
+        } else if (key === "m") {
+          e.preventDefault();
+          getCurrentWindow().minimize();
+        }
+        return;
+      }
+
+      if (e.shiftKey) return;
+      switch (key) {
+        case "j":
+          if (grid) setGrid(false);
+          handleNext();
+          break;
+        case "k":
+          if (grid) setGrid(false);
+          handlePrev();
+          break;
+        case "h":
+          handleToggleGrid();
+          break;
+        case "delete":
+          handleRemove();
+          break;
+        case "f11":
+          e.preventDefault();
+          toggleFullscreen();
+          break;
+      }
+    };
+
+    window.addEventListener("keydown", handleKeyDown);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [
+    grid,
+    handleOpen,
+    handleNext,
+    handlePrev,
+    handleToggleGrid,
+    handleRemove,
+  ]);
 
   useEffect(() => {
     // WebView 標準のドラッグ＆ドロップとコンテキストメニューを無効にする
