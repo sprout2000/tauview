@@ -3,11 +3,5 @@
   "identifier": "default",
   "description": "Capability for the main window",
   "windows": ["main"],
-  "permissions": [
-    "core:default",
-    "core:window:allow-set-title",
-    "core:window:allow-set-fullscreen",
-    "core:window:allow-is-fullscreen",
-    "core:window:allow-minimize"
-  ]
+  "permissions": ["core:default", "core:window:allow-set-title"]
 }

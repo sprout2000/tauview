@@ -12,7 +12,6 @@ mod cmd;
 mod format;
 #[cfg(target_os = "macos")]
 mod imageio;
-#[cfg(not(target_os = "windows"))]
 mod menu;
 mod protocol;
 
@@ -95,13 +94,8 @@ fn handle_menu_event(app: &AppHandle, id: &str) {
 }
 
 fn main() {
-    let builder = tauri::Builder::default();
-
-    // Windows ではメニューバーを表示しない（v1 版と同じ挙動）
-    #[cfg(not(target_os = "windows"))]
-    let builder = builder.menu(|app| menu::default(app));
-
-    builder
+    tauri::Builder::default()
+        .menu(|app| menu::default(app))
         // 2 つ目の起動を既存のウィンドウにまとめる（最初に登録する必要がある）
         .plugin(tauri_plugin_single_instance::init(|app, argv, cwd| {
             if let Some(window) = app.get_webview_window("main") {
