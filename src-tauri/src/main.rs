@@ -94,6 +94,17 @@ fn handle_menu_event(app: &AppHandle, id: &str) {
 }
 
 fn main() {
+    // Wayland では、右クリックから開くポップアップメニューに親ウィンドウが付かず、
+    // 「Couldn't map as window ... as popup because it doesn't have a parent」となって表示されない。
+    // GDK_BACKEND の指定がなく X11（XWayland）が使えるときは、X11 で動かす
+    #[cfg(target_os = "linux")]
+    if std::env::var_os("GDK_BACKEND").is_none()
+        && std::env::var_os("WAYLAND_DISPLAY").is_some()
+        && std::env::var_os("DISPLAY").is_some()
+    {
+        std::env::set_var("GDK_BACKEND", "x11");
+    }
+
     let builder = tauri::Builder::default();
 
     // メニューバーは macOS だけ。Windows・Linux では右クリックのコンテキストメニューを使う
